@@ -17,5 +17,5 @@ public interface AdsService {
 	List<Ads> GetAdsByFDate(Date FDate);
 	List<Ads> GetAdsBySDate(Date SDate);
 	List<AdsView> previousStats(int prodId);
-	String ModTargetView_tot(int AdsId,int vCount);
+	String ModTargetView_tot(int AdsId,int vCounty);
 }
