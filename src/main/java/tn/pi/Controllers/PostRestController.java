@@ -21,39 +21,34 @@ public class PostRestController {
 	@Autowired 
 	PostService postService;
 	
-	
-	// http://localhost:8080/SpringMVC/servlet/retrieve-all-posts
-		@GetMapping("/retrieve-all-posts")
+	//tekhdem
+	// http://localhost:8081/SpringMVC/servlet/Post/retrieve-all-posts
+		@GetMapping("/Post/retrieve-all-posts")
 		@ResponseBody
 		public List<Post> getPosts() {
 		List<Post> list = postService.retrieveAllPosts();
 		return list;
-		}
-		
-		// http://localhost:8080/SpringMVC/servlet/retrieve-user/{user-id}
-	/*	@GetMapping("/retrieve-user/{user-id}")
-		@ResponseBody
-		public User retrieveUser(@PathVariable("user-id") String userId) {
-		return userService.retrieveUser(userId);
-		}*/
+		}	
 
-		// http://localhost:8081/SpringMVC/servlet/add-post
-		@PostMapping("/add-post")
-		@ResponseBody
-		public Post addPost(@RequestBody Post pos) {
-			Post post = postService.addPost(pos);
-		return post;
-		}
+		//didn't work anymore
+		// http://localhost:8081/SpringMVC/servlet/Post/add-post
+				@PostMapping("/Post/add-post")
+				@ResponseBody
+				public Post addPost(@RequestBody Post pos) {
+					Post post = postService.addPost(pos);
+				return post;
+				}
+				
+				// http://localhost:8081/SpringMVC/servlet/Post/modify-post
+				@PutMapping("/Post/modify-post")
+				@ResponseBody
+				public Post modifyPost(@RequestBody Post post) {
+				return postService.updatePost(post);
+				}
 		
-		// http://localhost:8081/SpringMVC/servlet/modify-post
-		@PutMapping("/modify-post")
-		@ResponseBody
-		public Post modifyPost(@RequestBody Post post) {
-		return postService.updatePost(post);
-		}
-		
-		// http://localhost:8081/SpringMVC/servlet/remove-post/{post-id}
-		@DeleteMapping("/remove-post/{post-id}")
+		//tekhdem
+		// http://localhost:8081/SpringMVC/servlet/Post/remove-post/{post-id}
+		@DeleteMapping("/Post/remove-post/{post-id}")
 		@ResponseBody
 		public void removePost(@PathVariable("post-id") String postId) {
 			postService.deletePost(postId);

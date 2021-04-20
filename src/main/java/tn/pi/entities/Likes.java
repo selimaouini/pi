@@ -27,13 +27,11 @@ public class Likes implements Serializable {
 	@Column(name="likee")
 	private int likee;
 	
-	@Column(name="unlike")
-	private int unlike;
+	@Column(name="dislike")
+	private int dislike;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	Comment Comment ;
-	
-
+	@ManyToOne
+	private Comment Comment ;
 
 	public int getIdL() {
 		return idL;
@@ -51,24 +49,32 @@ public class Likes implements Serializable {
 		this.likee = likee;
 	}
 
-	public int getUnlike() {
-		return unlike;
+	public int getdislike() {
+		return dislike;
 	}
 
-	public void setUnlike(int unlike) {
-		this.unlike = unlike;
+	public void setDislike(int dislike) {
+		this.dislike = dislike;
 	}
 
-	@Override
-	public String toString() {
-		return "Likes [idL=" + idL + ", likee=" + likee + ", unlike=" + unlike + "]";
+	public Comment getComment() {
+		return Comment;
 	}
 
-	public Likes(int idL, int likee, int unlike) {
+	public void setComment(Comment comment) {
+		Comment = comment;
+	}
+
+	public int getDislike() {
+		return dislike;
+	}
+
+	public Likes(int idL, int likee, int dislike, tn.pi.entities.Comment comment) {
 		super();
 		this.idL = idL;
 		this.likee = likee;
-		this.unlike = unlike;
+		this.dislike = dislike;
+		Comment = comment;
 	}
 
 	public Likes() {

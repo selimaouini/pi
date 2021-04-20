@@ -17,8 +17,8 @@ public class ChatRestController {
 	@Autowired 
 	ChatService chatService; 
 	
-	// http://localhost:8081/SpringMVC/servlet/add-chat
-	@PostMapping("/add-chat")
+	// http://localhost:8081/SpringMVC/servlet/chat/add-chat
+	@PostMapping("/chat/add-chat/{user-id}")
 	@ResponseBody
 	public Chat addChat(@RequestBody Chat ch) {
 		Chat chat = chatService.SendMsg(ch);

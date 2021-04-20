@@ -1,18 +1,27 @@
 package tn.pi.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.sun.istack.NotNull;
 
 
 @Entity
@@ -23,9 +32,12 @@ private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idP;
+	
+	//@Size(min=3,title = " you should insert at least 1 character ")
 	@Column(name="title")
 	private String title;
 	
+	//@Size(min=25,description = " you should insert at least 1 character ")
 	@Column(name="description")
 	private String description;
 	
@@ -33,11 +45,23 @@ private static final long serialVersionUID = 1L;
 	@Column(name="photo")
 	private String photo;
 	
+	//@NotNull	
+	//private LocalDateTime dateCreation= LocalDateTime.now();
+	
 	@Temporal(TemporalType.DATE)
 	private Date dateCreation;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	User User ;
+	@Enumerated(EnumType.STRING)
+	Theme theme; 
+	
+	@ManyToOne
+	User user ;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Post")
+	private Set<Rating> rating;
+	
+	@OneToMany(cascade = CascadeType.ALL , mappedBy="Post")
+	List<Comment> comment;
 	
 	public long getIdP() {
 		return idP;
@@ -78,14 +102,37 @@ private static final long serialVersionUID = 1L;
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-	
-	public Post(long idP, String title, String description, String photo, Date dateCreation) {
-		super();
-		this.idP = idP;
-		this.title = title;
-		this.description = description;
-		this.photo = photo;
-		this.dateCreation = dateCreation;
+
+	public Theme getTheme() {
+		return theme;
+	}
+
+	public void setTheme(Theme theme) {
+		this.theme = theme;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Set<Rating> getRating() {
+		return rating;
+	}
+
+	public void setRating(Set<Rating> rating) {
+		this.rating = rating;
+	}
+
+	public List<Comment> getComment() {
+		return comment;
+	}
+
+	public void setComment(List<Comment> comment) {
+		this.comment= comment;
 	}
 
 	public Post() {
@@ -93,22 +140,29 @@ private static final long serialVersionUID = 1L;
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public String toString() {
-		return "Post [idP=" + idP + ", title=" + title + ", description=" + description + ", photo=" + photo
-				+ ", dateCreation=" + dateCreation + "]";
+	public Post(long idP, String title, String description, String photo, Date dateCreation, Theme theme) {
+		super();
+		this.idP = idP;
+		this.title = title;
+		this.description = description;
+		this.photo = photo;
+		this.dateCreation = dateCreation;
+		this.theme = theme;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dateCreation == null) ? 0 : dateCreation.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + (int) (idP ^ (idP >>> 32));
-		result = prime * result + ((photo == null) ? 0 : photo.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
+	
+	public Post(long idP, String title, String description, String photo, Date dateCreation, Theme theme, User user,
+			Set<Rating> rating, List<Comment> comment) {
+		super();
+		this.idP = idP;
+		this.title = title;
+		this.description = description;
+		this.photo = photo;
+		this.dateCreation = dateCreation;
+		this.theme = theme;
+		this.user = user;
+		this.rating = rating;
+		this.comment = comment;
 	}
 
 	@Override

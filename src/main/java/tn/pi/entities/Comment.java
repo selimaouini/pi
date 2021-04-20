@@ -1,7 +1,10 @@
 package tn.pi.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,9 +13,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.sun.istack.NotNull;
 
 
 @Entity
@@ -22,116 +30,122 @@ public class Comment implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idC;
+    private long idc;
 	
+	//@Size(min=1,description = " you should insert at least 1 character ")
 	@Column(name="description")
 	private String description;
 	
-	@Temporal(TemporalType.DATE)
-	private Date dateCreation;
+	@NotNull	
+	private LocalDateTime dateCreation= LocalDateTime.now();
 	
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	User User ;
+	@ManyToOne
+	private User User ;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	Post Post ;
+	@ManyToOne
+	private Post Post ;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="Comment")
+	private Set<Likes> likes;
 
 
-	public long getIdC() {
-		return idC;
+	/*
+	 * 
+	 * 	//@OneToMany(mappedBy = "comment")
+	//private Likes likes;
+	
+	@ManyToOne(cascade=CascadeType.MERGE)
+	@JoinColumn(name="idSubject",referencedColumnName="id")
+	private Subject subject;
+	
+	//@JsonBackReference
+	@ManyToOne(cascade=CascadeType.MERGE)
+	@JoinColumn(name="idUser",referencedColumnName="id")
+	private User user;
+	
+	*/
+	
+	
+	
+	public long getIdc() {
+		return idc;
 	}
 
-
-	public void setIdC(long idC) {
-		this.idC = idC;
+	public void setIdc(long idc) {
+		this.idc = idc;
 	}
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
-	public Date getDateCreation() {
+	public LocalDateTime getDateCreation() {
 		return dateCreation;
 	}
 
-
-	public void setDateCreation(Date dateCreation) {
+	public void setDateCreation(LocalDateTime dateCreation) {
 		this.dateCreation = dateCreation;
 	}
 
+	public User getUser() {
+		return User;
+	}
 
-	public Comment(long idC, String description, Date dateCreation) {
+
+	public void setUser(User user) {
+		User = user;
+	}
+
+
+	public Post getPost() {
+		return Post;
+	}
+
+
+	public void setPost(Post post) {
+		Post = post;
+	}
+	
+	public Set<Likes> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Set<Likes> likes) {
+		this.likes = likes;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Comment(long idc, String description, LocalDateTime dateCreation) {
 		super();
-		this.idC = idC;
+		this.idc = idc;
 		this.description = description;
 		this.dateCreation = dateCreation;
 	}
 
+	
 
 	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
 	@Override
 	public String toString() {
-		return "Comment [idC=" + idC + ", description=" + description + ", dateCreation=" + dateCreation + ", User="
-				+ User + "]";
+		return "Comment [idc=" + idc + ", description=" + description + ", dateCreation=" + dateCreation + ", User="
+				+ User + ", Post=" + Post + ", likes=" + likes + "]";
 	}
 
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((User == null) ? 0 : User.hashCode());
-		result = prime * result + ((dateCreation == null) ? 0 : dateCreation.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + (int) (idC ^ (idC >>> 32));
-		return result;
-	}
 
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Comment other = (Comment) obj;
-		if (User == null) {
-			if (other.User != null)
-				return false;
-		} else if (!User.equals(other.User))
-			return false;
-		if (dateCreation == null) {
-			if (other.dateCreation != null)
-				return false;
-		} else if (!dateCreation.equals(other.dateCreation))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (idC != other.idC)
-			return false;
-		return true;
-	}
-	
-	
-	
 }
 	
 

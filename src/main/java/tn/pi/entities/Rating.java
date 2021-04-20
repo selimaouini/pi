@@ -23,9 +23,11 @@ public class Rating implements Serializable {
 	@Column(name="Stars")
 	private int stars;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	Post Post ;
+	@ManyToOne
+	private Post Post ;
 	
+	@ManyToOne
+	private User user;
 	
 	public long getIdR() {
 		return idR;
@@ -43,10 +45,29 @@ public class Rating implements Serializable {
 		this.stars = stars;
 	}
 
-	public Rating(int idR, int stars) {
+	
+	public Post getPost() {
+		return Post;
+	}
+
+	public void setPost(Post post) {
+		Post = post;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Rating(int idR, int stars, tn.pi.entities.Post post, User user) {
 		super();
 		this.idR = idR;
 		this.stars = stars;
+		Post = post;
+		this.user = user;
 	}
 
 	public Rating() {

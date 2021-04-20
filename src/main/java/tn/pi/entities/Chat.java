@@ -24,6 +24,7 @@ public class Chat implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idch;
 	
+	//@Size(min=1,message = " you should insert at least 1 character ")
 	@Column(name="message")
 	private String message;
 
@@ -51,10 +52,11 @@ public class Chat implements Serializable {
 		return "Chat [idch=" + idch + ", message=" + message + "]";
 	}
 
-	public Chat(long idch, String message) {
+	public Chat(long idch, String message, tn.pi.entities.User user) {
 		super();
 		this.idch = idch;
 		this.message = message;
+		User = user;
 	}
 
 	public Chat() {
