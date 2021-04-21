@@ -45,24 +45,27 @@ private static final long serialVersionUID = 1L;
 	@Column(name="photo")
 	private String photo;
 	
-	//@NotNull	
-	//private LocalDateTime dateCreation= LocalDateTime.now();
+	@NotNull	
+	private LocalDateTime dateCreation= LocalDateTime.now();
 	
-	@Temporal(TemporalType.DATE)
-	private Date dateCreation;
+	//@Temporal(TemporalType.DATE)
+	//private Date dateCreation;
 
 	@Enumerated(EnumType.STRING)
 	Theme theme; 
 	
 	@ManyToOne
-	User user ;
+	private User user;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Post")
+	/*
+	@OneToMany( mappedBy = "Post")
 	private Set<Rating> rating;
 	
-	@OneToMany(cascade = CascadeType.ALL , mappedBy="Post")
-	List<Comment> comment;
-	
+
+	@OneToMany( mappedBy="Post")
+	private List<Comment> comment;
+*/	
+
 	public long getIdP() {
 		return idP;
 	}
@@ -95,11 +98,11 @@ private static final long serialVersionUID = 1L;
 		this.photo = photo;
 	}
 
-	public Date getDateCreation() {
+	public LocalDateTime getDateCreation() {
 		return dateCreation;
 	}
 
-	public void setDateCreation(Date dateCreation) {
+	public void setDateCreation(LocalDateTime dateCreation) {
 		this.dateCreation = dateCreation;
 	}
 
@@ -119,7 +122,7 @@ private static final long serialVersionUID = 1L;
 		this.user = user;
 	}
 
-	public Set<Rating> getRating() {
+/*	public Set<Rating> getRating() {
 		return rating;
 	}
 
@@ -134,13 +137,14 @@ private static final long serialVersionUID = 1L;
 	public void setComment(List<Comment> comment) {
 		this.comment= comment;
 	}
-
+*/
 	public Post() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Post(long idP, String title, String description, String photo, Date dateCreation, Theme theme) {
+	
+public Post(long idP, String title, String description, String photo, LocalDateTime dateCreation, Theme theme , User user) {
 		super();
 		this.idP = idP;
 		this.title = title;
@@ -148,9 +152,11 @@ private static final long serialVersionUID = 1L;
 		this.photo = photo;
 		this.dateCreation = dateCreation;
 		this.theme = theme;
+		this.user = user;
+	//	this.rating = rating;
 	}
 
-	
+/*	
 	public Post(long idP, String title, String description, String photo, Date dateCreation, Theme theme, User user,
 			Set<Rating> rating, List<Comment> comment) {
 		super();
@@ -163,7 +169,7 @@ private static final long serialVersionUID = 1L;
 		this.user = user;
 		this.rating = rating;
 		this.comment = comment;
-	}
+	}*/
 
 	@Override
 	public boolean equals(Object obj) {

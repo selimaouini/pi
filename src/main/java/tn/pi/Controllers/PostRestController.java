@@ -1,5 +1,6 @@
 package tn.pi.Controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,18 @@ public class PostRestController {
 		List<Post> list = postService.retrieveAllPosts();
 		return list;
 		}	
+		
+		//tekhdem
+		// http://localhost:8081/SpringMVC/servlet/Post/retrieve-post/{post-id}
+		@GetMapping("/Post/retrieve-post/{post-id}")
+		@ResponseBody
+		public Post getPostById(@PathVariable("post-id") String idP) {
+		return postService.getPostById(idP);
+		}
+		
+		
 
-		//didn't work anymore
+		//tekhdem
 		// http://localhost:8081/SpringMVC/servlet/Post/add-post
 				@PostMapping("/Post/add-post")
 				@ResponseBody
@@ -39,11 +50,12 @@ public class PostRestController {
 				return post;
 				}
 				
-				// http://localhost:8081/SpringMVC/servlet/Post/modify-post
-				@PutMapping("/Post/modify-post")
-				@ResponseBody
-				public Post modifyPost(@RequestBody Post post) {
-				return postService.updatePost(post);
+		//tekhdem
+		// http://localhost:8081/SpringMVC/servlet/Post/modify-post
+		@PutMapping("/Post/modify-post")
+		@ResponseBody
+		public Post modifyPost(@RequestBody Post post) {
+			return postService.updatePost(post);
 				}
 		
 		//tekhdem
@@ -54,4 +66,50 @@ public class PostRestController {
 			postService.deletePost(postId);
 		}
 
-}
+		// http://localhost:8081/SpringMVC/servlet/Post/get-by-title/{title}
+	  	  @GetMapping("/Post/get-by-title")
+		  @ResponseBody 
+		  public  List<Post> getPostByTitle(@PathVariable("title") String title) {
+			  List<Post> list =  (List<Post>) postService.getPostByTitle(title); 
+			  return list; 
+		 }
+	  	  
+	  	// http://localhost:8081/SpringMVC/servlet/Post/get-by-theme/{theme}
+	  	  @GetMapping("/Post/get-by-theme")
+		  @ResponseBody 
+		  public  List<Post> getPostByTheme(@PathVariable("theme") String theme) {
+			  List<Post> list =  (List<Post>) postService.getPostByTheme(theme); 
+			  return list; 
+		 }
+	  	  
+	  	// http://localhost:8081/SpringMVC/servlet/Post/get-by-date-Asc
+	  	  @GetMapping("/Post/get-by-date-Asc")
+		  @ResponseBody 
+		  public  List<Post> retrievePostsByDateAsc(@PathVariable("dateCreation") Date dateCreation) {
+			  List<Post> list =  (List<Post>) postService.retrievePostsByDateAsc(dateCreation); 
+			  return list; 
+		 }
+	  	  
+	    	// http://localhost:8081/SpringMVC/servlet/Post/get-by-date-Desc
+	  	  @GetMapping("/Post/get-by-date-Desc")
+		  @ResponseBody 
+		  public  List<Post> retrievePostsByDateDesc(@PathVariable("dateCreation") Date dateCreation) {
+			  List<Post> list =  (List<Post>) postService.retrievePostsByDateDesc(dateCreation); 
+			  return list; 
+		 }
+	  	  
+	  	  
+	  	  
+	  	  
+	  	  /*
+	  	   * http://localhost:8081/SpringMVC/servlet/Post/upload-img
+	  	   *  @PostMapping("/Post/upload-img")
+	  	   * @ResponseBody
+    public ImageResponse uplaodImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
+        System.out.println("Original Image Byte Size - " + file.getBytes().length);
+        byte[] photo=decompressBytes(compressBytes(file.getBytes()));
+        return new ImageResponse(photo);
+    }
+
+	  	   */
+}	

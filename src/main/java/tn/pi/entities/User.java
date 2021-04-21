@@ -44,8 +44,22 @@ public class User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	Role role;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "User")
+	/*@OneToMany(cascade = CascadeType.ALL,mappedBy = "User")
+	private Set<Post> post;*/
+	
+	
+	/*
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "User")
 	private Set<Chat> chat;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Comment> comment;
+	
+	@OneToMany(mappedBy = "user")
+	private List <Rating> rating;
+	
+	*/
 	
 	public long getIdu() {
 		return idu;

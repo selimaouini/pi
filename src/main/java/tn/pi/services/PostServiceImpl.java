@@ -1,11 +1,14 @@
 package tn.pi.services;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import tn.pi.Repository.CommentRepository;
 import tn.pi.Repository.LikesRepository;
@@ -74,6 +77,7 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	
+	
 /*	@Override
 	public Employee getEmployeeById(long id) {
 		Optional<Employee> optional = employeeRepository.findById(id);
@@ -102,31 +106,54 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public void sujetRedondant() {
-		// TODO Auto-generated method stub
+	//	postRepository.sujetRedondant(title);
 		
 	}
 
 	@Override
 	public Post getPostByTitle(String title) {
-		return null;
-	//	return (Post) postRepository.getPostByTitle(title);	
+		Post pos = (Post) postRepository.getPostByTitle(title);	
+		log.info ("post :" +title);
+		return pos ;
 	}
-
+	
 	@Override
 	public Post getPostByTheme(String theme) {
-		return null;
-		//Post pos = (Post) postRepository.getPostByTheme(theme);
-		//return pos;
+	    Post pos = (Post) postRepository.getPostByTheme(theme);
+		return pos;
 	}
 
 	@Override
 	public List<Post> getPostByUser(long idu) {
-		return null;
+		return null; 
 		//return (List<Post>) postRepository.getPostByUser(idu);
+	}
+
+	@Override
+	public List<Post> retrievePostsByDateAsc(Date dateCreation) {
+		List<Post> posts = (List<Post>)  postRepository.retrievePostsByDateAsc (dateCreation); 
+		for (Post post : posts )		{
+			log.info ("the newest posts :" +post);
+			}
+		return posts; 
+	}
+
+	@Override
+	public List<Post> retrievePostsByDateDesc(Date dateCreation) {
+		List<Post> posts = (List<Post>)  postRepository.retrievePostsByDateDesc (dateCreation); 
+		for (Post post : posts )		{
+			log.info ("the oldest posts:" +post);
+			}
+		return posts; 
 	}
 	
 	
 	/*
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	/*
 	 @Override
 	public Post getPostByName(String name) {
@@ -135,6 +162,32 @@ public class PostServiceImpl implements PostService {
 			log.info ("posts are written by:" +name);
 			}
 	return posts; 
+	
+	
+	
+	
+	
+	
+	
+		public void uploadImage(final MultipartFile file) throws IOException {
+//        UUID imgGeneratedId = UUID.nameUUIDFromBytes(file.getBytes());
+//        File convertFile = new File("src/main/frontend/src/assets/images/" + imgGeneratedId + file.getOriginalFilename());
+//        Post foundPost = pubrep.findFirstByOrderByIdDesc();
+//        foundPost.setImageUrl("./assets/images/" + imgGeneratedId + file.getOriginalFilename());
+//        convertFile.createNewFile();
+//        FileOutputStream fout = new FileOutputStream(convertFile);
+//        fout.write(file.getBytes());
+//        fout.close();
+//        postRepository.save(foundPost);
+//    }
+
+
+
+
+
+
+	
+
 	}*/
 	
 }

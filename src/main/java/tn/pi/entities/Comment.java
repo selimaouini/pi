@@ -39,7 +39,7 @@ public class Comment implements Serializable {
 	@NotNull	
 	private LocalDateTime dateCreation= LocalDateTime.now();
 	
-	
+/*	
 	@ManyToOne
 	private User User ;
 	
@@ -48,8 +48,10 @@ public class Comment implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Comment")
 	private Set<Likes> likes;
-
-
+*/
+	
+	
+	
 	/*
 	 * 
 	 * 	//@OneToMany(mappedBy = "comment")
@@ -91,7 +93,7 @@ public class Comment implements Serializable {
 	public void setDateCreation(LocalDateTime dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-
+/*
 	public User getUser() {
 		return User;
 	}
@@ -119,9 +121,7 @@ public class Comment implements Serializable {
 		this.likes = likes;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	}*/
 
 	public Comment(long idc, String description, LocalDateTime dateCreation) {
 		super();
@@ -136,13 +136,6 @@ public class Comment implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	public String toString() {
-		return "Comment [idc=" + idc + ", description=" + description + ", dateCreation=" + dateCreation + ", User="
-				+ User + ", Post=" + Post + ", likes=" + likes + "]";
-	}
-
 
 
 

@@ -25,15 +25,15 @@ public class CommentRestController {
 	@Autowired 
 	CommentService commentService; 
 
-	//ma y'afichich liste 
-	// http://localhost:8081/SpringMVC/servlet/Comment/retrieve-all-comments
-			@GetMapping("/Comment/retrieve-all-comments")
+	//yemchi
+	// http://localhost:8081/SpringMVC/servletc/comment/retrieve-all-comments
+			@GetMapping("/comment/retrieve-all-comments")
 			@ResponseBody
 			public List<Comment> getComments() {
 			List<Comment> list = commentService.retrieveAllComments();
 			return list;
 			}	
-	
+	//yemchi
 	// http://localhost:8081/SpringMVC/servlet/comment/add-comment
 				@PostMapping("/comment/add-comment")
 				@ResponseBody
@@ -42,15 +42,16 @@ public class CommentRestController {
 				return comment;
 				}
 				
-				// http://localhost:8081/SpringMVC/servlet/Comment/modify-Comment
-				@PutMapping("/modify-Comment")
+				//yemchi
+				// http://localhost:8081/SpringMVC/servlet/comment/modify-Comment
+				@PutMapping("/Comment/modify-Comment")
 				@ResponseBody
 				public Comment modifyComment(@RequestBody Comment com) {
 				return commentService.updateComment(com);
 				}
 				
 				// http://localhost:8081/SpringMVC/servlet/comment/remove-com/{com-id}
-				@DeleteMapping("/remove-com/{com-id}")
+				@DeleteMapping("/comment/remove-com/{com-id}")
 				@ResponseBody
 				public void removeCom(@PathVariable("com-id") String comId) {
 					commentService.deleteComment(comId);

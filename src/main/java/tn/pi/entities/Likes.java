@@ -30,8 +30,8 @@ public class Likes implements Serializable {
 	@Column(name="dislike")
 	private int dislike;
 
-	@ManyToOne
-	private Comment Comment ;
+	/*@ManyToOne
+	private Comment Comment ;*/
 
 	public int getIdL() {
 		return idL;
@@ -57,14 +57,14 @@ public class Likes implements Serializable {
 		this.dislike = dislike;
 	}
 
-	public Comment getComment() {
+/*	public Comment getComment() {
 		return Comment;
 	}
 
 	public void setComment(Comment comment) {
 		Comment = comment;
 	}
-
+*/
 	public int getDislike() {
 		return dislike;
 	}
@@ -74,7 +74,7 @@ public class Likes implements Serializable {
 		this.idL = idL;
 		this.likee = likee;
 		this.dislike = dislike;
-		Comment = comment;
+	
 	}
 
 	public Likes() {

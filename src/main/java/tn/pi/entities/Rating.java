@@ -24,7 +24,7 @@ public class Rating implements Serializable {
 	private int stars;
 
 	@ManyToOne
-	private Post Post ;
+	private Post post ;
 	
 	@ManyToOne
 	private User user;
@@ -45,13 +45,12 @@ public class Rating implements Serializable {
 		this.stars = stars;
 	}
 
-	
 	public Post getPost() {
-		return Post;
+		return post;
 	}
 
 	public void setPost(Post post) {
-		Post = post;
+		this.post = post;
 	}
 
 	public User getUser() {
@@ -62,11 +61,11 @@ public class Rating implements Serializable {
 		this.user = user;
 	}
 
-	public Rating(int idR, int stars, tn.pi.entities.Post post, User user) {
+	public Rating(int idR, int stars, Post post, User user) {
 		super();
 		this.idR = idR;
 		this.stars = stars;
-		Post = post;
+		this.post = post;
 		this.user = user;
 	}
 

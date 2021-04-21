@@ -11,7 +11,7 @@ public interface CommentService {
 	List<Comment> retrieveAllCommentsByPost(long idP);
 	Comment addComment(Comment com);
 	Comment updateComment(Comment com);
-	void deleteComment(String idC);
+	void deleteComment(String idc);
 	void motInterdit ();
 	void affectCommentToUser(long idu, long idc);
 }
