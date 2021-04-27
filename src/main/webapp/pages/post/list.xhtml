@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h:panelGroup columns="2">
+<h:form>
+<h:dataTable value="#{postController.posts}" var="post" border="1">
+
+<h:column><f:facet name="header"><h:outputText value="Title" /></f:facet>
+<h:outputText value="#{post.title}" /></h:column>
+
+<h:column><f:facet name="header"><h:outputText value="Content" /></f:facet>
+<h:outputText value="#{post.content}" /></h:column>
+
+<h:column><f:facet name="header"><h:outputText value="Date Creation" /></f:facet>
+<h:outputText value="#{post.dateCreation}" /></h:column>
+
+<h:column><f:facet name="header"><h:outputText value="Theme" /></f:facet>
+<h:outputText value="#{post.theme}" /></h:column>
+
+<h:commandButton action="#{employeController.displayEmploye(employe)}" value="Afficher" />
+
+<h:column><f:facet name="header"><h:outputText value="Action" /></f:facet>
+<h:commandButton action="#{employeController.removeEmploye(employe.id)}" value="Supprimer" /></h:column>
+
+</h:dataTable>
+</h:form>
+</h:panelGroup>
+</body>
+</html>

@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="T_Rating")
 public class Rating implements Serializable {
@@ -23,11 +25,14 @@ public class Rating implements Serializable {
 	@Column(name="Stars")
 	private int stars;
 
-	@ManyToOne
-	private Post post ;
+	/**************Associations**************/
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Post Post ;
 	
-	@ManyToOne
-	private User user;
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	User User ;
+	
 	
 	public long getIdR() {
 		return idR;
@@ -46,27 +51,27 @@ public class Rating implements Serializable {
 	}
 
 	public Post getPost() {
-		return post;
+		return Post;
 	}
 
-	public void setPost(Post post) {
-		this.post = post;
+	public void setPost(Post Post) {
+		this.Post = Post;
 	}
 
 	public User getUser() {
-		return user;
+		return User;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(User User) {
+		this.User = User;
 	}
 
-	public Rating(int idR, int stars, Post post, User user) {
+	public Rating(int idR, int stars, Post Post, User User) {
 		super();
 		this.idR = idR;
 		this.stars = stars;
-		this.post = post;
-		this.user = user;
+		this.Post = Post;
+		this.User = User;
 	}
 
 	public Rating() {

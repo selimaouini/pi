@@ -11,7 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +20,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 
@@ -33,13 +37,15 @@ private static final long serialVersionUID = 1L;
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idP;
 	
-	//@Size(min=3,title = " you should insert at least 1 character ")
+	@NotEmpty 
+	@Size(min=3,max= 25,message = " you should insert at least 1 character ")
 	@Column(name="title")
 	private String title;
 	
-	//@Size(min=25,description = " you should insert at least 1 character ")
-	@Column(name="description")
-	private String description;
+	@NotEmpty 
+	//@Size(min=5, max= 200, message = " you should insert at least 1 character ")
+	@Column(name="content")
+	private String content;
 	
 	
 	@Column(name="photo")
@@ -54,18 +60,21 @@ private static final long serialVersionUID = 1L;
 	@Enumerated(EnumType.STRING)
 	Theme theme; 
 	
-	@ManyToOne
-	private User user;
+	private Long postdToBeUpdated;
 	
-	/*
-	@OneToMany( mappedBy = "Post")
-	private Set<Rating> rating;
+	/**************Associations**************/
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	User User ;
 	
+		@OneToMany(mappedBy="Post" ,cascade=CascadeType.REMOVE)
+		public List<Comment> comments;
+		
+		@OneToMany(mappedBy = "Post")
+		private List<Rating>rating;
 
-	@OneToMany( mappedBy="Post")
-	private List<Comment> comment;
-*/	
-
+		
+		
 	public long getIdP() {
 		return idP;
 	}
@@ -82,12 +91,12 @@ private static final long serialVersionUID = 1L;
 		this.title = title;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getContent() {
+		return content;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public String getPhoto() {
@@ -114,96 +123,79 @@ private static final long serialVersionUID = 1L;
 		this.theme = theme;
 	}
 
-	public User getUser() {
-		return user;
+public User getUser() {
+		return User;
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		User = user;
 	}
 
-/*	public Set<Rating> getRating() {
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<Rating> getRating() {
 		return rating;
 	}
 
-	public void setRating(Set<Rating> rating) {
+	public void setRating(List<Rating> rating) {
 		this.rating = rating;
 	}
 
-	public List<Comment> getComment() {
-		return comment;
-	}
-
-	public void setComment(List<Comment> comment) {
-		this.comment= comment;
-	}
-*/
 	public Post() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-public Post(long idP, String title, String description, String photo, LocalDateTime dateCreation, Theme theme , User user) {
+	public Post(long idP,
+			@NotEmpty @Size(min = 3, max = 25, message = " you should insert at least 1 character ") String title,
+			@NotEmpty String content, String photo, LocalDateTime dateCreation, Theme theme,
+			tn.pi.entities.User user, List<Comment> comments, List<Rating> rating) {
 		super();
 		this.idP = idP;
 		this.title = title;
-		this.description = description;
+		this.content = content;
 		this.photo = photo;
 		this.dateCreation = dateCreation;
 		this.theme = theme;
-		this.user = user;
-	//	this.rating = rating;
-	}
-
-/*	
-	public Post(long idP, String title, String description, String photo, Date dateCreation, Theme theme, User user,
-			Set<Rating> rating, List<Comment> comment) {
-		super();
-		this.idP = idP;
-		this.title = title;
-		this.description = description;
-		this.photo = photo;
-		this.dateCreation = dateCreation;
-		this.theme = theme;
-		this.user = user;
+		User = user;
+		this.comments = comments;
 		this.rating = rating;
-		this.comment = comment;
-	}*/
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Post other = (Post) obj;
-		if (dateCreation == null) {
-			if (other.dateCreation != null)
-				return false;
-		} else if (!dateCreation.equals(other.dateCreation))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (idP != other.idP)
-			return false;
-		if (photo == null) {
-			if (other.photo != null)
-				return false;
-		} else if (!photo.equals(other.photo))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
 	}
+
+	public Post(@NotEmpty @Size(min = 3, max = 25, message = " you should insert at least 1 character ") String title,
+			@NotEmpty String content, String photo, Theme theme) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.photo = photo;
+		this.theme = theme;
+	}
+
+	public Long getPostdToBeUpdated() {
+		return postdToBeUpdated;
+	}
+
+	public void setPostdToBeUpdated(Long postdToBeUpdated) {
+		this.postdToBeUpdated = postdToBeUpdated;
+	}
+
+	public Post(@NotEmpty @Size(min = 3, max = 25, message = " you should insert at least 1 character ") String title,
+			@NotEmpty String content, String photo, Theme theme, Long postdToBeUpdated) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.photo = photo;
+		this.theme = theme;
+		this.postdToBeUpdated = postdToBeUpdated;
+	}
+
+	
 	
 	
 

@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +28,7 @@ public class CommentRestController {
 	CommentService commentService; 
 
 	//yemchi
-	// http://localhost:8081/SpringMVC/servletc/comment/retrieve-all-comments
+	// http://localhost:8081/SpringMVC/servlet/comment/retrieve-all-comments
 			@GetMapping("/comment/retrieve-all-comments")
 			@ResponseBody
 			public List<Comment> getComments() {
@@ -34,26 +36,40 @@ public class CommentRestController {
 			return list;
 			}	
 	//yemchi
-	// http://localhost:8081/SpringMVC/servlet/comment/add-comment
-				@PostMapping("/comment/add-comment")
-				@ResponseBody
-				public Comment addComment(@RequestBody Comment com) {
-					Comment comment = commentService.addComment(com);
-				return comment;
-				}
+	// http://localhost:8081/SpringMVC/servlet/comment/add-comment/{idu}/{idP}
+	   @PostMapping("/comment/add-comment/{idu}/{idP}")
+    @ResponseBody
+    public ResponseEntity <String> addComment(@RequestBody Comment com,@PathVariable("idu") long idu,@PathVariable("idP") long idP) {
+     //   if  (!com.getDescription().isEmpty())
+            commentService.addComment(com, idu, idP);
+        return new ResponseEntity <String>("Comment added !",HttpStatus.OK);
+    }
+	
+				
 				
 				//yemchi
 				// http://localhost:8081/SpringMVC/servlet/comment/modify-Comment
 				@PutMapping("/Comment/modify-Comment")
 				@ResponseBody
-				public Comment modifyComment(@RequestBody Comment com) {
-				return commentService.updateComment(com);
+				public  ResponseEntity <String> modifyComment(@RequestBody Comment com) {
+					Comment comment=commentService.getCommentById(com.getIdc());
+			      //  if (comment!=null && (!com.getDescription().isEmpty() ))
+			        	commentService.updateComment(com);
+			        return new ResponseEntity <String>("Comment updated !",HttpStatus.OK);
 				}
-				
+			
 				// http://localhost:8081/SpringMVC/servlet/comment/remove-com/{com-id}
 				@DeleteMapping("/comment/remove-com/{com-id}")
 				@ResponseBody
-				public void removeCom(@PathVariable("com-id") String comId) {
+				public ResponseEntity <String> removeCom(@PathVariable("com-id") String comId) {
 					commentService.deleteComment(comId);
+					 return new ResponseEntity <String>("Comment deleted !",HttpStatus.OK);
 				}
+				
+				
+				  @GetMapping("/comment/{idc}")
+				    @ResponseBody
+				    public Comment getCommentById(@PathVariable("idc") long idc) {
+				        return commentService.getCommentById(idc);
+				    }
 }

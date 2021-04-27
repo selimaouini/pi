@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 
@@ -39,36 +40,20 @@ public class Comment implements Serializable {
 	@NotNull	
 	private LocalDateTime dateCreation= LocalDateTime.now();
 	
-/*	
-	@ManyToOne
-	private User User ;
+	/**************Associations**************/
 	
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	User User ;
+	
+	@JsonIgnore
 	@ManyToOne
 	private Post Post ;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Comment")
 	private Set<Likes> likes;
-*/
-	
-	
-	
-	/*
-	 * 
-	 * 	//@OneToMany(mappedBy = "comment")
-	//private Likes likes;
-	
-	@ManyToOne(cascade=CascadeType.MERGE)
-	@JoinColumn(name="idSubject",referencedColumnName="id")
-	private Subject subject;
-	
-	//@JsonBackReference
-	@ManyToOne(cascade=CascadeType.MERGE)
-	@JoinColumn(name="idUser",referencedColumnName="id")
-	private User user;
-	
-	*/
-	
-	
+
 	
 	public long getIdc() {
 		return idc;
@@ -93,26 +78,23 @@ public class Comment implements Serializable {
 	public void setDateCreation(LocalDateTime dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-/*
+
 	public User getUser() {
 		return User;
 	}
-
 
 	public void setUser(User user) {
 		User = user;
 	}
 
-
 	public Post getPost() {
 		return Post;
 	}
 
-
 	public void setPost(Post post) {
 		Post = post;
 	}
-	
+
 	public Set<Likes> getLikes() {
 		return likes;
 	}
@@ -121,16 +103,16 @@ public class Comment implements Serializable {
 		this.likes = likes;
 	}
 
-	}*/
-
-	public Comment(long idc, String description, LocalDateTime dateCreation) {
+	public Comment(long idc, String description, LocalDateTime dateCreation, tn.pi.entities.User user,
+			tn.pi.entities.Post post, Set<Likes> likes) {
 		super();
 		this.idc = idc;
 		this.description = description;
 		this.dateCreation = dateCreation;
+		User = user;
+		Post = post;
+		this.likes = likes;
 	}
-
-	
 
 	public Comment() {
 		super();

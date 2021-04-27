@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/template/template.xhtml">
+<ui:param name="page_name" value="Post" />
+<ui:define name="content">
+<!-- BEGIN : TP1 JSF Introduction Login -->
+<h:panelGroup columns="2"><h:form><table>
+<h:form>
+<h:outputText value="Bonjour #{postController. authenticatedUser.prenom}
+#{postController. authenticatedUser.nom}" />
+
+
+<tr>
+	<td><h:outputText value="Title"></h:outputText></td>
+	<td><h:inputText value="#{postController.nom}"></h:inputText></td>
+</tr>
+
+<tr>
+	<td><h:outputText value="Content"></h:outputText></td>
+	<td><h:inputText value="#{postController.prenom}"></h:inputText></td>
+</tr>
+
+<tr>
+	<td><h:outputText value="Photo"></h:outputText></td>
+	<td><h:inputText value="#{postController.prenom}"></h:inputText></td>
+</tr>
+
+<tr>
+	<td><h:outputText value="Theme"></h:outputText></td>
+	<td><h:selectOneMenu value="#{postController.theme}">
+	<f:selectItem itemLabel="Choisir le Theme" itemValue="#{null}" />
+	<f:selectItems value="#{postController.themes}" /></h:selectOneMenu></td>
+</tr>
+
+<tr>
+	<td colspan="2"> <h:commandButton value="Add post" action="#{postController.addPost()}" /></td>
+	<h:commandButton value="Mettre A jour Employé"action="#{employeController.updateEmploye()}" />
+</tr>
+</table></h:form></h:panelGroup>
+
+
+</ui:define>
+</ui:composition>
+</body>
+</html>

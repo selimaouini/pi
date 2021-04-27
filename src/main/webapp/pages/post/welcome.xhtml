@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/template/template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<!--BEGIN : TP1 JSF Introduction Login -->
+<h3> Posts List</h3>
+<h:panelGroup>
+<h:form>
+
+<table border="1">
+
+<tr>
+<th> Title </th>
+<th> Content </th>
+<th> Photo </th>
+<th> Action </th>
+</tr>
+
+<c:forEach var="post" items="${posts}">
+	<tr> 
+		<td>${post.title}</td>
+		<td>${post.content}</td>
+		<td>< a img src="${pageContext.request.contextPath }/resources/images/${post.photo}" width="60"</a></td>
+		<td><a href="${pageContext.request.contextPath }/post/detail/${post.idP}">Detail</a></td>
+	</tr>
+	</c:forEach>
+	</table>
+</h:form>
+</h:panelGroup>
+</ui:define>
+</ui:composition>
+</body>
+</html>
