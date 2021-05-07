@@ -10,12 +10,14 @@ import tn.pi.entities.AdsView;
 @Service
 public interface AdsService {
 
-	void AddAd(Ads ads);
-	void Mod_SDate(int AdsID,Date new_SDate);
-	void Mod_FDate(int AdsId,Date new_FDate);
+    void AddAd(Ads ads);
+	
 	List<Ads> GetAllAds();
-	List<Ads> GetAdsByFDate(Date FDate);
-	List<Ads> GetAdsBySDate(Date SDate);
+	
 	List<AdsView> previousStats(int prodId);
-	String ModTargetView_tot(int AdsId,int vCounty);
+	String ModTargetView_tot(int AdsId,int vCount);
+    String AddAd(Ads ads, int prodId);
+	int deleteAdd(int idAdd);
+	int SignalAdd(int idAdd);
+	List<Ads> Productmostviewed();
 }

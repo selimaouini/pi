@@ -22,19 +22,17 @@ public class Ads implements Serializable {
 	private Date DateCreation;
 	private String MediaType;
 	private String Madia;
+	private int nbsignal;
 	@Temporal(TemporalType.DATE)
-	private Date startDate;
+	private Date beginDate;
 	@Temporal(TemporalType.DATE)
 	private Date finishDate;
 	private String Target;
-	private int TargetView_tot;
+	private double TargetView_tot;
 	@ManyToOne
 	private Product product;
 	public int getIdAds() {
 		return idAds;
-	}
-	public void setIdAds(int idAds) {
-		this.idAds = idAds;
 	}
 	public Date getDateCreation() {
 		return DateCreation;
@@ -54,11 +52,18 @@ public class Ads implements Serializable {
 	public void setMadia(String madia) {
 		Madia = madia;
 	}
-	public Date getStartDate() {
-		return startDate;
+	public int getNbsignal() {
+		return nbsignal;
 	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setNbsignal(int nbsignal) {
+		this.nbsignal = nbsignal;
+	}
+	
+	public Date getBeginDate() {
+		return beginDate;
+	}
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
 	}
 	public Date getFinishDate() {
 		return finishDate;
@@ -72,10 +77,10 @@ public class Ads implements Serializable {
 	public void setTarget(String target) {
 		Target = target;
 	}
-	public int getTargetView_tot() {
+	public double getTargetView_tot() {
 		return TargetView_tot;
 	}
-	public void setTargetView_tot(int targetView_tot) {
+	public void setTargetView_tot(double targetView_tot) {
 		TargetView_tot = targetView_tot;
 	}
 	public Product getProduct() {
@@ -84,14 +89,31 @@ public class Ads implements Serializable {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public Ads(int idAds, Date dateCreation, String mediaType, String madia, Date startDate, Date finishDate,
-			String target, int targetView_tot, Product product) {
+	public void setIdAds(int idAds) {
+		this.idAds = idAds;
+	}
+	public Ads(int idAds, Date dateCreation, String mediaType, String madia, int nbsignal, Date beginDate,
+			Date finishDate, String target, int targetView_tot, Product product) {
 		super();
 		this.idAds = idAds;
 		DateCreation = dateCreation;
 		MediaType = mediaType;
 		Madia = madia;
-		this.startDate = startDate;
+		this.nbsignal = nbsignal;
+		this.beginDate = beginDate;
+		this.finishDate = finishDate;
+		Target = target;
+		TargetView_tot = targetView_tot;
+		this.product = product;
+	}
+	public Ads(Date dateCreation, String mediaType, String madia, int nbsignal, Date beginDate,
+			Date finishDate, String target, int targetView_tot, Product product) {
+		super();
+		DateCreation = dateCreation;
+		MediaType = mediaType;
+		Madia = madia;
+		this.nbsignal = nbsignal;
+		this.beginDate = beginDate;
 		this.finishDate = finishDate;
 		Target = target;
 		TargetView_tot = targetView_tot;
@@ -104,9 +126,11 @@ public class Ads implements Serializable {
 	@Override
 	public String toString() {
 		return "Ads [idAds=" + idAds + ", DateCreation=" + DateCreation + ", MediaType=" + MediaType + ", Madia="
-				+ Madia + ", startDate=" + startDate + ", finishDate=" + finishDate + ", Target=" + Target
-				+ ", TargetView_tot=" + TargetView_tot + ", product=" + product + "]";
+				+ Madia + ", nbsignal=" + nbsignal + ", beginDate=" + beginDate + ", finishDate=" + finishDate
+				+ ", Target=" + Target + ", TargetView_tot=" + TargetView_tot + ", product=" + product + "]";
 	}
+	
+	
 	
 	
 }

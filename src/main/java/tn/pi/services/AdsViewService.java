@@ -15,4 +15,8 @@ public interface AdsViewService {
 	void Addview(int AdId, int userId);
 	ArrayList finalStats();
 	void AffectAdsviewtoAds(int AdId,AdsView adsview);
+	double NbVues(int IdAdd);
+	double NbVuesMale(int IdAdd);
+	double NbVuesFemale(int IdAdd);
+	
 }

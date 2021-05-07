@@ -14,35 +14,27 @@ import javax.persistence.TemporalType;
 @Table(name="Promotion")
 public class Promotion implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idpromotion;
-	@Temporal(TemporalType.DATE)
-	private Date Startingdate;
-	@Temporal(TemporalType.DATE)
-	private Date EndingDate;
+	private int idPromotion;
 	private String libelle;
-	private String Description;
-	private long percentage;
+	@Temporal(TemporalType.DATE)
+	private Date startDate;
+	@Temporal(TemporalType.DATE)
+	private Date endDate;
+	private String desc;
+	private float percentage;
 	@ManyToOne
 	private Product product;
-	public int getIdpromotion() {
-		return idpromotion;
+	public int getIdPromotion() {
+		return idPromotion;
 	}
-	public void setIdpromotion(int idpromotion) {
-		this.idpromotion = idpromotion;
-	}
-	public Date getStartingdate() {
-		return Startingdate;
-	}
-	public void setStartingdate(Date startingdate) {
-		Startingdate = startingdate;
-	}
-	public Date getEndingDate() {
-		return EndingDate;
-	}
-	public void setEndingDate(Date endingDate) {
-		EndingDate = endingDate;
+	public void setIdPromotion(int idPromotion) {
+		this.idPromotion = idPromotion;
 	}
 	public String getLibelle() {
 		return libelle;
@@ -50,16 +42,29 @@ public class Promotion implements Serializable {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	public String getDescription() {
-		return Description;
+	public Date getStartDate() {
+		return startDate;
 	}
-	public void setDescription(String description) {
-		Description = description;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
-	public long getPercentage() {
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+	
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	public float getPercentage() {
 		return percentage;
 	}
-	public void setPercentage(long percentage) {
+	public void setPercentage(float percentage) {
 		this.percentage = percentage;
 	}
 	public Product getProduct() {
@@ -68,14 +73,28 @@ public class Promotion implements Serializable {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public Promotion(int idpromotion, Date startingdate, Date endingDate, String libelle, String description,
-			long percentage, Product product) {
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	public Promotion(int idPromotion, String libelle, Date startDate, Date endDate, String desc,
+			float percentage, Product product) {
 		super();
-		this.idpromotion = idpromotion;
-		Startingdate = startingdate;
-		EndingDate = endingDate;
+		this.idPromotion = idPromotion;
 		this.libelle = libelle;
-		Description = description;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.desc = desc;
+		this.percentage = percentage;
+		this.product = product;
+	}
+	
+	public Promotion(String libelle, Date startDate, Date endDate, String desc, float percentage,
+			Product product) {
+		super();
+		this.libelle = libelle;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.desc = desc;
 		this.percentage = percentage;
 		this.product = product;
 	}
@@ -85,11 +104,13 @@ public class Promotion implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Promotion [idpromotion=" + idpromotion + ", Startingdate=" + Startingdate + ", EndingDate=" + EndingDate
-				+ ", libelle=" + libelle + ", Description=" + Description + ", percentage=" + percentage + ", product="
+		return "Promotion [idPromotion=" + idPromotion + ", libelle=" + libelle + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", desc=" + desc + ", percentage=" + percentage + ", product="
 				+ product + "]";
 	}
 	
 	
+	
+
 
 }
