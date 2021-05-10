@@ -1,7 +1,9 @@
 package tn.pi.services;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import tn.pi.entities.Ads;
@@ -20,4 +22,8 @@ public interface AdsService {
 	int deleteAdd(int idAdd);
 	int SignalAdd(int idAdd);
 	List<Ads> Productmostviewed();
+
+	
+
+	
 }

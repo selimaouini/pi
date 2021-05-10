@@ -9,7 +9,7 @@ import tn.pi.entities.AdsView;
 @Service
 public interface AdsViewService {
 
-	int AddAdsView(AdsView adsview);
+	public int AddAdsView(int idadd);
 	List<AdsView> getAllAdsView();
 	List<AdsView> AdsViewToday();
 	void Addview(int AdId, int userId);

@@ -48,6 +48,8 @@ public class Product implements Serializable{
 	//private User user;
 	@OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
 	private List<Promotion>promotions;
+	@OneToOne
+	private Ads Ads;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Category category;
 	//@ManyToMany(mappedBy = "products")
@@ -64,6 +66,22 @@ public class Product implements Serializable{
 	}
 
 	
+	
+
+	public Ads getAds() {
+		return Ads;
+	}
+
+
+
+
+	public void setAds(Ads ads) {
+		Ads = ads;
+	}
+
+
+
+
 	public Product(String productName, String picture, String description, float price, boolean newProduct,
 			String barCode, Date createdAt, int mostViewed, int weigth, boolean promotionEtat,
 			List<Promotion> promotions, Category category, boolean expired ,Date dateexpiration) {

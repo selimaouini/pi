@@ -17,6 +17,7 @@ public class PiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PiApplication.class, args);
+		
 	}
 	@Bean
 	public ServletRegistrationBean servletRegistrationBean() {

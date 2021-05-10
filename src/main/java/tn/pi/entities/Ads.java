@@ -1,17 +1,21 @@
 package tn.pi.entities;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.primefaces.model.file.UploadedFile;
 @Entity
 @Table(name="Ads")
 public class Ads implements Serializable {
@@ -29,11 +33,55 @@ public class Ads implements Serializable {
 	private Date finishDate;
 	private String Target;
 	private double TargetView_tot;
+	private double NbVuesMale;
+	private double NbVuesfemale;
+	private double NbVues;
+	private String file;
 	@ManyToOne
 	private Product product;
+	
+	
+	
+
+	
+
+	
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+
 	public int getIdAds() {
 		return idAds;
 	}
+	
+	public double getNbVuesMale() {
+		return NbVuesMale;
+	}
+
+	public void setNbVuesMale(double nbVuesMale) {
+		NbVuesMale = nbVuesMale;
+	}
+
+	public double getNbVuesfemale() {
+		return NbVuesfemale;
+	}
+
+	public void setNbVuesfemale(double nbVuesfemale) {
+		NbVuesfemale = nbVuesfemale;
+	}
+
+	public double getNbVues() {
+		return NbVues;
+	}
+
+	public void setNbVues(double nbVues) {
+		NbVues = nbVues;
+	}
+
 	public Date getDateCreation() {
 		return DateCreation;
 	}
@@ -118,17 +166,41 @@ public class Ads implements Serializable {
 		Target = target;
 		TargetView_tot = targetView_tot;
 		this.product = product;
+		
 	}
+	
+	public Ads(Date dateCreation, String mediaType, String madia, int nbsignal, Date beginDate,
+			Date finishDate, String target, int targetView_tot, Product product, String file) {
+		super();
+		DateCreation = dateCreation;
+		MediaType = mediaType;
+		Madia = madia;
+		this.nbsignal = nbsignal;
+		this.beginDate = beginDate;
+		this.finishDate = finishDate;
+		Target = target;
+		TargetView_tot = targetView_tot;
+		this.product = product;
+		this.file= file;
+	}
+	
+	
+
 	public Ads() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	@Override
 	public String toString() {
 		return "Ads [idAds=" + idAds + ", DateCreation=" + DateCreation + ", MediaType=" + MediaType + ", Madia="
 				+ Madia + ", nbsignal=" + nbsignal + ", beginDate=" + beginDate + ", finishDate=" + finishDate
-				+ ", Target=" + Target + ", TargetView_tot=" + TargetView_tot + ", product=" + product + "]";
+				+ ", Target=" + Target + ", TargetView_tot=" + TargetView_tot + ", NbVuesMale=" + NbVuesMale
+				+ ", NbVuesfemale=" + NbVuesfemale + ", NbVues=" + NbVues + ", file=" + file + ", product=" + product
+				+ "]";
 	}
+
+	
 	
 	
 	

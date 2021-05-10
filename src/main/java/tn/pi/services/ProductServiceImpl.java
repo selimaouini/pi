@@ -2,10 +2,12 @@ package tn.pi.services;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
@@ -16,12 +18,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import antlr.StringUtils;
+import freemarker.template.TemplateException;
 import tn.pi.entities.Ads;
 import tn.pi.entities.Category;
 import tn.pi.entities.Product;
 import tn.pi.repository.ProductRepository;
 import tn.pi.repository.PromotionRepository;
 import tn.pi.repository.CategoryRepository;
+import tn.pi.repository.AdsRepository;
 @Service
 public class ProductServiceImpl implements ProductService{
 	@Autowired
@@ -29,8 +33,11 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	CategoryRepository CategoryRepository;
 	@Autowired
+	AdsRepository AdsRepository;
+	@Autowired
 	ProductService ProductService;
-	
+	@Autowired
+	EmailService  emailService;
 	/************************************VerifyProduct**************************************/
 	@Override
 	public boolean verifyProduct(String barCode) {
@@ -55,11 +62,29 @@ public class ProductServiceImpl implements ProductService{
 		        
 		        }
 		       
+		        try {
+					try {
+						emailService.sendMailMultipart("mohamedselim.aouini@esprit.tn","Expired products","HEY");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (TemplateException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} catch (MessagingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					
+				}
+	
+		        
+		       
 				return "CHECK YOUR PRODUCT";
 				
 	}
 	
-
+	
 	
 
 	@Override
@@ -208,8 +233,8 @@ public class ProductServiceImpl implements ProductService{
 		/// prod.setCategoryname(category.getname);
 		Category category = CategoryRepository.findById(idCategory).get();
 		prod.setCategory(category);
-	       
-			
+	    
+			   
 		        prod.setCreatedAt(new Date());
 				ProductRepository.save(prod);
 				return prod;
@@ -220,6 +245,12 @@ public class ProductServiceImpl implements ProductService{
 	public void AddorupdateProduct(Product product, int idCategory) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String ExpiredProduct() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

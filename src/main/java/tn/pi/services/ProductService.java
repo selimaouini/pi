@@ -32,6 +32,7 @@ public interface ProductService {
 	String ExpiredProduct(int idProduct);
 	//String addProduct();
 	public void updateProduct(int idProduct,Product prod);
+	String ExpiredProduct();
 	
 	
 	
