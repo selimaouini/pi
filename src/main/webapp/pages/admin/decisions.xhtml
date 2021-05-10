@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/template/templateadmin.xhtml">
+<ui:define name="content">
+<h:head>
+<h:form>
+        <p:growl id="messages"/>
+        <p:menubar>
+                  <p:menuitem value="Delivery Men" icon="pi pi-fw pi-user" outcome="/pages/admin/devMen"></p:menuitem>
+                  <p:menuitem value="Statistics" icon="pi pi-fw pi-chart-line" outcome="/pages/admin/statistics"></p:menuitem>
+                  <p:menuitem value="Deliveries" icon="pi pi-fw pi-slack" outcome="/pages/admin/deliveries"></p:menuitem>
+                  <p:menuitem value="Claims" icon="pi pi-fw pi-exclamation-circle" outcome="/pages/admin/claims"></p:menuitem>
+                  <p:menuitem value="Decisions" icon="pi pi-fw pi-filter-slash" outcome="/pages/admin/decisions"></p:menuitem>
+        </p:menubar>
+    </h:form>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Login Page</title>
+	
+</h:head>
+
+<h:form id="form">
+    <div class="card">
+        
+        <p:carousel value="#{DecisionController.decision}" var="Decision"  responsive="true">
+            <div class="Decision"  >
+               
+                   
+                    <div class="Decision-grid-item-content">
+                     <p:graphicImage name="/images/decisions.jpg"/>
+                     <div class="Decision-decision_result">#{Decision.decision_result}</div>
+                       
+                    </div>
+                    <div class="Decision-grid-item-bottom"> 
+                        <h:outputText value="#{Decision.date_decision}" styleClass="product-price"  ></h:outputText>
+                      
+                      <div class="Decision-grid-item-content">
+                    <p:commandButton  class="ui-button-warning rounded-button" icon="pi pi-trash"   process="@this" oncomplete="PF('deleteProductDialog').show()" style="margin-right:10px;" ></p:commandButton>
+                    <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300" message="Delete Decision?" header="Confirm" severity="warn">
+                       <p:commandButton value="Yes" icon="pi pi-check"   actionListener="#{DecisionController.deleteDecision(Decision.id_decision)}" process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
+                       <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times" onclick="PF('deleteProductDialog').hide()"/>
+                    </p:confirmDialog>
+                   </div>
+
+
+
+                   </div>
+          </div>
+        </p:carousel>
+    </div>
+        
+        
+
+    </h:form>
+    </ui:define>
+    </ui:composition>
+</html>

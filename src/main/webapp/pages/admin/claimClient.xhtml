@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/template/template.xhtml">
+<ui:define name="content">
+<h:head>
+	
+	
+</h:head>
+<div class="card">
+
+    <h:form>
+        <p:growl id="messages"/>
+
+        <p:menubar>
+            <p:menuitem value="Delivery" icon="pi pi-fw pi-user" outcome="/pages/admin/deliveryClient">
+               </p:menuitem>
+               <p:menuitem value="Réclamer" icon="pi pi-fw pi-chart-line" outcome="/pages/admin/claimClient">
+                 </p:menuitem>                 
+               
+        </p:menubar>
+     
+    </h:form>
+</div>
+<h:body>
+
+
+<div class="card">
+    <h:form>
+        
+<h5 class="p-mt-0"></h5>
+        <p:textEditor widgetVar="editor1" value="#{ClaimController.description}" height="300"  />       
+        
+            
+       
+       <p:growl id="growl" showDetail="true" />
+        <p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
+       
+       
+      <p:commandButton icon="pi pi-check" styleClass="rounded-button ui-button-outlined" update="growl"  value="Ajouter reclamation" action="#{ClaimController.addClaimss()}" />
+    
+ </h:form>      
+</div>
+</h:body>
+</ui:define>
+</ui:composition>
+</html>

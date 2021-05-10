@@ -1,14 +1,20 @@
 package tn.pi.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -18,94 +24,159 @@ public class Delivery implements Serializable {
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY) 
-	private long id_delivery;
+	private int id_delivery;
 	
-	@Column (name="description")
-	private String description;
+	
 	@Column (name="Shippingcost")
 	private float Shippingcost;
 	@Column (name="address")
 	private String address;
+	
+	@Column (name="date_affectation")
+	private Date date_affectation;
+	
+	@Column (name="date_delivery")
+	private Date date_delivery;
 	@Column (name="city")
 	private String city;
 	@Column (name="state")
-	private String state;
+	@Enumerated(EnumType.STRING)
+	private DeliveryState state;
 	
+	@JsonIgnore
 	@ManyToOne
 	DeliveryMan DeliveryMan;
 	
+	@JsonIgnore
+	@ManyToOne
+	Command commande;
+	
+
+
 	public Delivery() {
 		super();
 	}
-	
-	 Delivery(long id_delivery, String description, float shippingcost, String address, String city,
-			String state) {
+
+
+	public Delivery(int id_delivery, float shippingcost, String address, Date date_affectation, Date date_delivery,
+			String city, DeliveryState state, tn.pi.entities.DeliveryMan deliveryMan, Command commande) {
 		super();
 		this.id_delivery = id_delivery;
-		this.description = description;
-		this.Shippingcost = shippingcost;
+		Shippingcost = shippingcost;
 		this.address = address;
+		this.date_affectation = date_affectation;
+		this.date_delivery = date_delivery;
 		this.city = city;
 		this.state = state;
+		DeliveryMan = deliveryMan;
+		this.commande = commande;
+		
 	}
 
-	public long getId_delivery() {
+
+	public int getId_delivery() {
 		return id_delivery;
 	}
 
-	public void setId_delivery(long id_delivery) {
+
+	public void setId_delivery(int id_delivery) {
 		this.id_delivery = id_delivery;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 	public float getShippingcost() {
 		return Shippingcost;
 	}
 
+
 	public void setShippingcost(float shippingcost) {
 		Shippingcost = shippingcost;
 	}
+
 
 	public String getAddress() {
 		return address;
 	}
 
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+
+	public Date getDate_affectation() {
+		return date_affectation;
+	}
+
+
+	public void setDate_affectation(Date date_affectation) {
+		this.date_affectation = date_affectation;
+	}
+
+
+	public Date getDate_delivery() {
+		return date_delivery;
+	}
+
+
+	public void setDate_delivery(Date date_delivery) {
+		this.date_delivery = date_delivery;
+	}
+
 
 	public String getCity() {
 		return city;
 	}
 
+
 	public void setCity(String city) {
 		this.city = city;
 	}
 
-	public String getState() {
+
+	public DeliveryState getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+
+	public void setState(DeliveryState state) {
 		this.state = state;
 	}
 
+
+	public DeliveryMan getDeliveryMan() {
+		return DeliveryMan;
+	}
+
+
+	public void setDeliveryMan(DeliveryMan deliveryMan) {
+		DeliveryMan = deliveryMan;
+	}
+
+
+	public Command getCommande() {
+		return commande;
+	}
+
+
+	public void setCommande(Command commande) {
+		this.commande = commande;
+	}
+
+
+
+
 	@Override
 	public String toString() {
-		return "Delivery [id_delivery=" + id_delivery + ", description=" + description + ", Shippingcost="
-				+ Shippingcost + ", address=" + address + ", city=" + city + ", state=" + state + "]";
+		return "Delivery [id_delivery=" + id_delivery + ", Shippingcost=" + Shippingcost + ", address=" + address
+				+ ", date_affectation=" + date_affectation + ", date_delivery=" + date_delivery + ", city=" + city
+				+ ", state=" + state + ", DeliveryMan=" + DeliveryMan + ", commande=" + commande
+				+ "]";
 	}
-	 
 
-}
-	
-	
+
 	
 
+	
+
+		}

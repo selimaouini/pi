@@ -11,7 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -21,100 +24,116 @@ public class DeliveryMan implements Serializable{
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY) 
-	private long id_deliveryMan;
-	
-	@Column (name="name")
-	private String name;
-	@Column (name="workZone")
+	private int id_deliveryMan;
+	@Column (name="firstName")
+	private String firstName;
+	@Column (name="lastName")
+	private String lastName;
+	@Column (name="work_zone")
 	private String workZone;
 	@Column (name="premium")
 	private float premium;
-	@Column (name="availibility")
-	private boolean availibility;
+	@Column (name="availability")
+	private boolean availability;
 	@Column (name="nbDelivery")
 	private int nbDelivery;
+	@Column (name="tel")
+	private String tel;
 	
+	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.REMOVE,fetch=FetchType.EAGER, mappedBy="DeliveryMan")
-	private List<Delivery> dep;
+	private List<Delivery> deliveries;
 	
 	public DeliveryMan() {
 		super();
 	}
-
-	public DeliveryMan(long id_deliveryMan, String name, String workZone, float premium, boolean availibility,
-			int nbDelivery) {
+	public DeliveryMan(int id_deliveryMan, String firstName, String lastName, String workZone, float premium,
+			boolean availability, int nbDelivery, String tel, List<Delivery> deliveries, tn.pi.entities.User user) {
 		super();
 		this.id_deliveryMan = id_deliveryMan;
-		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.workZone = workZone;
 		this.premium = premium;
-		this.availibility = availibility;
+		this.availability = availability;
 		this.nbDelivery = nbDelivery;
-		
+		this.tel = tel;
+		this.deliveries = deliveries;
 		
 	}
-
-	public long getId_deliveryMan() {
+	public int getId_deliveryMan() {
 		return id_deliveryMan;
 	}
-
-	public void setId_deliveryMan(long id_deliveryMan) {
+	public void setId_deliveryMan(int id_deliveryMan) {
 		this.id_deliveryMan = id_deliveryMan;
 	}
-
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 	public String getWorkZone() {
 		return workZone;
 	}
-
 	public void setWorkZone(String workZone) {
 		this.workZone = workZone;
 	}
-
 	public float getPremium() {
 		return premium;
 	}
-
 	public void setPremium(float premium) {
 		this.premium = premium;
 	}
-
-	public boolean isAvailibility() {
-		return availibility;
+	public boolean isAvailability() {
+		return availability;
 	}
-
-	public void setAvailibility(boolean availibility) {
-		this.availibility = availibility;
+	public void setAvailability(boolean availability) {
+		this.availability = availability;
 	}
-
 	public int getNbDelivery() {
 		return nbDelivery;
 	}
-
 	public void setNbDelivery(int nbDelivery) {
 		this.nbDelivery = nbDelivery;
 	}
-
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public List<Delivery> getDeliveries() {
+		return deliveries;
+	}
+	public void setDeliveries(List<Delivery> deliveries) {
+		this.deliveries = deliveries;
+	}
+	
+	
+	public DeliveryMan(int id_deliveryMan, String firstName, String lastName, String workZone, String tel) {
+		super();
+		this.id_deliveryMan = id_deliveryMan;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.workZone = workZone;
+		this.tel = tel;
+	}
 	@Override
 	public String toString() {
-		return "DeliveryMan [id_deliveryMan=" + id_deliveryMan + ", name=" + name + ", workZone=" + workZone
-				+ ", premium=" + premium + ", availibility=" + availibility + ", nbDelivery=" + nbDelivery + "]";
+		return "DeliveryMan [id_deliveryMan=" + id_deliveryMan + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", workZone=" + workZone + ", premium=" + premium + ", availability=" + availability + ", nbDelivery="
+				+ nbDelivery + ", tel=" + tel + ", deliveries=" + deliveries + "]";
 	}
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-}
+
+			}
