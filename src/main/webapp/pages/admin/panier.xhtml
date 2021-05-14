@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/template.xhtml"> 
+<ui:param name="page_name" value="Commandes" />
+<ui:define name="content">
+<!-- BEGIN : TP1 JSF Introduction Login -->
+
+<p:panel header="Panier">
+<h:form>
+<div class="card">
+<p:dataTable value="#{CartController.cart}" var="Cart" border="1">
+
+<p:column><f:facet name="header"><h:outputText value="Montant" /></f:facet>
+<h:outputText value="#{Cart.subtotal}#{Cart.currency}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Etat" /></f:facet>
+<h:outputText value="#{Cart.etatcart}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Nombre de produits" /></f:facet>
+<h:outputText value="#{Cart.nb}" /></p:column>
+<p:column> <f:facet name="header"><h:outputText value="Mode de paiement" /></f:facet>
+<p:commandButton  action="#{CartController.save(Cart.idcart)}"  icon="pi pi-fw pi-credit-card" value="payer" styleClass="ui-button-outlined" />
+ 
+<p:commandButton   action="#{CartController.paymentbyfidelite(Cart.idcart)}"  icon="pi pi-fw pi-heart" value="fidelity" styleClass="ui-button-outlined" />
+
+<p:commandButton     icon="pi pi-fw pi-slack" value="Livraison" styleClass="ui-button-outlined" />
+</p:column>
+
+
+
+</p:dataTable>
+
+</div>
+   <p:commandButton value="annuler" action="#{CartController.annuler()}" styleClass="ui-button-raised ui-button-danger ui-button-flat" />
+</h:form>
+</p:panel>
+</ui:define>
+</ui:composition>
+</html>

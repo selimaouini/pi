@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/template/template.xhtml"> 
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+
+<p:panel>
+<h:form>
+
+<div class="card">
+<p:dataTable value="#{catalogcontroller.cat}" var="catalog" border="1">
+<p:column><f:facet name="header"><h:outputText value="Produit" /></f:facet>
+<h:outputText value="#{catalog.name}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Bar code" /></f:facet>
+<p:barcode value="#{catalog.barCode}"  type="codabar"/></p:column>
+<p:column><f:facet name="header"><h:outputText value="Prix" /></f:facet>
+<h:outputText value="#{catalog.price}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="quantité" /></f:facet>
+<h:outputText value="#{catalog.stock}" /></p:column>
+ <p:column> <f:facet name="header"><h:outputText value="action" /></f:facet>
+ <p:commandButton icon="pi pi-plus" action="#{catalogcontroller.demander(catalog.id)}" styleClass="edit-button rounded-button ui-button-success" >
+ </p:commandButton>
+  
+            </p:column>
+ 
+  
+</p:dataTable>
+
+</div>
+
+</h:form>
+</p:panel>
+
+
+
+</ui:define>
+</ui:composition>
+</html>

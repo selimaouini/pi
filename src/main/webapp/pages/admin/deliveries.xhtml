@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/template/templateadmin.xhtml">
+<ui:define name="content">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Login Page</title>
+	
+</h:head>
+
+<h:body>
+
+<div class="card">
+    <h:form>
+        <p:growl id="messages"/>
+
+        <p:menubar>
+           
+            
+           <p:menuitem value="Delivery Men" icon="pi pi-fw pi-user" outcome="/pages/admin/devMen"></p:menuitem>
+                  <p:menuitem value="Statistics" icon="pi pi-fw pi-chart-line" outcome="/pages/admin/statistics"></p:menuitem>
+                  <p:menuitem value="Deliveries" icon="pi pi-fw pi-slack" outcome="/pages/admin/deliveries"></p:menuitem>
+                  <p:menuitem value="Claims" icon="pi pi-fw pi-exclamation-circle" outcome="/pages/admin/claims"></p:menuitem>
+                  <p:menuitem value="Decisions" icon="pi pi-fw pi-filter-slash" outcome="/pages/admin/decisions"></p:menuitem>
+        
+               
+               
+            
+            
+            
+
+            
+                    
+            
+        </p:menubar>
+     
+    </h:form>
+</div>
+
+
+
+	<div class="card">
+    <h:form id="form">
+ 
+    <p:growl id="messages" showDetail="true"/>
+    
+        <p:dataTable id="dt-delivery" widgetVar="dtdelivery" value="#{DeliveryController.delivery}" var="Delivery">
+        
+        
+             
+            <p:column headerText="ShippingCost">
+                <h:outputText value="#{Delivery.shippingcost}" />
+            </p:column>
+            <p:column headerText="City">
+                <h:outputText value="#{Delivery.city}" />
+            </p:column>
+            <p:column headerText="Adresse">
+                <h:outputText value="#{Delivery.address}" />
+            </p:column>
+            <p:column headerText="Date Delivery">
+                <h:outputText value="#{Delivery.date_delivery}" />
+            </p:column>
+            <p:column headerText="Date Affectation">
+                <h:outputText value="#{Delivery.date_affectation}" />
+            </p:column>
+            <p:column headerText="Etat">
+                <h:outputText value="#{Delivery.state}" />
+            </p:column>
+            <p:column headerText="Action" exportable="false">
+                    <p:commandButton  icon="pi pi-check-square" styleClass="rounded-button ui-button-success" ajax="false" action="#{DeliveryController.updateStateDeliveryToAffected(Delivery.id_delivery)}" disabled="#{Delivery.state == 'AFFECTED'}" ></p:commandButton>
+                    <p:commandButton  class="ui-button-warning rounded-button" icon="pi pi-trash"  process="@this" oncomplete="PF('deleteProductDialog').show()"></p:commandButton>
+                    
+                    <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300" message="Delete delivery?" header="Confirm" severity="warn" disabled="#{Delivery.state == 'IN_PROGRESS'}" >
+                       <p:commandButton value="Yes" icon="pi pi-check"   actionListener="#{DeliveryController.deleteDelivery(Delivery.id_delivery)}" process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
+                       <p:commandButton value="No"  type="button" styleClass="ui-button-secondary" icon="pi pi-times" onclick="PF('deleteProductDialog').hide()"/>
+                    </p:confirmDialog>
+            </p:column>
+        </p:dataTable>
+        
+        
+
+    </h:form>
+</div>
+	
+	
+</h:body>
+</ui:define>
+</ui:composition>
+</html>

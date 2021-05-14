@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+
+xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/template.xhtml"> 
+
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+
+<p:panel>
+<h:form>
+<p:dataTable value="#{FidelitéController.user}" var="User" border="1">
+
+<p:column><f:facet name="header"><h:outputText value="Client " /></f:facet>
+<h:outputText value="#{User.firstName} #{User.lastName}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Points Convertis " /></f:facet>
+<h:outputText value="#{User.pointconverti}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Nombre de points" /></f:facet>
+<h:outputText value="#{User.nbrpoint}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Etat" /></f:facet>
+<h:outputText value="#{User.etat}" /></p:column>
+
+
+</p:dataTable>
+
+</h:form>
+</p:panel>
+</ui:define>
+</ui:composition>
+</html>
+
+

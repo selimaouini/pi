@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	
+	
+</h:head>
+<div class="card">
+
+    <h:form>
+        <p:growl id="messages"/>
+
+        <p:menubar>
+           
+            
+            <p:menuitem value="Delivery" icon="pi pi-fw pi-user" outcome="/pages/admin/deliveryClient">
+                                  
+               </p:menuitem>
+               <p:menuitem value="Réclamer" icon="pi pi-fw pi-chart-line" outcome="/pages/admin/claimClient">
+                                  
+                 </p:menuitem>
+               
+              
+               
+            
+            
+            
+
+            
+                    
+            
+        </p:menubar>
+     
+    </h:form>
+</div>
+   
+            
+                    
+   
+	 
+<h:body>	
+<p:panel columns="2"><h:form><table>
+
+<h5>Ville</h5>
+        <div class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-4">
+                
+                
+                
+                <p:selectOneMenu id="option" value="#{CascadeSelectView.selectedOption},{DeliverynController.city}" >
+                    <f:selectItem itemLabel="Choisir votre ville" itemValue=""/>
+                    <f:selectItem itemLabel="bizerte" itemValue="Option1 "/>
+                    <f:selectItem itemLabel="tunis" itemValue="Option2"/>
+                    <f:selectItem itemLabel="nabeul" itemValue="Option3"/>
+                    <f:selectItem itemLabel="sousse" itemValue="Option4"/>
+                    <f:selectItem itemLabel="sfax" itemValue="Option5"/>
+                    <f:selectItem itemLabel="gabes" itemValue="Option6"/>
+                    
+                    <f:facet name="footer">
+                        <p:divider styleClass="p-mt-0" />
+                        
+                    </f:facet>
+                </p:selectOneMenu>
+                
+                 
+            </div>
+          </div>
+          
+    <div class="p-field">
+    <tr><td><h:outputText value="Adresse"></h:outputText></td><td><p:inputText
+    value="#{DeliveryController.address}"></p:inputText></td></tr>
+     
+   
+
+
+  <tr><td colspan="2"> <p:commandButton value="ajouter livraison" action="#{DeliveryController.addNewDeliveryByCommand()}" /></td></tr>
+
+
+
+</div>
+
+<p:panel>>    <div class="card">
+    <p:imageCompare leftImage="/resources/images/sonic.png"
+                    rightImage="/resources/images/sonicnn.jpg"
+                    width="450" height="435"/>
+                    
+                    
+                    
+                    
+                    <div class="card">
+    <h5></h5>
+    <p:imageSwitch effect="shuffle">
+        <ui:repeat value="#{imagesViews.images}" var="image">
+            <p:graphicImage name="/images/nature/#{image}"/>
+        </ui:repeat>
+    </p:imageSwitch>
+</div>
+                    
+</div></p:panel>
+
+
+<p:panel>      
+	 
+	 
+	<div class="card">
+    <h5>MP4</h5>
+    <p:video value="https://www.youtube.com/watch?v=ZRJTe8QLy78"
+             player="mp4"
+             controls="true"
+             width="420"
+             height="250"
+             onplay="console.log('MP4 Started Playing')"
+             onpause="console.log('MP4 Stopped Playing')">
+             <h5>Your browser does not support the video element,
+        See:</h5> <h:outputLink value="https://www.youtube.com/watch?v=ZRJTe8QLy78"></h:outputLink>
+    
+            </p:video>
+     </div>
+	 
+	 </p:panel>
+</table></h:form></p:panel>
+</h:body>
+</html>

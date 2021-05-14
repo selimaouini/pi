@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/template/templateadmin.xhtml">
+<ui:define name="content">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Login Page</title>
+	
+</h:head>
+<div class="card">
+    <h:form>
+        <p:growl id="messages"/>
+
+        <p:menubar>
+           
+            
+            <p:menuitem value="Delivery Men" icon="pi pi-fw pi-user" outcome="/pages/admin/devMen"></p:menuitem>
+                  <p:menuitem value="Statistics" icon="pi pi-fw pi-chart-line" outcome="/pages/admin/statistics"></p:menuitem>
+                  <p:menuitem value="Deliveries" icon="pi pi-fw pi-slack" outcome="/pages/admin/deliveries"></p:menuitem>
+                  <p:menuitem value="Claims" icon="pi pi-fw pi-exclamation-circle" outcome="/pages/admin/claims"></p:menuitem>
+                  <p:menuitem value="Decisions" icon="pi pi-fw pi-filter-slash" outcome="/pages/admin/decisions"></p:menuitem>
+        
+               
+               
+            
+            
+            
+
+            
+                    
+            
+        </p:menubar>
+     
+    </h:form>
+</div>
+
+
+
+	
+<h:body>
+
+<div class="card">
+<p:panel columns="2">
+    <h:form id="form">
+ 
+    <p:growl id="messages" showDetail="true"/>
+    
+        <p:dataTable id="dt-claim" widgetVar="dtdeliveryMen" value="#{ClaimController.claim}" var="Claim"
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                     paginator="true" rows="2" styleClass="p-mt-2">
+        
+          
+          
+            <p:column headerText="Description">
+                <h:outputText value="#{Claim.description}" />
+                </p:column>
+                <p:column headerText="">
+                <p:commandButton type="ui-button-warning rounded-button" icon="pi pi-info-circle" onclick="PF('dlg4').show()"  />
+                                    <p:dialog header="Header" widgetVar="dlg4" minHeight="60" width="500" showEffect="fade" minimizable="true" maximizable="true">
+                                      <p class="p-m-0">"#{Claim.description}"          </p>
+                                    </p:dialog>
+              </p:column>
+               
+              <p:column headerText="Date">
+                <h:outputText value="#{Claim.date}" />
+              </p:column>
+            
+            
+      <p:column headerText="Action">
+          <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash"  disabled="#{Claim.state == 'false' }" process="@this" oncomplete="PF('deleteProductDialog').show()"></p:commandButton>
+          
+                      <p:commandButton  icon="pi pi-reply" styleClass="rounded-button ui-button-success" ajax="false" action="#{ClaimController.selectClaim(Claim.id_claim)}"  disabled="#{Claim.state == 'true' }" ></p:commandButton>            
+        
+           <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300" message="Delete the product?" header="Confirm" severity="warn">
+            <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{ClaimController.deleteClaim(Claim.id_claim)}" process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
+            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times" onclick="PF('deleteProductDialog').hide()"/>
+          </p:confirmDialog>
+      </p:column>
+            
+             
+        </p:dataTable>
+        
+        
+
+    </h:form></p:panel>
+</div>
+</h:body>
+</ui:define>
+
+</ui:composition>
+</html>

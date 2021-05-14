@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+
+xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/templateadmin.xhtml"> 
+
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<p:menubar>
+<p:menuitem value="Stock" icon="pi pi-fw pi-inbox" outcome="/pages/admin/stock"></p:menuitem>
+<p:menuitem value="Demandes de stocks" icon="pi pi-fw pi-plus" outcome="/pages/admin/demandesdestock_admin"></p:menuitem>
+
+<p:menuitem value="Stock epuisé" icon="pi pi-fw pi-exclamation-circle" outcome="/pages/admin/epuisé"></p:menuitem>
+</p:menubar>
+
+<p:panel>
+<h:form>
+<p:dataTable value="#{StockController.stock}" var="Stock" border="1">
+<p:column><f:facet name="header"><h:outputText value="Produit" /></f:facet>
+<h:outputText value="#{Stock.nomp}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Date de création" /></f:facet>
+<h:outputText value="#{Stock.dateCreation}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="quantité" /></f:facet>
+<h:outputText value="#{Stock.quantity}" /></p:column>
+</p:dataTable>
+
+</h:form>
+</p:panel>
+</ui:define>
+</ui:composition>
+</html>
+
+

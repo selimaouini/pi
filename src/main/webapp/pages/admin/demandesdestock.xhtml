@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+
+xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/template.xhtml"> 
+
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+
+<p:panel columns="2">
+<h:form>
+<p:dataTable value="#{demandestockcontroller.demandestock}" var="Demandestock" paginator="true" rows="3" border="1">
+<p:column><f:facet name="header"><h:outputText value="Produit" /></f:facet>
+<h:outputText value="#{Demandestock.nomp}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Date de création" /></f:facet>
+<h:outputText value="#{Demandestock.dateCreation}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="quantité" /></f:facet>
+<h:outputText value="#{Demandestock.quantity}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Etat" /></f:facet>
+<h:outputText value="#{Demandestock.etatdemande}" /></p:column>
+
+
+
+<p:column> <f:facet name="header"><h:outputText value="Action" /></f:facet>
+<p:commandButton action="#{demandestockcontroller.validerdemande(Demandestock.idds)}"  disabled="#{Demandestock.etatdemande != 'encours' }"  icon="pi pi-check-square"  styleClass="rounded-button ui-button-success" ></p:commandButton> 
+
+<p:commandButton action="#{demandestockcontroller.refuser(Demandestock.idds)}"  disabled="#{Demandestock.etatdemande != 'encours' }"  icon="pi pi-times" styleClass="rounded-button ui-button-danger" ></p:commandButton> </p:column>
+    
+
+</p:dataTable>
+</h:form>
+</p:panel>
+</ui:define>
+</ui:composition>
+</html>

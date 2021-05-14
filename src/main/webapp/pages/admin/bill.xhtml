@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+
+xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/templateadmin.xhtml"> 
+
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<p:menubar>
+<p:menuitem value="Commandes" icon="pi pi-fw pi-shopping-cart" outcome="/pages/admin/Commande"></p:menuitem>
+<p:menuitem value="Statistics" icon="pi pi-fw pi-chart-line" outcome="/pages/admin/index"></p:menuitem>
+
+<p:menuitem value="Bills" icon="pi pi-fw pi-money-bill" outcome="/pages/admin/bill"></p:menuitem>
+</p:menubar>
+<!-- BEGIN : TP1 JSF Introduction Login -->
+   <p:panel header="Factures">
+
+<h:form>
+ <div class="card">
+  <span class="ui-input-icon-left">
+        <i class="pi pi-search" />
+        <p:inputText placeholder="Search" />
+    </span>
+<p:dataTable value="#{FactureController.bill}" var="Bill" border="1">
+
+   
+
+<p:column><f:facet name="header"><h:outputText value="Number" /></f:facet>
+<h:outputText value="#{Bill.numBill}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Date" /></f:facet>
+<h:outputText value="#{Bill.datebill}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Type de facture" /></f:facet>
+<h:outputText value="#{Bill.typeofbill}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Montant" /></f:facet>
+<h:outputText value="#{Bill.totalfinal}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Montant" /></f:facet>
+<h:outputText><a href="http://localhost:8081/bills/export/1">Export to PDF</a></h:outputText></p:column>
+
+
+
+</p:dataTable>
+</div>
+</h:form>
+ </p:panel>
+</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/template/template.xhtml"> 
+
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+
+
+<p:menubar>
+<p:menuitem value="Commandes" icon="pi pi-fw pi-shopping-cart" outcome="/pages/admin/Commande"></p:menuitem>
+<p:menuitem value="Statistics" icon="pi pi-fw pi-chart-line" outcome="/pages/admin/index"></p:menuitem>
+
+<p:menuitem value="Bills" icon="pi pi-fw pi-money-bill" outcome="/pages/admin/bill"></p:menuitem>
+</p:menubar>
+
+<h:body style="margin-left:50px">
+
+<h1>Download your bills </h1>
+<div class="card">
+	<h2>Statistiques de ventes </h2>
+	<p:chart type="line" model="#{lineChartBean.lineModel}" style="height:400px;width:600px"/>
+	</div>
+</h:body>
+</ui:define>
+</ui:composition>
+</html>

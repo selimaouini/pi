@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/template/template.xhtml"> 
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<!-- BEGIN : TP1 JSF Introduction Login -->
+
+
+<p:panel><h:form>
+
+<table>
+
+
+<tr><td><h:outputText value="Produit"></h:outputText></td>
+<td><p:inputText value="#{catalogcontroller.name}"></p:inputText></td></tr>
+<tr><td><h:outputText value="Code a barre"></h:outputText></td>
+<td><p:inputText value="#{catalogcontroller.barCode}"></p:inputText></td></tr>
+<tr><td><h:outputText value="Prix"></h:outputText></td>
+<td><div class="p-col-12">
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="pi pi-tags"/></span>
+                    <span class="ui-inputgroup-addon"><i class="pi pi-money-bill"/></span>
+                    <p:inputText value="#{catalogcontroller.price}" placeholder="Price"/>
+                    <span class="ui-inputgroup-addon">.00</span>
+                    <span class="ui-inputgroup-addon">TND</span>
+                </div>
+            </div>  </td> </tr>
+
+
+<tr><td><h:outputText value="stock"></h:outputText></td>
+<td> <p:spinner id="stock" min="0" max="50" value="#{catalogcontroller.stock}"/></td></tr>
+
+                   
+
+
+<tr><td colspan="2"> <p:commandButton action="#{catalogcontroller.proposer()}" value="Ajouter"  /></td></tr>
+</table></h:form></p:panel>
+
+
+<p:panel>
+<h:form>
+
+<div class="card">
+<p:dataTable value="#{catalogcontroller.cat}" var="catalog" border="1">
+<p:column><f:facet name="header"><h:outputText value="Produit" /></f:facet>
+<h:outputText value="#{catalog.name}" /></p:column>
+
+<p:column><f:facet name="header"><h:outputText value="Bar code" /></f:facet>
+<p:barcode value="#{catalog.barCode}"  type="codabar"/></p:column>
+            
+
+<p:column><f:facet name="header"><h:outputText value="Prix" /></f:facet>
+<h:outputText value="#{catalog.price}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="quantité" /></f:facet>
+<h:outputText value="#{catalog.stock}" /></p:column>
+ <p:column> <f:facet name="header"><h:outputText value="action" /></f:facet>
+ <p:commandButton icon="pi pi-pencil"  styleClass="edit-button rounded-button ui-button-success" >
+ </p:commandButton>
+  <p:commandButton  action="#{catalogcontroller.delete(catalog.id)}" class="ui-button-warning rounded-button" icon="pi pi-trash" >
+                   
+                </p:commandButton>
+            </p:column>
+ 
+  
+</p:dataTable>
+
+</div>
+
+</h:form>
+</p:panel>
+
+
+
+</ui:define>
+</ui:composition>
+</html>

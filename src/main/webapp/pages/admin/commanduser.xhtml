@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/templateadmin.xhtml"> 
+<ui:param name="page_name" value="Commandes" />
+<ui:define name="content">
+<!-- BEGIN : TP1 JSF Introduction Login -->
+<p:menubar>
+<p:menuitem value="Commandes" icon="pi pi-fw pi-shopping-cart" outcome="/pages/admin/Commande"></p:menuitem>
+<p:menuitem value="Statistics" icon="pi pi-fw pi-chart-line" outcome="/pages/admin/index"></p:menuitem>
+
+<p:menuitem value="Bills" icon="pi pi-fw pi-money-bill" outcome="/pages/admin/bill"></p:menuitem>
+</p:menubar>
+<p:panel header="Commands">
+<h:form>
+
+<div class="card">
+<p:dataTable value="#{CommandController.commanduser}" var="Command" border="1">
+<p:column><f:facet name="header"><h:outputText value="Client" /></f:facet>
+<h:outputText value="#{Command.nomuser}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Description" /></f:facet>
+<h:outputText value="#{Command.description}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Montant" /></f:facet>
+<h:outputText value="#{Command.amountCommand}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Reduction" /></f:facet>
+<h:outputText value="#{Command.reduction}" /></p:column>
+
+
+
+
+</p:dataTable>
+<div class="card">
+	<div>
+		<h1>  <p:tag styleClass="p-mr-2" icon="pi pi-info-circle" severity="info" value="Info"/> Le profit d'aujourd'hui est égal <h:outputText value="#{CommandController.totaljour}" /> TND </h1>
+		
+	</div>
+	</div>
+
+</div>
+
+
+
+
+</h:form>
+</p:panel>
+</ui:define>
+</ui:composition>
+</html>

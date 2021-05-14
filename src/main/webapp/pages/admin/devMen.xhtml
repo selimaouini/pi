@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/template/templateadmin.xhtml">
+<ui:define name="content">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Login Page</title>
+	
+</h:head>
+    <h:form>
+        <p:growl id="messages"/>
+        <p:menubar>
+                  <p:menuitem value="Delivery Men" icon="pi pi-fw pi-user" outcome="/pages/admin/devMen"></p:menuitem>
+                  <p:menuitem value="Statistics" icon="pi pi-fw pi-chart-line" outcome="/pages/admin/statistics"></p:menuitem>
+                  <p:menuitem value="Deliveries" icon="pi pi-fw pi-slack" outcome="/pages/admin/deliveries"></p:menuitem>
+                  <p:menuitem value="Claims" icon="pi pi-fw pi-exclamation-circle" outcome="/pages/admin/claims"></p:menuitem>
+                  <p:menuitem value="Decisions" icon="pi pi-fw pi-filter-slash" outcome="/pages/admin/decisions"></p:menuitem>
+        </p:menubar>
+    </h:form>
+	
+
+         <p:growl id="growl" showDetail="true" />
+            
+               <p:panel columns="2">
+                 <h:form id="form">
+                      <p:toolbar>
+                           <p:toolbarGroup>
+                               <p:commandButton value="Ajouter Livreur" icon="pi pi-plus" update="dt-deliveryMen" oncomplete="PF('manageProductDialogggg').show()" styleClass="ui-button-success" style="margin-right: .5rem"></p:commandButton>
+                           </p:toolbarGroup>
+                           <p:toolbarGroup align="right">
+                               <p:commandButton value="XLS" styleClass="p-mr-2 p-mb-2 ui-button-outlined">
+                               <p:dataExporter type="xls" target="dt-deliveryMen" fileName="Delivery Man" pageOnly="true"/></p:commandButton>
+                           </p:toolbarGroup>
+                      </p:toolbar>
+                               
+                               
+             
+        <p:dialog header="ajouter" showEffect="fade" modal="true" widgetVar="manageProductDialogggg" minHeight="70" width="500"  responsive="true"  >
+           <p:outputPanel id="manage-product-content" class="ui-fluid">
+           <p:outputPanel>
+                     <h:outputLabel for="firstName" value="First Name"/>
+            <p:inputText id="firstName" value="#{DeliveryManController.firstName}" required="false" 
+                            >
+                <f:validateRegex pattern="^[a-zA-Z]+$"/>
+            </p:inputText>
+                    <h:outputLabel for="lastName" value="Last Name"/>
+            <p:inputText id="lastName" value="#{DeliveryManController.lastName}" required="false" 
+                           >
+                <f:validateRegex pattern="^[a-zA-Z]+$"/>
+            </p:inputText>
+                    <h:outputLabel for="workZone" value="Work zone"/>
+            <p:inputText id="workZone" value="#{DeliveryManController.workZone}" required="false" 
+                            >
+                <f:validateRegex pattern="^[a-zA-Z]+$"/>
+            </p:inputText>
+                    <h:outputLabel for="tel" value="Phone number"/>
+            <p:inputTextarea id="desc" value="#{DeliveryManController.tel}" required="false" >
+                <f:validateLength minimum="8" maximum="8"/>
+            </p:inputTextarea>
+                    
+                    
+        </p:outputPanel>
+        </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton action="#{DeliveryManController.addDeliveryMan()}" value="confirmer" icon="pi pi-check" />
+                <p:commandButton value="annuler" icon="pi pi-times" onclick="PF('manageProductDialogggg').hide()" class="ui-button-secondary"/>
+            </f:facet>
+   </p:dialog>
+                          
+        
+    
+      
+ 
+          <p:growl id="messages" showDetail="true"/>
+    
+          <p:dataTable id="dt-deliveryMen" widgetVar="dtdeliveryMen" value="#{DeliveryManController.deliveryMan}" var="DeliveryMan"
+           paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true" rows="5" styleClass="p-mt-2">
+
+            <p:column headerText="First name"><h:outputText value="#{DeliveryMan.firstName}" /></p:column>
+            <p:column headerText="Work Zone"><h:outputText value="#{DeliveryMan.workZone}" /></p:column>
+            <p:column headerText="First name"><h:outputText value="#{DeliveryMan.firstName}" /></p:column>
+            <p:column headerText="Phone number"><h:outputText value="#{DeliveryMan.tel}" /></p:column>
+            <p:column headerText="Delivery number"><h:outputText value="#{DeliveryMan.nbDelivery}" /></p:column>
+            <p:column headerText="Premium"><h:outputText value="#{DeliveryMan.premium}" /></p:column>
+            <p:column headerText="Availability"><h:outputText value="#{DeliveryMan.availability}" />
+                   <p:commandButton  icon="pi pi-check-circle" styleClass="rounded-button ui-button-success" ajax="false"   update="growl" action="#{DeliveryManController.updateAvailibilityToTrue(DeliveryMan.id_deliveryMan)}" disabled="#{DeliveryMan.availability == 'true' }"></p:commandButton>
+                   <p:commandButton  icon="pi pi-times-circle" styleClass="rounded-button ui-button-success" ajax="false"  update="growl"  action="#{DeliveryManController.updateAvailibilityToFalse(DeliveryMan.id_deliveryMan)}" disabled="#{DeliveryMan.availability == 'false'}" ></p:commandButton>
+            </p:column>
+            <p:column headerText="Action" exportable="false">
+              <p:commandButton  icon="pi pi-pencil" styleClass="rounded-button ui-button-success" ajax="false" action="#{DeliveryManController.selectDeliveryMan(DeliveryMan.id_deliveryMan)}"></p:commandButton>            
+              
+              
+              
+              <p:commandButton  class="ui-button-warning rounded-button" icon="pi pi-trash"  process="@this" oncomplete="PF('deleteProductDialog').show()"></p:commandButton>
+                    <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300" message="Delete the product?" header="Confirm" severity="warn">
+                       <p:commandButton value="Yes" icon="pi pi-check"  update="growl" actionListener="#{DeliveryManController.deleteDeliveryMan(DeliveryMan.id_deliveryMan)}" process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
+                       <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times" onclick="PF('deleteProductDialog').hide()"/>
+                    </p:confirmDialog> 
+             </p:column>
+     </p:dataTable>
+        
+       
+
+</h:form></p:panel>
+</ui:define>
+</ui:composition></html>
