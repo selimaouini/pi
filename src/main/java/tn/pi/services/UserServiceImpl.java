@@ -78,4 +78,10 @@ public class UserServiceImpl implements UserService{
 		userRepository.deleteById(Long.parseLong(id));
 		
 	}
+
+
+	@Override
+	public User authenticate(String login, String password) {
+		return userRepository.getUserByEmailAndPassword(login, password);
+	}
 }

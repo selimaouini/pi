@@ -38,12 +38,11 @@
 								<h:outputLabel for="title">Title <span
 										class="text-red-400">*</span>
 								</h:outputLabel>
-								<h:inputText validatorMessage="Valeur ne doit pas depasser 30"
-									value="#{postController.title}" placeholder="Titre" 
-									class="bg-gray-100 mx-2 p-1 focus:outline-none focus:ring focus:border-blue-400"
-									id="title" required="true">
-									<f:validateLength minimum="6" maximum="20" />
-								</h:inputText>
+								<span class="ui-float-label">
+       <p:inputText id="float-input" value="#{postController.title}"/>
+       <p:outputLabel for="@previous" value="Titre"/>
+   </span>
+
 								<h:message class="text-green-400" for="title" />
 							</div>
 
@@ -93,12 +92,27 @@
 						</fieldset>
 
 
-	<h:commandButton type="button" value="Submit "  icon="pi pi-check" action="#{postController.addPost()}"
-		class="rounded bg-blue-400 hover:bg-blue-300 text-white p-1 m-4"
-							id="submit"  styleClass="ui-button-outlined" />
 
-    <p:linkButton outcome="/pages/post/list" type="button" value="Annuler" icon="pi pi-times" 
+
+<div class="card">
+    <h:form>
+        <p:growl id="message" showDetail="true"/>
+
+        <p:commandButton value="Confirmer" action="#{postController.addPost()}" update="message" styleClass="p-mr-2" icon="pi pi-check">
+            <p:confirm header="Confirmation" message="Are you sure you want to proceed?" icon="pi pi-exclamation-triangle"/>
+        </p:commandButton>
+
+           <p:linkButton outcome="/pages/post/list" type="button" value="Annuler" icon="pi pi-times" 
 							  class="ui-button-secondary"/>
+
+
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+        </p:confirmDialog>
+    </h:form>
+</div>
+
 
 					</h:form>
 		</h:panelGroup>	

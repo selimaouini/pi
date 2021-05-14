@@ -13,27 +13,38 @@
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Consommi Tounsi</title>
+		<title>Post</title>
 		<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
 			rel="stylesheet" />
 	</h:head>
 	<h:body>
 		<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 			template="/template/template.xhtml">
-			<ui:param name="page_name" value="Consomi tounsi" />
+			<ui:param name="page_name" value="Post" />
 			<ui:define name="menu">
 
-				
-				   <p:linkButton outcome="-pages/post/detail" value="Retour" style="margin-right:20px;"> </p:linkButton>
-  <p:dataTable id="table" var="post" value="#{post.post}">
+				   
+				  
 
-				
+								
+<!-- BEGIN  -->
+        <p:growl id="messages" showDetail="true"/>
+    <p:panel columns="2">
+                 <h:form id="form">
+        <p:toolbar>
+            <p:toolbarGroup>
+                 <p:linkButton  outcome="/pages/post/list" value="Retour" icon="pi pi-plus" 
+                                 styleClass="ui-button-success" style="margin-right: .5rem">
+               </p:linkButton>
+       
+</p:toolbarGroup>
+</p:toolbar>
+</h:form></p:panel>
 
-				<div class="rounded bg-white-400 shadow-lg inline-block p-8 m-8">
-					<center>
-						<h1 class="text-center text-blue-800">Post Detail</h1>
-					</center>
-					<div class="flex flex-col p-4">
+		<center>	<p:panel  header="Post"></p:panel> </center>	
+			
+			
+			<div class="flex flex-col p-4">
 						<span class="text-blue-400">Title</span> <span class="font-light">#{post.title}</span>
 					</div>
 					<div class="flex flex-col p-4">
@@ -52,16 +63,16 @@
 					<div class="flex flex-col p-4">
 						<span class="text-blue-400">Writer</span> <span class="font-light">#{user.firstName}</span>
 					</div>
-
-					<h:commandButton icon="pi pi-user-edit" class="p-mr-2" action="#{postController.updatePost(post,post.title,post.content,post.photo,post.theme)}"
+			
+				   
+				   
+				   <p:linkButton  outcome="/pages/post/update" icon="pi pi-user-edit" class="p-mr-2" action="#{postController.updatePost(post,post.title,post.content,post.photo,post.theme)}"
 						value="Modifier" />
-						styleClass="rounded-button ui-button-danger" 
-				
-					<h:commandButton icon="pi pi-trash"  class="p-button-danger"  action="#{postController.delete(post.idP)}" value="Supprimer" />
-				
-				</div>
-
-				<div>
+					
+				 <p:commandButton type="button" value="Supprimer" icon="pi pi-trash" styleClass="ui-button-raised ui-button-danger ui-button-flat"></p:commandButton>
+				   
+				   <br></br><br></br>
+				   <div>
 					<h4>Rating</h4>
 					<h:form method="post" commandName="rating"
 						action="#{postController.addRating()}">
@@ -75,64 +86,79 @@
 					</h:form>
 
 				</div>
-
+				
+				
+				 <br></br> <br></br>    
+				 
+				 
+				
 				<div>
 					<h:form id="form">
 						<h4>Comments</h4>
+						<br></br>
 						<h:panelGroup columns="2">
 							<h:form>
 
-								<h:dataTable value="#{commentController.comments}" var="comment" border="1">
-									<h:column>
+								<h:dataTable value="#{commentController.comments}" var="comment" border="1" styleClass="comments-table">
+									<p:column>
 										<f:facet name="header">
 											<h:outputText value="Description" />
 										</f:facet>
 										<h:outputText value="#{comment.description}" />
-									</h:column>
+									</p:column>
 
-									<h:column>
+									<p:column>
 										<f:facet name="header">
 											<h:outputText value="Date Creation" />
 										</f:facet>
 										<h:outputText value="#{comment.dateCreation}" />
-									</h:column>
+									</p:column>
 
-									<h:column>
+									<p:column>
 										<f:facet name="header">
 											<h:outputText value="Action" />
 										</f:facet>
-										<h:commandButton
-											action="#{commentController.updateComment(comment)}"
-											value="Modifier" icon="pi pi-fw pi-pencil" />
-										<h:commandButton
-											action="#{commentController.removeComment(comment.idc)}"
-											value="Supprimer" />
-									</h:column>
+										<p:commandButton
+											action="#{commentController.updateComment(comment)}" styleClass="edit-button rounded-button" icon="pi pi-pencil"/>
+										<p:commandButton
+										styleClass="rounded-button ui-button-danger" icon="pi pi-trash"	action="#{commentController.removeComment(comment.idc)}" />
+									</p:column>
 
-									<h:column>
+
+
+
+									<p:column>
 										<f:facet name="header">
 											<h:outputText value="React" />
 										</f:facet>								
-										<h:commandButton  icon="pi pi-thumbs-up"  styleClass="rounded-button ui-button-outlined" action="#{commentController.like()}"/>			
-										<h:commandButton  icon="pi pi-thumbs-down"  styleClass="rounded-button ui-button-outlined" action="#{commentController.dislike()}"/>																																							
-									</h:column>
+										<p:commandButton  icon="pi pi-thumbs-up" styleClass="rounded-button"  action="#{commentController.like()}"/>									
+																		
+										<p:commandButton  icon="pi pi-thumbs-down" styleClass="rounded-button" action="#{commentController.dislike()}"/>																																							
+									</p:column>
 
 								</h:dataTable>
 							</h:form>
 						</h:panelGroup>
 
-						<table>
-							<tr>
-								<td><h:outputText value="comment"></h:outputText></td>
-								<td><h:inputText value="#{commentController.description}"></h:inputText></td>
 
-								<td colspan="2"><h:commandButton value="Envoyer" action="#{commentController.addComment()}" /></td>
-							</tr>
-						</table>
-					</h:form>
-				</div></p:dataTable>
-			</ui:define>
-		</ui:composition>
-	</h:body>
-</f:view>
-</html>
+<div class="flex items-center my-2">
+								<h:outputLabel for="comment">Comment<span
+										class="text-red-400">*</span>
+								</h:outputLabel>
+								<h:inputText validatorMessage="Valeur ne doit pas depasser 30"
+									value="#{commentController.description}" placeholder="Titre" 
+									class="bg-gray-100 mx-2 p-1 focus:outline-none focus:ring focus:border-blue-400"
+									id="description" required="true">
+									<f:validateLength minimum="6" maximum="20" />
+								</h:inputText>
+								<h:message class="text-green-400" for="description" />
+							</div>
+
+						
+							 <p:commandButton type="button" value="Envoyer" styleClass="ui-button-outlined" action="#{commentController.saveComment()}" />
+							 <p:commandButton type="button" value="Modifier" styleClass="ui-button-outlined" action="#{commentController.addComment()}" />
+					
+		   
+							
+		</h:form></div>
+		</ui:define></ui:composition></h:body></f:view></html>

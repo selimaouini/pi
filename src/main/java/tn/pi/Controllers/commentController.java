@@ -50,6 +50,12 @@ public class commentController {
 	boolean disliked;
 	boolean liked;
 	
+	/*** 1er méthode ***/
+	public void saveComment() {
+		commentService.addOrUpdateComment(new Comment(description));
+		} 
+	
+	/*** 2éme méthode ***/
 	public Comment addComment() {
 		User u =userRepository.findById(id).get();
 		Post p =postRepository.findById(idP).get();
@@ -59,6 +65,7 @@ public class commentController {
 		com.setDescription(description);
 		return commentService.addOrUpdateComment(comment);
 	}
+	
 
 	public List<Comment> getComments() {
 		comments = commentService.retrieveAllComments();
