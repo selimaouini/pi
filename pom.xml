@@ -5,8 +5,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-			<version>2.2.1.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>2.2.1.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>tn.pi</groupId>
 	<artifactId>pi</artifactId>
@@ -41,16 +41,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.
-hibernate.validator/hibernate-validator -->
-<dependency>
-<groupId>org.hibernate.validator</groupId>
-<artifactId>hibernate-validator</artifactId>
-<version>6.1.0.Final</version>
-</dependency>
 
-
+		<!-- https://mvnrepository.com/artifact/org. hibernate.validator/hibernate-validator -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.1.0.Final</version>
+		</dependency>
 
 
 
@@ -81,8 +78,9 @@ hibernate.validator/hibernate-validator -->
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>8.0</version>
+			<version>10.0.0</version>
 		</dependency>
+	
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -92,7 +90,7 @@ hibernate.validator/hibernate-validator -->
 	</dependencies>
 
 	<build>
-	<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
+		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

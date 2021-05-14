@@ -23,7 +23,9 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.core.annotation.Order;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
@@ -58,20 +60,24 @@ private static final long serialVersionUID = 1L;
 	//private Date dateCreation;
 
 	@Enumerated(EnumType.STRING)
-	Theme theme; 
+	private Theme theme; 
 	
 	private Long postdToBeUpdated;
+
 	
 	/**************Associations**************/
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	User User ;
 	
-		@OneToMany(mappedBy="Post" ,cascade=CascadeType.REMOVE)
+	@JsonBackReference(value="Comment_post")
+	@OneToMany(mappedBy="Post" , fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
 		public List<Comment> comments;
+
 		
-		@OneToMany(mappedBy = "Post")
-		private List<Rating>rating;
+	@JsonIgnore
+		@OneToMany(mappedBy ="Post", cascade = CascadeType.REMOVE)
+		private List<Rating> rating;
 
 		
 		
@@ -147,6 +153,7 @@ public User getUser() {
 		this.rating = rating;
 	}
 
+    
 	public Post() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -195,8 +202,18 @@ public User getUser() {
 		this.postdToBeUpdated = postdToBeUpdated;
 	}
 
-	
-	
+	public Post(long idP,
+			@NotEmpty @Size(min = 3, max = 25, message = " you should insert at least 1 character ") String title,
+			@NotEmpty String content, String photo , Theme theme, Long postdToBeUpdated) {
+		super();
+		this.idP = idP;
+		this.title = title;
+		this.content = content;
+		this.photo = photo;
+		this.theme = theme;
+		this.postdToBeUpdated = postdToBeUpdated;
+	}
+
 	
 
 }

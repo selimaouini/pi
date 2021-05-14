@@ -35,8 +35,8 @@ public class Chat implements Serializable {
 	@Column(name="message")
 	private String message;
 
-	@Temporal(TemporalType.DATE)
-    private Date dateCreation;
+	@NotNull	
+	private LocalDateTime dateCreation= LocalDateTime.now();
 	
 	/**************Associations**************/
 	/*@ManyToOne(cascade = CascadeType.ALL)
@@ -66,11 +66,11 @@ public class Chat implements Serializable {
 		this.message = message;
 	}
 
-	    public Date getDateCreation() {
+		public LocalDateTime getDateCreation() {
 		return dateCreation;
 	}
 
-	public void setDateCreation(Date dateCreation) {
+	public void setDateCreation(LocalDateTime dateCreation) {
 		this.dateCreation = dateCreation;
 	}
 
@@ -95,7 +95,20 @@ public class Chat implements Serializable {
 		return "Chat [idch=" + idch + ", message=" + message + "]";
 	}
 	
-	public Chat(long idch, String message, Date dateCreation, User sender, User receiver) {
+	
+	public Chat(String message) {
+		super();
+		this.message = message;
+	}
+	
+
+	public Chat(long idch, String message) {
+		super();
+		this.idch = idch;
+		this.message = message;
+	}
+
+	public Chat(long idch, String message, LocalDateTime dateCreation, User sender, User receiver) {
 		super();
 		this.idch = idch;
 		this.message = message;

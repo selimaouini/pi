@@ -4,26 +4,58 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import tn.pi.entities.Post;
+import tn.pi.entities.Theme;
 import tn.pi.entities.User;
 
 public interface PostService {
-	List<Post> retrieveAllPosts();//done
-	Post addPost(Post pos); //done
-	Post updatePost(Post pos); //done 
-	Post getPostById(String idP); //done 
-	Post getPostByTitle(String title);
-	Post getPostByTheme (String theme);
-	public List<Post> getPostByUser(long idu);
-//	Post getPostByUser(int idP ,int idu);
-	void deletePost(String idP); //done
-	void deleteSansInteraction (String idP); //not commented
-	//void affectPostToUser(int id, int idP);
-	void sujetRedondant ();
+	
+	/******** jsf ********/
+	 public String save(Post p);
+	 public Post getPost();
+	 public String delete(long idP);
+	 public String modifier(Post p, String title, String content,String photo, Theme theme);
+	 public void loadData();
+	 public List<Post> getPosts();
+	 public String saveModif();
 
-	List<Post> retrievePostsByDateAsc(Date dateCreation); //filtre by date asc
-	List<Post> retrievePostsByDateDesc(Date dateCreation); //filtre by date desc
-	//most rated 
+	 public void deleteP(long idP);
+	public Post addPostt(Post p);
+	/******** Crud ********/
+	List<Post> retrieveAllPosts();// done
 
+	String addPost(Post p, long id); // done
 
+	void updatePost(Post p); // done
+	// Post getPostById(String idP); //done
+
+	void deletePost(String idP); // done
+
+	/******** Get By ********/
+	Post getPostById(long idP); //done
+
+	public List<Post> getPostByUserId(Long id);
+
+	/******** Search ********/
+
+	public List<Post> search(String word);//done
+
+	/******** Filtre ********/
+
+	List<Post> retrievePostsByDateAsc(); // filtre by date asc done
+
+	List<Post> getAllPostsOrderedByDate(); // filtre by date desc done
+
+	/******** Suppression automatique ********/
+	void deleteSansInteraction(); // not commented
+
+	// void affectPostToUser(int id, int idP);
+
+	/******** Post a la une ********/
+	List<String> PostMostCommented();
+
+	
+	// public void uploadImage(final MultipartFile file);
 }

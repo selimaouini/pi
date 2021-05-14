@@ -20,7 +20,7 @@ public class Rating implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idR;
+    private long idR;
 	
 	@Column(name="Stars")
 	private int stars;
@@ -38,7 +38,7 @@ public class Rating implements Serializable {
 		return idR;
 	}
 
-	public void setIdR(int idR) {
+	public void setIdR(long idR) {
 		this.idR = idR;
 	}
 
@@ -66,12 +66,17 @@ public class Rating implements Serializable {
 		this.User = User;
 	}
 
-	public Rating(int idR, int stars, Post Post, User User) {
+	public Rating(long idR, int stars, Post Post, User User) {
 		super();
 		this.idR = idR;
 		this.stars = stars;
 		this.Post = Post;
 		this.User = User;
+	}
+
+	public Rating(int stars) {
+		super();
+		this.stars = stars;
 	}
 
 	public Rating() {

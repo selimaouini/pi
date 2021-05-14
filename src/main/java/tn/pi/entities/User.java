@@ -32,7 +32,9 @@ public class User implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idu;
+	@Column(name = "idu")
+	private Long id;
+	
 	@Column(name="first_name")
 	private String firstName;
 	
@@ -44,29 +46,30 @@ public class User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	Role role;
 	
-	/*@OneToMany(cascade = CascadeType.ALL,mappedBy = "User")
-	private Set<Post> post;*/
+	@Column(name="email")
+	private String email;
+	/**************Associations**************/
 	
-	
-	/*
+     @OneToMany(cascade = CascadeType.ALL,mappedBy = "User")
+	private Set<Post> post;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "User")
-	private Set<Chat> chat;
+    /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "User")
+	private Set<Chat> chat;*/
 	
-	@OneToMany(mappedBy = "user")
-	private List<Comment> comment;
+	@OneToMany(mappedBy = "User")
+	private List<Comment> comments;
+
+	@OneToMany(mappedBy = "User")
+	private List <Rating> ratings;
 	
-	@OneToMany(mappedBy = "user")
-	private List <Rating> rating;
+
 	
-	*/
-	
-	public long getIdu() {
-		return idu;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdu(long idu) {
-		this.idu = idu;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {
@@ -105,9 +108,9 @@ public class User implements Serializable {
 		return serialVersionUID;
 	}
 
-	public User(long idu, String firstName, String lastName, Date dateNaissance, Role role) {
+	public User(long id, String firstName, String lastName, Date dateNaissance, Role role) {
 		super();
-		this.idu = idu;
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateNaissance = dateNaissance;

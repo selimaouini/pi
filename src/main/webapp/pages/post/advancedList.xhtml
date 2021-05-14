@@ -30,10 +30,9 @@
                  <h:form id="form">
         <p:toolbar>
             <p:toolbarGroup>
-                 <p:linkButton outcome="/pages/post/add" value="Nouveau" icon="pi pi-plus" 
+                <p:commandButton value="Nouveau" icon="pi pi-plus" outcome="/pages/post/add"
                                  styleClass="ui-button-success" style="margin-right: .5rem">
-               </p:linkButton>
-       
+                </p:commandButton>
 </p:toolbarGroup>
 </p:toolbar>
 </h:form></p:panel>
@@ -61,19 +60,41 @@
 
 <p:column> 
 <f:facet name="header"><h:outputText value="Action" /></f:facet>
-<p:linkButton  outcome="/pages/post/detail" action="#{postController.getPostById(post.idP)}" styleClass="rounded-button" icon="pi pi-eye"></p:linkButton>
+<p:commandButton outcome="/pages/post/detail" action="#{postController.getPostById(post.idP)}" styleClass="rounded-button" icon="pi pi-eye"></p:commandButton>
 
-<p:linkButton outcome="/pages/post/update" icon="pi pi-pencil"  styleClass="edit-button rounded-button"
- action="#{postController.modifier(post,post.title,post.content,post.photo,post.theme)}">   </p:linkButton>
-                          
+<p:commandButton icon="pi pi-pencil" update=":form:manage-post-content" oncomplete="PF('managePostDialog').show()"  
+styleClass="edit-button rounded-button" process="@this"
+ action="#{postController.modifier(post,post.title,post.content,post.photo,post.theme)}"> 
+   <p:resetInput target=":form:manage-post-content"/>  </p:commandButton>
+  
 <p:commandButton styleClass="rounded-button ui-button-danger" icon="pi pi-trash"  action="#{postController.delete(post.idP)}" />
 </p:column>
-
-
-                              
-                               
-                  
+     
 </p:dataTable>
+
+
+
+   <p:dialog header="Post Details" showEffect="fade" modal="true" widgetVar="managePostDialog" minHeight="70" width="500"  responsive="true"  >
+           <p:outputPanel id="manage-post-content" class="ui-fluid">
+           <p:outputPanel>
+                     <h:outputLabel for="title" value="Titre"/>
+           			 <p:inputText id="title" value="#{postController.title}" required="false" > </p:inputText>
+            
+                    <h:outputLabel for="content" value="Description"/>
+      		        <p:inputText id="content" value="#{postController.content}" required="false">  </p:inputText>
+      		        
+                    <h:outputLabel for="theme" value="Sujet"/>
+        		    <p:inputText id="theme" value="#{postontroller.theme}" required="false"   >  </p:inputText>
+        		    
+                  
+        </p:outputPanel>
+        </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton action="#{postController.addPost()}" value="submit" icon="pi pi-check" />
+                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('managePostDialog').hide()" class="ui-button-secondary"/>
+            </f:facet>
+   </p:dialog>
 </div>
 </h:form>
 

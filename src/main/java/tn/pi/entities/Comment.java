@@ -23,38 +23,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
-
 @Entity
-@Table(name="T_Comment")
+@Table(name = "T_Comment")
 public class Comment implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idc;
-	
-	//@Size(min=1,description = " you should insert at least 1 character ")
-	@Column(name="description")
+	private long idc;
+
+	// @Size(min=1,description = " you should insert at least 1 character ")
+	@Column(name = "description")
 	private String description;
-	
-	@NotNull	
-	private LocalDateTime dateCreation= LocalDateTime.now();
-	
-	/**************Associations**************/
-	
+
+	@NotNull
+	private LocalDateTime dateCreation = LocalDateTime.now();
+
+	/************** Associations **************/
+
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
-	User User ;
-	
+	User User;
+
 	@JsonIgnore
 	@ManyToOne
-	private Post Post ;
+	private Post Post;
 
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="Comment")
-	private Set<Likes> likes;
+	@OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
+	private List<Likes> likes;
 
-	
 	public long getIdc() {
 		return idc;
 	}
@@ -95,16 +92,16 @@ public class Comment implements Serializable {
 		Post = post;
 	}
 
-	public Set<Likes> getLikes() {
+	public List<Likes> getLikes() {
 		return likes;
 	}
 
-	public void setLikes(Set<Likes> likes) {
+	public void setLikes(List<Likes> likes) {
 		this.likes = likes;
 	}
 
 	public Comment(long idc, String description, LocalDateTime dateCreation, tn.pi.entities.User user,
-			tn.pi.entities.Post post, Set<Likes> likes) {
+			tn.pi.entities.Post post, List<Likes> likes) {
 		super();
 		this.idc = idc;
 		this.description = description;
@@ -114,14 +111,20 @@ public class Comment implements Serializable {
 		this.likes = likes;
 	}
 
+	public Comment(String description) {
+		super();
+		this.description = description;
+	}
+
 	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
+	public Comment(long idc, String description) {
+		super();
+		this.idc = idc;
+		this.description = description;
+	}
 
 }
-	
-
-	

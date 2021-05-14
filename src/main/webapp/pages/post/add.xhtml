@@ -1,54 +1,109 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-xmlns:f="http://java.sun.com/jsf/core"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:ui="http://java.sun.com/jsf/facelets"
-template="/template/template.xhtml">
-<ui:param name="page_name" value="Post" />
-<ui:define name="content">
-<!-- BEGIN : TP1 JSF Introduction Login -->
-<h:panelGroup columns="2"><h:form><table>
-<h:form>
-<h:outputText value="Bonjour #{postController. authenticatedUser.prenom}
-#{postController. authenticatedUser.nom}" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Posts</title>
+
+	</h:head>
+	<h:body>
+		<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+			template="/template/template.xhtml">
+			<ui:param name="page_name" value="Consomi tounsi" />
+			<ui:define name="menu">
 
 
-<tr>
-	<td><h:outputText value="Title"></h:outputText></td>
-	<td><h:inputText value="#{postController.nom}"></h:inputText></td>
-</tr>
 
-<tr>
-	<td><h:outputText value="Content"></h:outputText></td>
-	<td><h:inputText value="#{postController.prenom}"></h:inputText></td>
-</tr>
-
-<tr>
-	<td><h:outputText value="Photo"></h:outputText></td>
-	<td><h:inputText value="#{postController.prenom}"></h:inputText></td>
-</tr>
-
-<tr>
-	<td><h:outputText value="Theme"></h:outputText></td>
-	<td><h:selectOneMenu value="#{postController.theme}">
-	<f:selectItem itemLabel="Choisir le Theme" itemValue="#{null}" />
-	<f:selectItems value="#{postController.themes}" /></h:selectOneMenu></td>
-</tr>
-
-<tr>
-	<td colspan="2"> <h:commandButton value="Add post" action="#{postController.addPost()}" /></td>
-	<h:commandButton value="Mettre A jour Employé"action="#{employeController.updateEmploye()}" />
-</tr>
-</table></h:form></h:panelGroup>
+				<!-- BEGIN  -->
+				<h:panelGroup columns="2">
+					<h:form>
+						<fieldset
+							class="border-blue-400 border-2 p-4 m-4 min-w-min max-w-screen-sm">
+							<center>
+								<legend class="text-blue-400">Add Post</legend>
+							</center>
 
 
-</ui:define>
-</ui:composition>
-</body>
+							<div class="flex items-center my-2">
+								<h:outputLabel for="title">Title <span
+										class="text-red-400">*</span>
+								</h:outputLabel>
+								<h:inputText validatorMessage="Valeur ne doit pas depasser 30"
+									value="#{postController.title}" placeholder="Titre" 
+									class="bg-gray-100 mx-2 p-1 focus:outline-none focus:ring focus:border-blue-400"
+									id="title" required="true">
+									<f:validateLength minimum="6" maximum="20" />
+								</h:inputText>
+								<h:message class="text-green-400" for="title" />
+							</div>
+
+							<div class="flex items-center my-2">
+								<h:outputLabel for="content">Content <span
+										class="text-red-400">*</span>
+								</h:outputLabel>
+								<h:inputText validatorMessage="Valeur ne doit pas depasser 30"
+									value="#{postController.content}" placeholder="Description" 
+									class="bg-gray-100 mx-2 p-1 focus:outline-none focus:ring focus:border-blue-400"
+									id="title" required="true">
+									<f:validateLength minimum="6" maximum="200" />
+								</h:inputText>
+								<h:message class="text-green-400" for="content" />
+							</div>
+	
+
+
+
+
+
+							<div class="card">
+							<h:form>
+								<div class="ui-fluid p-formgrid p-grid">
+									<div class="p-field p-col-12 p-md-4">
+										<h:outputLabel for="theme" value=" Sujet: *" />
+										<p:selectOneMenu id="theme" value="#{postController.themes}"
+											validatorMessage="Cette valeur est obligatoire"
+											required="true" label="Text 2" style="width: 12rem">
+											<f:selectItem itemLabel="Choisir votre Sujet" itemValue=""
+												noSelectionOption="true" />
+											<f:selectItem itemLabel="Accessoires" itemValue="1" />
+											<f:selectItem itemLabel="Artisanat" itemValue="2" />
+											<f:selectItem itemLabel="Decoration" itemValue="3" />
+											<f:selectItem itemLabel="Habillement" itemValue="4" />
+											<f:selectItem itemLabel="Gastronomie" itemValue="5" />
+											<f:selectItem itemLabel="Maroquinerie" itemValue="6" />
+											<f:selectItem itemLabel="Tapisserie " itemValue="7" />
+											<f:facet name="footer">
+												<p:divider styleClass="p-mt-0" />
+												<h:outputText value="7 options" style="font-weight:bold;" />
+								</f:facet></p:selectOneMenu>
+								</div>
+								
+								</div></h:form></div>
+									
+						</fieldset>
+
+
+	<h:commandButton type="button" value="Submit "  icon="pi pi-check" action="#{postController.addPost()}"
+		class="rounded bg-blue-400 hover:bg-blue-300 text-white p-1 m-4"
+							id="submit"  styleClass="ui-button-outlined" />
+
+    <p:linkButton outcome="/pages/post/list" type="button" value="Annuler" icon="pi pi-times" 
+							  class="ui-button-secondary"/>
+
+					</h:form>
+		</h:panelGroup>	
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
 </html>

@@ -24,6 +24,23 @@ public class ChatServiceImpl implements ChatService {
 
 	private static final Logger log = LogManager.getLogger(ChatServiceImpl.class);
 	
+	/******** JSF ********/
+	@Override
+	public long addOrUpdateChat(Chat chat, long senderId,long  receiverId) {
+		chatRepository.save(chat);
+		return chat.getIdch();
+	}
+	
+	
+	
+
+	@Override
+	public void deleteChatById(long idch) {
+		chatRepository.deleteById(idch);
+
+	}
+		
+	/******** Crud ********/
 	
 	@Override
 	public Chat SendMsg(Chat chat) {
@@ -49,7 +66,7 @@ public class ChatServiceImpl implements ChatService {
 	        User sender=userRepository.findById(senderId).orElse(null);
 	        User receiver=userRepository.findById(receiverId).orElse(null);
 	        if (sender!=null && receiver!=null) {
-	        	c.setDateCreation(new Date());
+	        //	c.setDateCreation(new Date());
 	            c.setSender(sender);
 	            c.setReceiver(receiver);
 	            chatRepository.save(c);
@@ -60,5 +77,7 @@ public class ChatServiceImpl implements ChatService {
 	public List<Chat> getConversation(long senderId, long receiverId) {
 		   return chatRepository.getConversation(senderId, receiverId);
 	}
+
+
 
 }

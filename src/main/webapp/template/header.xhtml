@@ -1,17 +1,84 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8"></meta>
-<title>Consommi Tounsi</title>
-</head>
-<body>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-xmlns:f="http://java.sun.com/jsf/core"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:panelGroup>
-<br/><br/>Mettez ici un en-tête ! <br/><br/>
-</h:panelGroup>
-</ui:composition>
-</body>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Consommi Tounsi</title>
+		<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+			rel="stylesheet" />
+	</h:head>
+	<h:body>
+		<h:panelGroup>
+			 <div class="ui-g">
+            <div class="ui-g-12">
+                <p:toolbar>
+                    <f:facet name="left">
+  
+ <p:button value="Home" styleClass="ui-button-raised" icon="pi pi-fw pi-home" />
+ <p:button value="Produits" styleClass="ui-button-raised" icon="pi pi-th-large" />
+     <p:button value="Acheter" styleClass="ui-button-raised" icon="pi pi-shopping-cart " />
+ <p:button value="Evénements" styleClass="ui-button-raised" icon="pi pi-calendar" />                
+ <p:button value="Forum" styleClass="ui-button-raised" icon="pi pi-comments" />
+  <p:button value="Réclamer" styleClass="ui-button-raised" icon=" pi pi-exclamation-triangle"/>
+                    </f:facet>
+                    
+                      <f:facet name="right">
+                   
+<p:button icon="pi pi-bell" styleClass="rounded-button ui-button-info" />
+ <p:button icon="pi pi-heart" styleClass="rounded-button ui-button-info" />
+  <p:button icon="pi pi-user" styleClass="rounded-button ui-button-info" />
+   <p:button  styleClass="rounded-button ui-button-info" icon="pi pi-sign-out" />
+ 
+    
+                    </f:facet>
+                </p:toolbar>
+            </div>
+            <div class="ui-g-12">
+                <ui:insert name="content" />
+            </div>
+        </div>
+ 
+			
+			<div class="card">
+    <h:form>
+        <p:growl id="messages"/>
+
+        <p:menubar>
+            <p:submenu label="Posts" icon="pi pi-fw pi-file">
+             <p:menuitem value="New"  icon="pi pi-fw pi-plus"/>
+                 <p:submenu label="Search" icon="pi pi-fw pi-users">
+                    <p:submenu label="Filter" icon="pi pi-fw pi-filter">
+                        <p:menuitem value="Print" icon="pi pi-fw pi-print"/>
+                    </p:submenu>
+                    <p:menuitem value="List" icon="pi pi-fw pi-bars"/>
+                </p:submenu>
+            </p:submenu>
+            
+             <p:submenu label="Messages" icon="pi pi-fw pi-comment"></p:submenu>
+
+            
+            <f:facet name="options">
+                <div class="ui-input-icon-left p-mr-2">
+                    <i class="pi pi-fw pi-search" />
+                    <p:inputText placeholder="Search"/>
+                </div>
+                <p:button value="Search" action="#{postController.search(word)}" icon="pi pi-search" styleClass="ui-button-info"/>
+            </f:facet>
+        </p:menubar>
+    </h:form>
+</div>
+		</h:panelGroup>
+
+	</h:body>
+</f:view>
 </html>

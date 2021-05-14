@@ -17,4 +17,9 @@
 		<listener-class>org.springframework.web.context.request.RequestContextListener
 		</listener-class>
 	</listener>
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+	<param-value>cupertino</param-value>
+	</context-param>
 </web-app>
+
