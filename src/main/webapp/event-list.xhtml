@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Event</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<p:commandButton action="event-list" value="Events" />
+			<p:commandButton action="donation-list" value="Donations" />
+		</h:form>
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<p:toolbar>
+					<f:facet name="left">
+						<p:button href="/" value="List of Events" />
+						<p:button href="/event" value="New Event" />
+					</f:facet>
+				</p:toolbar>
+			</div>
+			<div class="ui-g-12">
+				<h:form id="form">
+					<p:panel header="Events List">
+						<p:dataTable id="table" var="event" value="#{eventList.events}">
+
+							<p:column>
+								<f:facet name="header">Title</f:facet>
+								<h:outputText value="#{event.title}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">Adress</f:facet>
+								<h:outputText value="#{event.adress}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">Date</f:facet>
+								<h:outputText value="#{event.date}" />
+							</p:column>
+
+							<p:column>
+								<p:commandButton value="Update"
+									action="#{eventController.modifier(event,event.title, event.adress, event.date)}" />
+
+
+								<p:commandButton value="Delete"
+									action="#{eventController.delete(event.id)}" />
+							</p:column>
+						</p:dataTable>
+					</p:panel>
+				</h:form>
+			</div>
+		</div>
+	</h:body>
+</f:view>
+</html>
