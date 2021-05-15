@@ -56,6 +56,8 @@ public interface PostService {
 	/******** Post a la une ********/
 	List<String> PostMostCommented();
 
-	
+	public void accpeterPost (Long idP);
+	public void RefuserPost (Long idP);
+	public List<Post> getAllPostEtatWaiting();
 	// public void uploadImage(final MultipartFile file);
 }

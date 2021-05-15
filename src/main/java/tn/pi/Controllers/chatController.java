@@ -1,5 +1,10 @@
 package tn.pi.Controllers;
 
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+
 import java.util.List;
 
 import org.ocpsoft.rewrite.annotation.Join;
@@ -15,7 +20,8 @@ import tn.pi.services.ChatService;
 @Scope(value = "session")
 @Controller(value = "chatController")
 @ELBeanName(value = "chatController")
-public class ControllerChatImpl {
+@Join(path = "/chat", to = "/chat/sendMsg.jsf")
+public class chatController {
 	@Autowired 
 	ChatService chatService;
 	
@@ -24,11 +30,28 @@ public class ControllerChatImpl {
 	long senderId;
 	private List<Chat> chats;
 	
+	
+	
+	@MessageMapping("/chat.addUser")
+	@SendTo("/topic/public")
+	public Chat addUser(@Payload Chat chat, SimpMessageHeaderAccessor headerAccessor) {
+		headerAccessor.getSessionAttributes().put("username", chat.getSender());
+		return chat;
+	}
+	
+	
+	@MessageMapping("/chat.send")
+	@SendTo("/chat/public")
+	public Chat sendMessage(@Payload Chat chat) {
+		return chat;
+	}
+	
 	public void sendChat() {
 		chatService.addOrUpdateChat(new Chat(), receiverId, receiverId);
 		//	chatService.add(Chat c, receiverId, receiverId);
 //			return navigateTo;
 		}
+
 
 
 

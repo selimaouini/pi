@@ -25,6 +25,7 @@ import tn.pi.entities.Post;
 import tn.pi.entities.Theme;
 import tn.pi.entities.User;
 import tn.pi.services.PostService;
+import tn.pi.services.RatingService;
 import tn.pi.services.UserService;
 
 @Scope(value = "session")
@@ -40,6 +41,8 @@ public class postController {
 	UserRepository userRepository;
 	@Autowired
 	UserService userService;
+	@Autowired
+	RatingService ratingService;
 
 	private List<Post> posts;
 	private long idP;
@@ -53,9 +56,10 @@ public class postController {
 	private User user;
 	long id=1; 
 	private Post post;
-	private Post p;
+	private float avg;
+	private String username;
 		
-	public Post addPost(){		
+	public String addPost(){		
 		User u =userRepository.findById(id).get();
 	Post post =new Post();
 		post.setUser(u);
@@ -63,7 +67,8 @@ public class postController {
 		post.setContent(content);
 		post.setPhoto(photo);
 		post.setTheme(theme);
-		return postService.addPostt(post);
+		post.setUsername(username);
+		return postService.addPost(post,id);
 				}
 	
 	public void deletePost(long idP){
@@ -71,9 +76,13 @@ public class postController {
 		addMessage(FacesMessage.SEVERITY_INFO, "Success", "Post deleted");
 	}
 	
+	public void Post(long idP){
+		postService.getPostById(idP);
+	
+	}
 	
 	public void update(long idP){
-	 postService.updatePost(p);
+	 postService.updatePost(post);
 	  addMessage(FacesMessage.SEVERITY_INFO, "Success", "Post updated");
 	
 	}
@@ -82,6 +91,8 @@ public class postController {
 	     FacesContext.getCurrentInstance().
 	             addMessage(null, new FacesMessage(severity, summary, detail));
 	}
+	
+	//public float getValueRatingByPostAndUser(long idP, long id) 
 	
 	 public List<Post> getPosts() {
 	    	posts=postService.retrieveAllPosts();
@@ -148,11 +159,29 @@ public class postController {
 	}
 
 	public Post getPost() {
+	Post	post=	postService.getPostById(idP);
 		return post;
 	}
 
 	public void setPost(Post post) {
 		this.post = post;
+	}
+
+	public float getAvg() {
+		avg= ratingService.getAvgRat();
+		return avg;
+	}
+
+	public void setAvg(float avg) {
+		this.avg = avg;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	

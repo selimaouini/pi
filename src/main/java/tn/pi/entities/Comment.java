@@ -38,6 +38,8 @@ public class Comment implements Serializable {
 
 	@NotNull
 	private LocalDateTime dateCreation = LocalDateTime.now();
+	
+	private String username;
 
 	/************** Associations **************/
 
@@ -100,12 +102,23 @@ public class Comment implements Serializable {
 		this.likes = likes;
 	}
 
-	public Comment(long idc, String description, LocalDateTime dateCreation, tn.pi.entities.User user,
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	
+	public Comment(long idc, String description, LocalDateTime dateCreation, String username, tn.pi.entities.User user,
 			tn.pi.entities.Post post, List<Likes> likes) {
 		super();
 		this.idc = idc;
 		this.description = description;
 		this.dateCreation = dateCreation;
+		this.username = username;
 		User = user;
 		Post = post;
 		this.likes = likes;

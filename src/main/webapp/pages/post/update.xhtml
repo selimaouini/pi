@@ -10,17 +10,15 @@
 	xmlns:p="http://primefaces.org/ui">
 <f:view>
 	<h:head>
-		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Consommi Tounsi</title>
 		<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
 			rel="stylesheet" />
 	</h:head>
 	<h:body>
 		<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 			template="/template/template.xhtml">
-			<ui:param name="page_name" value="Consomi tounsi" />
+			<ui:param name="page_name" value="Forum" />
 			<ui:define name="menu">
 
 
@@ -34,65 +32,52 @@
 					<h:panelGroup columns="2">
 						<h:form>
     <fieldset
-            class="border-blue-400 border-2 p-4 m-4 min-w-min max-w-screen-sm">
-        <legend class="text-blue-400">Modifier Post</legend>
-        	
-								
-								<div class="flex items-center my-2">
-									<h:outputLabel for="title">
-                Title <span class="text-red-400">*</span>
-									</h:outputLabel>
-									 <span class="ui-float-label">
-       <p:inputText id="float-input"	value="#{post.title}"/>
-       <p:outputLabel for="@previous" value="Username"/>
-   </span>
-									<h:message class="text-green-400" for="montant" />
-								</div>
+          		class="border-blue-400 border-2 p-4 m-4 min-w-min max-w-screen-sm">
+							<legend class="text-blue-400">Nouveau Post</legend>
 
-								<div class="flex items-center my-2">
-									<h:outputLabel for="content">
-                Content <span class="text-red-400">*</span>
-									</h:outputLabel>
-								  <div class="p-field p-col-12">
-        <label for="content">Description</label>
-        <Textarea id="content" rows="4" />
-    </div></div>
+							<div class="card">
+								<h:form>
+									<p:messages id="msgs" />
 
-								<div class="flex items-center my-2">
-									<h:outputLabel for="photo">
-             Photo <span class="text-red-400">*</span>
-									</h:outputLabel>
-									<h:commandButton value="#{post.photo}" id="photo"
-										action="#{postController.uploadphoto()}">								
-									</h:commandButton>
-									<h:message class="text-green-400" for="photo" />
-								</div>
+									<h:panelGrid columns="3" cellpadding="7" styleClass="p-mb-3">
+										<p:outputLabel for="title" value="Titre:" />
+										<p:inputText id="title" value="#{postController.title}"
+											required="true" label="title">
+											<f:validateLength minimum="2" />
+										</p:inputText>
+										<p:message for="title" display="icon" />
 
+										<p:outputLabel for="content" value="Description:" />
+										<p:inputText id="content" value="#{postController.content}"
+											required="true" label="content">
+											<f:validateLength minimum="2" />
+										</p:inputText>
+										<p:message for="content" display="icon" />
+											
 
+											<h:outputLabel for="theme" value=" Sujet: *" />
+											<p:selectOneMenu id="theme" value="#{postController.themes}"
+												validatorMessage="Cette valeur est obligatoire"
+												required="true" label="Text 2" style="width: 12rem">
+												<f:selectItem itemLabel="Choisir votre Sujet" itemValue=""
+													noSelectionOption="true" />
+												<f:selectItem itemLabel="Accessoires" itemValue="1" />
+												<f:selectItem itemLabel="Artisanat" itemValue="2" />
+												<f:selectItem itemLabel="Decoration" itemValue="3" />
+												<f:selectItem itemLabel="Habillement" itemValue="4" />
+												<f:selectItem itemLabel="Gastronomie" itemValue="5" />
+												<f:selectItem itemLabel="Maroquinerie" itemValue="6" />
+												<f:selectItem itemLabel="Tapisserie " itemValue="7" />
+												<f:facet name="footer">
+													<p:divider styleClass="p-mt-0" />
+													<h:outputText value="7 options" style="font-weight:bold;" />
+												</f:facet>
+											</p:selectOneMenu>
 
-								<div class="card">
-							<h:form>
-								<div class="ui-fluid p-formgrid p-grid">
-									<div class="p-field p-col-12 p-md-4">
-										<h:outputLabel for="theme" value=" Sujet: *" />
-										<p:selectOneMenu id="theme" value="#{postController.themes}"
-											validatorMessage="Cette valeur est obligatoire"
-											required="true" label="Text 2" style="width: 12rem">
-											<f:selectItem itemLabel="Choisir votre Sujet" itemValue=""
-												noSelectionOption="true" />
-											<f:selectItem itemLabel="Accessoires" itemValue="1" />
-											<f:selectItem itemLabel="Artisanat" itemValue="2" />
-											<f:selectItem itemLabel="Decoration" itemValue="3" />
-											<f:selectItem itemLabel="Habillement" itemValue="4" />
-											<f:selectItem itemLabel="Gastronomie" itemValue="5" />
-											<f:selectItem itemLabel="Maroquinerie" itemValue="6" />
-											<f:selectItem itemLabel="Tapisserie " itemValue="7" />
-											<f:facet name="footer">
-												<p:divider styleClass="p-mt-0" />
-												<h:outputText value="7 options" style="font-weight:bold;" />
-								</f:facet></p:selectOneMenu>
-								</div>
-								</div></h:form></div>
+											</h:panelGrid>
+										
+											</h:form></div>
+
 							</fieldset>
 	
 	<div class="card">

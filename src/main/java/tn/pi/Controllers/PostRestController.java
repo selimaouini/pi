@@ -100,10 +100,10 @@ public class PostRestController {
 	}
 
 	// http://localhost:8081/SpringMVC/servlet/Post/getPost-By-UserId/{idUser}
-	@GetMapping("/Post/getPost-By-UserId/{idu}")
+	@GetMapping("/Post/getPost-By-UserId/{id}")
 	@ResponseBody
-	public List<Post> getPostByUserId(@PathVariable("idu") Long idu) {
-		return (List<Post>) postService.getPostByUserId(idu);
+	public List<Post> getPostByUserId(@PathVariable("id") Long id) {
+		return (List<Post>) postService.getPostByUserId(id);
 	}
 
 	// tekhdem
@@ -133,11 +133,11 @@ public class PostRestController {
 
 	// tekhdem
 	// http://localhost:8081/SpringMVC/servlet/Post/addRating/{idu}/{idP}/{stars}
-	@PostMapping(value = "/Post/addRating/{idu}/{idP}/{stars}")
+	@PostMapping(value = "/Post/addRating/{id}/{idP}/{stars}")
 	@ResponseBody
-	public void addRatingByPost(Rating rat, @PathVariable("idu") long idu, @PathVariable("idP") long idP,
+	public void addRatingByPost(Rating rat, @PathVariable("id") long id, @PathVariable("idP") long idP,
 			@PathVariable("stars") int stars) {
-		ratingService.rate( idu, idP, stars);
+		ratingService.rate( id, idP, stars);
 
 	}
 
@@ -152,10 +152,10 @@ public class PostRestController {
 
 	// tekhdem
 	// http://localhost:8081/SpringMVC/servlet/Post/Rating/GetBy_Post_User/{idP}/{idu}
-	@GetMapping("/Post/Rating/GetBy_Post_User/{idP}/{idu}")
-	public float getValueRatingByPostAndUser(@PathVariable("idP") long idP,
-			@PathVariable("idu") long idu) {
-		return ratingService.getValueRatingByPostAndUser(idP, idu);
+	@GetMapping("/Post/Rating/GetBy_Post_User/{idP}/{id}")
+	public float valueAVGRating(@PathVariable("idP") long idP,
+			@PathVariable("id") long id) {
+		return ratingService.getValueRatingByPostAndUser(idP, id);
 	}
 
 	// tekhdem
@@ -166,6 +166,9 @@ public class PostRestController {
 		ratingService.getAvgRat( );
 
 	}
+	
+ 
+	
 	/*
 	 * http://localhost:8081/SpringMVC/servlet/Post/upload-img
 	 * 

@@ -38,6 +38,13 @@ public class Chat implements Serializable {
 	@NotNull	
 	private LocalDateTime dateCreation= LocalDateTime.now();
 	
+	private MessageType type;
+	private String senderr;
+
+	public enum MessageType {
+		CHAT, LEAVE, JOIN
+	}
+
 	/**************Associations**************/
 	/*@ManyToOne(cascade = CascadeType.ALL)
 	User User ;*/
@@ -88,14 +95,24 @@ public class Chat implements Serializable {
 
 	    public void setReceiver(User receiver) {
 	        this.receiver = receiver;
-	    }
+	    }	
+	
+	public MessageType getType() {
+			return type;
+		}
 
-	@Override
-	public String toString() {
-		return "Chat [idch=" + idch + ", message=" + message + "]";
-	}
-	
-	
+		public void setType(MessageType type) {
+			this.type = type;
+		}
+
+	public String getSenderr() {
+			return senderr;
+		}
+
+		public void setSenderr(String senderr) {
+			this.senderr = senderr;
+		}
+
 	public Chat(String message) {
 		super();
 		this.message = message;

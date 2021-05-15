@@ -94,6 +94,8 @@ public class PostServiceImpl implements PostService {
 				return "** Attention il y a un autre post avec ce titre **";
 			// p.setTitle();
 			p.setContent("***");
+			p.setEtat("Waiting");
+			p.setUsername(user.getFirstName()+" "+user.getLastName());
 			// Date currentSqlDate= new Date (System.currentTimeMillis());
 			// p.setDateCreation(currentSqlDate);
 			postRepository.save(p);
@@ -246,6 +248,24 @@ public class PostServiceImpl implements PostService {
 		post = new Post();
 		return "/list.xhtml?faces-redirect=true";
 
+	}
+	@Override
+	public void accpeterPost(Long idP) {
+		Post post=postRepository.findById(idP).get();
+		post.setEtat("Accpted");
+		postRepository.save(post);
+		
+	}
+	@Override
+	public void RefuserPost(Long idP) {
+		Post post=postRepository.findById(idP).get();
+		post.setEtat("Accpted");
+		postRepository.save(post);
+		
+	}
+	@Override
+	public List<Post> getAllPostEtatWaiting() {
+		return postRepository.findAllbyEtatWaiting();
 	}
 
 	/*

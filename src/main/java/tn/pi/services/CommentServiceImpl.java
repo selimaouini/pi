@@ -74,6 +74,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public void addComment(Comment com, long id, long idP) {
+		
 		String words = com.getDescription();
 		List<String> forbiddenWord = new ArrayList<String>();
 		forbiddenWord.add("fuck");
@@ -89,6 +90,7 @@ public class CommentServiceImpl implements CommentService {
 			com.setUser(user);
 			com.setPost(post);
 			com.setDescription("***");
+			com.setUsername(user.getFirstName()+" "+user.getLastName());
 			// Date currentSqlDate= new Date (System.currentTimeMillis());
 			// com.setDateCreation(currentSqlDate);
 			commentRepository.save(com);
@@ -179,9 +181,6 @@ public class CommentServiceImpl implements CommentService {
 	        }
 	    }
 
-
-
-
 @Override
 public void dislikeComment(long idc, long id, boolean disliked) {
        Likes l = likesRepository.getDislikesByComAndUser(idc,id);
@@ -199,7 +198,7 @@ public void dislikeComment(long idc, long id, boolean disliked) {
                l=new Likes();
                l.setComment(comment);
                l.setUser(user);
-               l.setLiked(disliked);
+               l.setDisliked(disliked);
                likesRepository.save(l);
            }
        }

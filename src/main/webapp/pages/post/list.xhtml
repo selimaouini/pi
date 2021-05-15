@@ -19,7 +19,7 @@
 	<h:body>
 		<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 			template="/template/template.xhtml">
-			<ui:param name="page_name" value="Posts" />
+			<ui:param name="page_name" value="Forum" />
 			<ui:define name="menu">
 
     
@@ -57,7 +57,7 @@
 <h:outputText value="#{post.dateCreation}" /></p:column>
 
 <p:column><f:facet name="header"><h:outputText value="Auteur" /></f:facet>
-|<h:outputText value=" " /></p:column>
+|<h:outputText value="#{post.username}" /></p:column>
 
 <p:column> 
 <f:facet name="header"><h:outputText value="Action" /></f:facet>

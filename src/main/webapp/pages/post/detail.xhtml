@@ -20,7 +20,7 @@
 	<h:body>
 		<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 			template="/template/template.xhtml">
-			<ui:param name="page_name" value="Post" />
+			<ui:param name="page_name" value="Forum" />
 			<ui:define name="menu">
 
 				   
@@ -42,7 +42,7 @@
 </h:form></p:panel>
 
 		<center>	<p:panel  header="Post"></p:panel> </center>	
-			
+			<p:dataTable value="#{postController.post}" var="post" border="1">
 			
 			<div class="flex flex-col p-4">
 						<span class="text-blue-400">Title</span> <span class="font-light">#{post.title}</span>
@@ -64,7 +64,7 @@
 						<span class="text-blue-400">Writer</span> <span class="font-light">#{user.firstName}</span>
 					</div>
 			
-				   
+				   </p:dataTable>
 				   
 				   <p:linkButton  outcome="/pages/post/update" icon="pi pi-user-edit" class="p-mr-2" action="#{postController.updatePost(post,post.title,post.content,post.photo,post.theme)}"
 						value="Modifier" />
@@ -83,11 +83,12 @@
 								<p:rating readonly="true" value="#{post.rating}" />
 							</tr>
 						</table>
+						<div>
+						<h7> Avis  <h:outputText value="#{postController.avg}" /></h7>
+						</div>
 					</h:form>
 
 				</div>
-				
-				
 				 <br></br> <br></br>    
 				 
 				 
@@ -113,7 +114,9 @@
 										</f:facet>
 										<h:outputText value="#{comment.dateCreation}" />
 									</p:column>
-
+									<p:column><f:facet name="header"><h:outputText value="Auteur" /></f:facet>
+|									<h:outputText value="#{comment.username}" /></p:column>
+									
 									<p:column>
 										<f:facet name="header">
 											<h:outputText value="Action" />
@@ -123,17 +126,13 @@
 										<p:commandButton
 										styleClass="rounded-button ui-button-danger" icon="pi pi-trash"	action="#{commentController.removeComment(comment.idc)}" />
 									</p:column>
-
-
-
-
 									<p:column>
 										<f:facet name="header">
 											<h:outputText value="React" />
 										</f:facet>								
-										<p:commandButton  icon="pi pi-thumbs-up" styleClass="rounded-button"  action="#{commentController.like()}"/>									
+										<p:commandButton  icon="pi pi-thumbs-up" styleClass="rounded-button"  action="#{commentController.like(comment.idc)}"/>									
 																		
-										<p:commandButton  icon="pi pi-thumbs-down" styleClass="rounded-button" action="#{commentController.dislike()}"/>																																							
+										<p:commandButton  icon="pi pi-thumbs-down" styleClass="rounded-button" action="#{commentController.dislike(comment.idc)}"/>																																							
 									</p:column>
 
 								</h:dataTable>
@@ -155,7 +154,7 @@
 							</div>
 
 						
-							 <p:commandButton type="button" value="Envoyer" styleClass="ui-button-outlined" action="#{commentController.saveComment()}" />
+							 <p:commandButton type="button" value="Envoyer" styleClass="ui-button-outlined" action="#{commentController.addComment()}" />
 							 <p:commandButton type="button" value="Modifier" styleClass="ui-button-outlined" action="#{commentController.addComment()}" />
 					
 		   

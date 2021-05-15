@@ -63,7 +63,8 @@ private static final long serialVersionUID = 1L;
 	private Theme theme; 
 	
 	private Long postdToBeUpdated;
-
+	private String etat;
+private String username;
 	
 	/**************Associations**************/
 	@JsonIgnore
@@ -154,6 +155,42 @@ public User getUser() {
 	}
 
     
+	public String getEtat() {
+		return etat;
+	}
+
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
+	
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Post(long idP,
+			@NotEmpty @Size(min = 3, max = 25, message = " you should insert at least 1 character ") String title,
+			@NotEmpty String content, String photo, LocalDateTime dateCreation, Theme theme, Long postdToBeUpdated,
+			String etat, String username, tn.pi.entities.User user, List<Comment> comments, List<Rating> rating) {
+		super();
+		this.idP = idP;
+		this.title = title;
+		this.content = content;
+		this.photo = photo;
+		this.dateCreation = dateCreation;
+		this.theme = theme;
+		this.postdToBeUpdated = postdToBeUpdated;
+		this.etat = etat;
+		this.username = username;
+		User = user;
+		this.comments = comments;
+		this.rating = rating;
+	}
+
 	public Post() {
 		super();
 		// TODO Auto-generated constructor stub

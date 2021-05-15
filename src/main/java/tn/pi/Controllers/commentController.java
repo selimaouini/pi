@@ -15,6 +15,7 @@ import tn.pi.Repository.CommentRepository;
 import tn.pi.Repository.PostRepository;
 import tn.pi.Repository.UserRepository;
 import tn.pi.entities.Comment;
+import tn.pi.entities.Likes;
 import tn.pi.entities.Post;
 import tn.pi.entities.User;
 import tn.pi.services.CommentService;
@@ -24,7 +25,7 @@ import tn.pi.services.UserService;
 @Scope(value = "session")
 @Controller(value = "commentController")
 @ELBeanName(value = "commentController")
-//@Join(path = "/detail", to = "/detail.jsf")
+// @Join(path = "/detail", to = "/detail.jsf")
 public class commentController {
 	@Autowired
 	CommentService commentService;
@@ -39,33 +40,31 @@ public class commentController {
 	@Autowired
 	PostRepository postRepository;
 
-	
-	
 	private String description;
 	private List<Comment> comments;
-	long idP=23;
+	// long idP=23;
 	long idc;
-	long id=1; 
+	long id = 1;
 	private Comment comment;
 	boolean disliked;
 	boolean liked;
-	
+
 	/*** 1er méthode ***/
 	public void saveComment() {
 		commentService.addOrUpdateComment(new Comment(description));
-		} 
-	
+	}
+
 	/*** 2éme méthode ***/
-	public Comment addComment() {
-		User u =userRepository.findById(id).get();
-		Post p =postRepository.findById(idP).get();
+	public void addComment(long idP) {
 		Comment com = new Comment();
+		User u = userRepository.findById(id).get();
+		Post p = postRepository.findById(idP).get();
+
 		com.setUser(u);
 		com.setPost(p);
 		com.setDescription(description);
-		return commentService.addOrUpdateComment(comment);
+		commentService.addComment(com, id, idP);
 	}
-	
 
 	public List<Comment> getComments() {
 		comments = commentService.retrieveAllComments();
@@ -76,30 +75,36 @@ public class commentController {
 		commentService.deleteCommentById(idP);
 		addMessage(FacesMessage.SEVERITY_INFO, "Success", "Comment deleted");
 	}
+
 	public void updateComment() {
 		commentService.addOrUpdateComment(new Comment(description));
 	}
 
-	List<Comment> retrieveAllCommentsByPost(long idP){
+	List<Comment> retrieveAllCommentsByPost(long idP) {
 		comments = commentService.retrieveAllCommentsByPost(idP);
 		return comments;
 	}
-	
-/*	 public Comment dislike(long idL){
-		 Comment com =commentRepository.findById(idc).get();
-	return commentService.dislikeComment(idc,id, disliked);
+
+	public void dislike(long idc) {
+		Likes l = new Likes();
+		User u = userRepository.findById(id).get();
+		l.setDisliked(disliked);
+		l.setUser(u);
+		commentService.dislikeComment(idc, id, disliked);
 	}
-	
-	 public Comment like(long idL){
-		 Comment com =commentRepository.findById(idc).get();
-	return 	commentService.likeComment(idc,id, disliked);
+
+	public void like(long idc) {
+		Likes l = new Likes();
+		User u = userRepository.findById(id).get();
+		l.setUser(u);
+		l.setLiked(liked);
+		commentService.likeComment(idc, id, disliked);
 	}
-	*/
+
 	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
-	     FacesContext.getCurrentInstance().
-	             addMessage(null, new FacesMessage(severity, summary, detail));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
@@ -112,13 +117,11 @@ public class commentController {
 		this.comments = comments;
 	}
 
-	public long getIdP() {
-		return idP;
-	}
-
-	public void setIdP(long idP) {
-		this.idP = idP;
-	}
+	/*
+	 * public long getIdP() { return idP; }
+	 * 
+	 * public void setIdP(long idP) { this.idP = idP; }
+	 */
 
 	public long getId() {
 		return id;
@@ -135,7 +138,5 @@ public class commentController {
 	public void setComment(Comment comment) {
 		this.comment = comment;
 	}
-	
-	
-	
+
 }

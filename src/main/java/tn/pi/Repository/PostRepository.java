@@ -41,6 +41,12 @@ public interface PostRepository extends CrudRepository<Post, Long> {
     @Query(value="delete from Post  where DATEDIFF(CURRENT_TIMESTAMP,dateCreation)>=10 and Rating.Stars=0",nativeQuery=true)
     public void deleteSansInteraction();
 	
+	
+	
+	@Query(value = "SELECT DISTINCT * FROM Posy where etat='waiting' ORDER BY dateCreation DESC", nativeQuery = true)
+	public List<Post> findAllbyEtatWaiting();
+	
+	
 	/*	@Query("SELECT p FROM Post p order by p.dateCreation ASC")
 	public List<Post> retrievePostsByDateAsc(@Param("dateCreation") LocalDateTime dateCreation);
 	 * 
