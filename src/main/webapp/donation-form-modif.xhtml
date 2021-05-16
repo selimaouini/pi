@@ -19,13 +19,26 @@
 						<h:panelGrid columns="1">
 							<p:outputLabel for="amount" value="amount: " />
 							<p:inputText id="amount"
-								value="#{donationController.donation.amount}" />
-							<p:outputLabel for="date" value="Date: " />
-							<p:inputText id="date"
-								value="#{donationController.donation.date}" />
+								value="#{donationController.donation.amount}" required="true" />
+							<p:message for="amount" display="text" />
+							<p:tooltip for="amount" value="Enter the amount"
+								my="right center" at="left center" />
+
+							<p:outputLabel for="date" value="date: " />
+							<p:datePicker id="date"
+								value="#{donationController.donation.date}" required="true" />
+							<p:message for="date" display="text" />
+							<p:tooltip for="date" value="Enter the date" my="right center"
+								at="left center" />
+
 							<p:outputLabel for="name_event" value="Name Event: " />
 							<p:inputText id="name_event"
-								value="#{donationController.donation.name_event}" />
+								value="#{donationController.donation.name_event}"
+								required="true" />
+							<p:message for="name_event" display="text" />
+							<p:tooltip for="name_event" value="Enter the name of the event"
+								my="right center" at="left center" />
+
 
 							<h:commandButton value="Save"
 								action="#{donationController.saveModif}" />

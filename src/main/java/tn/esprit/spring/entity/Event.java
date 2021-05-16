@@ -2,12 +2,15 @@ package tn.esprit.spring.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Event implements Serializable {
@@ -21,12 +24,13 @@ public class Event implements Serializable {
 
 	private String title;
 	private String adress;
-	private String date;
+	@Temporal(TemporalType.DATE)
+	private Date date;
 
 	public Event() {
 	}
 
-	public Event(String title, String adress, String date) {
+	public Event(String title, String adress, Date date) {
 		this.title = title;
 		this.adress = adress;
 		this.date = date;
@@ -49,11 +53,11 @@ public class Event implements Serializable {
 		this.adress = adress;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

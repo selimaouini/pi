@@ -21,7 +21,7 @@ import javax.faces.bean.ManagedBean;
 @Scope (value = "session")
 @Component (value = "eventList")
 @ELBeanName(value = "eventList")
-@Join(path = "/", to = "/event-list.jsf")
+@Join(path = "/events", to = "/event-list.jsf")
 public class EventListController implements IEventListController{
 	private List<Event> events;
 	

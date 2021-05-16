@@ -1,11 +1,14 @@
 package tn.esprit.spring.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Donation implements Serializable {
@@ -15,9 +18,10 @@ public class Donation implements Serializable {
 	private int id;
 
 	private String amount;
-	private String date;
 	private String name_event;
-
+	@Temporal(TemporalType.DATE)
+	private Date date;
+	
 	public int getId() {
 		return id;
 	}
@@ -34,11 +38,11 @@ public class Donation implements Serializable {
 		this.amount = amount;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -50,7 +54,7 @@ public class Donation implements Serializable {
 		this.name_event = name_event;
 	}
 
-	public Donation(String amount, String date, String name_event) {
+	public Donation(String amount, Date date, String name_event) {
 
 		this.amount = amount;
 		this.date = date;

@@ -12,27 +12,44 @@
 		<title>Event</title>
 	</h:head>
 	<h:body>
-			<div class="ui-g">
+		<div class="ui-g">
 			<div class="ui-g-12">
-		<h:form id="eventForm">
-			<p:panel header="Event Details">
-				<h:panelGrid columns="1">
-					<p:outputLabel for="title" value="title: " />
-					<p:inputText id="title" value="#{eventController.event.title}" />
-					<p:outputLabel for="adress" value="Adress: " />
-					<p:inputText id="adress" value="#{eventController.event.adress}" />
-					<p:outputLabel for="date" value="Date: " />
-					<p:inputText id="date" value="#{eventController.event.date}" />
+				<h:form id="eventForm">
+					<p:panel header="Event Details">
+						<h:panelGrid columns="1">
+							<p:outputLabel for="title" value="title: " />
+							<p:inputText id="title" value="#{eventController.event.title}"
+								required="true" />
+							<p:message for="title" display="text" />
+							<p:tooltip for="title" value="Enter the title" my="right center"
+								at="left center" />
 
-					<h:commandButton value="Save" action="#{eventController.save}" />
-				</h:panelGrid>
-			</p:panel>
-		</h:form>
+							<p:outputLabel for="adress" value="Adress: " />
+							<p:inputText id="adress" value="#{eventController.event.adress}"
+								required="true" />
+							<p:message for="adress" display="text" />
+							<p:tooltip for="adress" value="Enter the adress"
+								my="right center" at="left center" />
+
+
+							<p:outputLabel for="date" value="Date: " />
+							<p:datePicker id="date" value="#{eventController.event.date}"
+								required="true" />
+							<p:message for="date" display="text" />
+							<p:tooltip for="date" value="Enter the date" my="right center"
+								at="left center" />
+
+
+
+							<h:commandButton value="Save" action="#{eventController.save}" />
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
 			</div>
 		</div>
 	</h:body>
 </f:view>
 </html>
-	
-	
-	
+
+
+

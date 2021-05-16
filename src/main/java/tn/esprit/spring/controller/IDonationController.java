@@ -1,5 +1,7 @@
 package tn.esprit.spring.controller;
 
+import java.util.Date;
+
 import tn.esprit.spring.entity.Donation;
 
 public interface IDonationController {
@@ -9,7 +11,7 @@ public interface IDonationController {
 
 	public String delete(int id);
 
-	public String modifier(Donation d, String amount, String date, String name_event);
+	public String modifier(Donation d, String amount, Date date, String name_event);
 
 	public String saveModif();
 

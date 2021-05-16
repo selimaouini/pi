@@ -2,14 +2,23 @@ package tn.esprit.spring.service;
 
 
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.ocpsoft.rewrite.annotation.RequestAction;
 import org.ocpsoft.rewrite.faces.annotation.Deferred;
 import org.ocpsoft.rewrite.faces.annotation.IgnorePostback;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.entity.Donation;
 import tn.esprit.spring.entity.Event;
 import tn.esprit.spring.repository.EventRepository;
 
@@ -21,11 +30,14 @@ public class EventServiceImpl implements IEventService
 	private List<Event> events;
 	@Autowired
 	EventRepository eventRepository;
+	
 
 
-	public String save() {
+
+	public String save(){
 		eventRepository.save(event);
 		event = new Event();
+		
 		return "/event-list.xhtml?faces-redirect=true";
 	}
 
@@ -34,16 +46,21 @@ public class EventServiceImpl implements IEventService
 
 		return event;
 	}
+	@Override
+	public Event getEventById(int id) {
+		Event e = eventRepository.findById(id).get();
+		return e;
+	}
 
 
 	public String delete(int id) {
-		Event p =eventRepository.findById(id).get();
-		eventRepository.delete(p);
+		Event e =eventRepository.findById(id).get();
+		eventRepository.delete(e);
 		return "/event-list.xhtml?faces-redirect=true";
 	}
 
 
-	public String modifier(Event e, String title, String adress, String date) {
+	public String modifier(Event e, String title, String adress, Date date) {
 		event=e;
 		return "/event-form-modif.xhtml?faces-redirect=true";
 

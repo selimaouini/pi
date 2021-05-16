@@ -1,5 +1,6 @@
 package tn.esprit.spring.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,12 @@ public class DonationServiceImpl implements IDonationService {
 		// TODO Auto-generated method stub
 		return donation;
 	}
+	
+	@Override
+	public Donation getDonationById(int id) {
+		Donation d = donationRepository.findById(id).get();
+		return d;
+	}
 
 	@Override
 	public String delete(int id) {
@@ -36,7 +43,7 @@ public class DonationServiceImpl implements IDonationService {
 	}
 
 	@Override
-	public String modifier(Donation d, String amount, String date, String name_event) {
+	public String modifier(Donation d, String amount, Date date, String name_event) {
 		donation = d;
 		return "/donation-form-modif.xhtml?faces-redirect=true";
 
