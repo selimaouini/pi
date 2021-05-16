@@ -116,6 +116,14 @@ public class ProductRestController {
 						Product product= ProductService.findProductByName(name);
 						return product;
 						}
+			        
+			        
+			      //creating get mapping that getProductByName   
+			        @GetMapping("/product/retrieve-Product-ByCategoryName/{name}")
+					public  List<Product> findProductByCategoryName(@PathVariable String name) {
+			        	 List<Product> product= ProductService.filterProductByCategory(name);
+						return product;
+						}
 			     
 					
 					 //creating a get mapping that retrieves a specific product by idcategory
@@ -144,5 +152,22 @@ public class ProductRestController {
 			        	return products;
 			        }
 					
+			        
+			      //creating 
+					@GetMapping("/product/getexpiredprod")
+					@ResponseBody
+					public Product getExpiredprod() {
+						
+						return ProductService.getepuisé();
+					}	
+					
+					
+					//creating 
+					@PostMapping("/product/sendmail")
+					@ResponseBody
+					public Product sendmail() {
+						
+						return ProductService.sendmail();
+					}	
 					
 }

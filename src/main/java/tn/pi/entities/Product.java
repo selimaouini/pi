@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,8 +19,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="Product") 
@@ -29,7 +33,9 @@ public class Product implements Serializable{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idProduct;
 	private String productName;
-	private String picture;
+	@Size(max = 250)
+    @Column(name = "picture")
+    private String picture;
 	private String description;
 	private boolean expired;
 	@Temporal(TemporalType.DATE)
@@ -46,12 +52,17 @@ public class Product implements Serializable{
 	 
 	//@ManyToOne
 	//private User user;
+	@JsonIgnore
 	@OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
 	private List<Promotion>promotions;
+	@JsonIgnore
 	@OneToOne
 	private Ads Ads;
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Category category;
+	@OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+	private List<Rating>rating;
 	//@ManyToMany(mappedBy = "products")
 	//private List<CommandProduct> commandproducts;
 	//@ManyToOne
@@ -77,6 +88,20 @@ public class Product implements Serializable{
 
 	public void setAds(Ads ads) {
 		Ads = ads;
+	}
+
+
+
+
+	public List<Rating> getRating() {
+		return rating;
+	}
+
+
+
+
+	public void setRating(List<Rating> rating) {
+		this.rating = rating;
 	}
 
 
@@ -201,7 +226,7 @@ public class Product implements Serializable{
 		this.picture = picture;
 		this.description = description;
 		this.price = price;
-		this.pricepromotion = pricepromotion;
+		
 		this.newProduct = newProduct;
 		this.barCode = barCode;
 		this.createdAt = createdAt;
@@ -213,10 +238,11 @@ public class Product implements Serializable{
 		this.dateexpiration = dateexpiration;
 	}
 	
-	public Product(String productName,String description, Date dateexpiration, float price, float pricepromotion,
+	public Product(String productName,String picture,String description, Date dateexpiration, float price, float pricepromotion,
 			String barCode, Date createdAt, int mostViewed, boolean promotionEtat, Category category) {
 		super();
 		this.productName = productName;
+		this.picture = picture;
 		this.description = description;
 		this.dateexpiration = dateexpiration;
 		this.price = price;

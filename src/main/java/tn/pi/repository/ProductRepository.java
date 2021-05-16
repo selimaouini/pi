@@ -1,4 +1,5 @@
 package tn.pi.repository;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -39,5 +40,9 @@ public interface ProductRepository extends CrudRepository<Product,Integer> {
 	@Transactional
 	@Query("UPDATE Product p   SET p.mostViewed = :view+1 WHERE p.id =:id ")
 	public int updateViewCountProduct(@Param("view")int view,@Param("id")int id);
+	
+	/*********************************************************/
+	 @Query("select Prod from Product Prod where Prod.dateexpiration =:x ")
+		public Product expireddelete(@Param("x") Date dateexpiration);
 
 }

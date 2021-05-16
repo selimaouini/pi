@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import tn.pi.entities.Product;
+import tn.pi.entities.Rating;
 public interface ProductService {
 	//public String addProduct( int idCategory);
    // public void updateProduct (Product product,int idCategory);
@@ -32,7 +33,12 @@ public interface ProductService {
 	String ExpiredProduct(int idProduct);
 	//String addProduct();
 	public void updateProduct(int idProduct,Product prod);
-	String ExpiredProduct();
+	public String ExpiredProduct();
+	//Product addProduct(Product prod, int idCategory, int idAds);
+	public Rating addEv(Rating e, Integer id);
+	public Product getepuisé();
+	public Product Expireddel();
+	public Product sendmail();
 	
 	
 	

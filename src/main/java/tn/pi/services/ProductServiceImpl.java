@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,8 +23,11 @@ import freemarker.template.TemplateException;
 import tn.pi.entities.Ads;
 import tn.pi.entities.Category;
 import tn.pi.entities.Product;
+import tn.pi.entities.Promotion;
+import tn.pi.entities.Rating;
 import tn.pi.repository.ProductRepository;
 import tn.pi.repository.PromotionRepository;
+import tn.pi.repository.RatingRepository;
 import tn.pi.repository.CategoryRepository;
 import tn.pi.repository.AdsRepository;
 @Service
@@ -38,6 +42,8 @@ public class ProductServiceImpl implements ProductService{
 	ProductService ProductService;
 	@Autowired
 	EmailService  emailService;
+	@Autowired
+	RatingRepository var3;
 	/************************************VerifyProduct**************************************/
 	@Override
 	public boolean verifyProduct(String barCode) {
@@ -64,7 +70,7 @@ public class ProductServiceImpl implements ProductService{
 		       
 		        try {
 					try {
-						emailService.sendMailMultipart("mohamedselim.aouini@esprit.tn","Expired products","HEY");
+						emailService.sendMailMultipart("mohamedselim.aouini@esprit.tn","Expired products");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -140,8 +146,8 @@ public class ProductServiceImpl implements ProductService{
 	/***************Creating getAll product by category method from database **************/
 	@Override
 	public List<Product>filterProductByCategory(String categoryName) {
-		ProductRepository.filterProductByCategory(categoryName);
-		return null;
+		return ProductRepository.filterProductByCategory(categoryName);
+		 
 		
 	}
 	
@@ -225,13 +231,16 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	int idAds=38;
 	@Transactional
 	@Override
+	
 	public Product addProduct(Product prod, int idCategory) {
 		
 		/// prod.setCategoryname(category.getname);
+		
 		Category category = CategoryRepository.findById(idCategory).get();
+		
 		prod.setCategory(category);
 	    
 			   
@@ -256,15 +265,82 @@ public class ProductServiceImpl implements ProductService{
 
 
 	
-	
+	@Override
+	public Rating addEv(Rating e, Integer id) {
+		
+			
+		Product c = ProductRepository.findById(id).get();
+			
+			List<Product> my = var3.evsave();
+			if(my.contains(c)) {
+				Rating v = var3.findev(c);
+				
+				v.setNbretoile(v.getNbretoile()+e.getNbretoile());
+					
+				var3.save(v);
+				return v ;		
+		}
+			else {
+				e.setProduct(c);
+				var3.save(e);
+				return e;
+				
+				
+			}
+		}
 
 
 
-	
+	@Override 
+	 public Product getepuisé() {
+		 return ProductRepository.expireddelete(new Date());
+	 }
+
+	@Transactional
+	@Override
+	@Scheduled(cron="* 30 * * * ?")
+	public Product Expireddel() {
+		
+	Product prod =  ProductService.getepuisé();
+	 if (prod !=null) {
+		
+		 try {
+			emailService.sendMailMultipart("mohamedselim.aouini@esprit.tn","Expired products");
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TemplateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		 ProductService.deleteProduct(ProductService.getepuisé().getIdProduct());
+			 }
+	return null ;
+			
+		}
+
+public Product sendmail()
+{
+	try {
+		emailService.sendMailMultipart("mohamedselim.aouini@esprit.tn","Expired products");
+	} catch (MessagingException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (TemplateException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return null;
 
 
-
-
+}
 	
 
 	
