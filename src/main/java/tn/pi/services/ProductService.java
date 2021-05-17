@@ -1,26 +1,45 @@
 package tn.pi.services;
-
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import javax.servlet.http.HttpServletRequest;
 
-import tn.pi.entities.Bill;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+
 import tn.pi.entities.Product;
-import tn.pi.repositories.ICommandRepository;
-import tn.pi.repositories.IProductRepository;
-
-@Service
-public class ProductService implements IProductService {
-	@Autowired
+import tn.pi.entities.Rating;
+public interface ProductService {
+	//public String addProduct( int idCategory);
+   // public void updateProduct (Product product,int idCategory);
+    public void AddorupdateProduct (Product product,int idCategory);
+    public int deleteProduct(int idProduct);
+    public List<Product> getAllProducts();
+    public Product getProductById(int id);
+    public Product findProductByName(String name);
+    public List<Product> getProductsByCategory(String categoryName);
+    public List<Product> searchProducts(String productName,String categoryName);
+    public boolean verifyProduct(String barCode);
+    public Product findProductByBarCode(String barCode);
+//	Product findProductByBarCode(int idCategory, Product prod);
+	Product addProduct(Product prod,int idCategory);
+	List<Product> filterProductByCategory(String categoryName);
+	public Product findProductByCategoryId(int id);
+	Product findProductByIdCategory(int id);
+	Product findProductById(int id);
+	String ExpiredProduct(int idProduct);
+	//String addProduct();
+	public void updateProduct(int idProduct,Product prod);
+	public String ExpiredProduct();
+	//Product addProduct(Product prod, int idCategory, int idAds);
+	public Rating addEv(Rating e, Integer id);
+	public Product getepuisé();
+	public Product Expireddel();
+	public Product sendmail();
 	
-	IProductRepository PR;
 	
 	
-	@Override
-	public List<Product> getAllProducts() {
-	
-		return PR.findAll();
-	}
-
 }

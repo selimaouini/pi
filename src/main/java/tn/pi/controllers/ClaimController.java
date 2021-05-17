@@ -9,7 +9,7 @@ import javax.mail.MessagingException;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import tn.pi.repositories.*;
+
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +22,7 @@ import tn.pi.entities.Decision;
 import tn.pi.entities.Delivery;
 import tn.pi.entities.DeliveryMan;
 import tn.pi.entities.User;
+import tn.pi.repositories.*;
 import tn.pi.services.EmailService;
 import tn.pi.services.claimServices;
 import tn.pi.services.decisionServices;

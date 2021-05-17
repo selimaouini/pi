@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/template/template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+
+<!-- BEGIN : Product -->
+<
+<h:panelGroup>
+<h:form>
+|<h:panelGroup columns="2"><h:form><table>
+<tr><td><h:outputText value="libelle"></h:outputText></td>
+<td><h:inputText value="#{PromotionController.libelle}"></h:inputText></td></tr>
+<tr><td><h:outputText value="startDate"></h:outputText></td>
+<td><h:inputText value="#{PromotionController.startDate}"></h:inputText></td></tr>
+<tr><td><h:outputText value="endDate"></h:outputText></td>
+<td><h:inputText value="#{PromotionController.endDate}"></h:inputText></td></tr>
+<tr><td><h:outputText value="price"></h:outputText></td>
+<td><h:inputText value="#{ProductController.price}"></h:inputText></td></tr>
+<tr><td><h:outputText value="pricepromotion"></h:outputText></td>
+<td><h:inputText value="#{ProductController.pricepromotion}"></h:inputText></td></tr>
+<tr><td><h:outputText value="barCode"></h:outputText></td>
+<td><h:inputText value="#{ProductController.barCode}"></h:inputText></td></tr>
+<tr><td><h:outputText value="createdAt"></h:outputText></td>
+<td><h:inputText value="#{ProductController.createdAt}"></h:inputText></td></tr>
+<tr><td><h:outputText value="mostViewed"></h:outputText></td>
+<td><h:inputText value="#{ProductController.mostViewed}"></h:inputText></td></tr>
+ 
+
+
+<tr><td colspan="2"> <h:commandButton  action="#{ProductController.addProduct()}" value="Ajouter Produit" /></td></tr>
+</table></h:form></h:panelGroup>
+</h:form>
+</h:panelGroup>
+<h:panelGroup columns="2">
+<h:form>
+<h:dataTable value="#{ProductController.product}" var="Product" border="1">
+
+<h:column><f:facet name="header"><h:outputText value="productName" /></f:facet>
+<h:outputText value="#{Product.productName}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="description" /></f:facet>
+<h:outputText value="#{Product.description}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="dateexpiration" /></f:facet>
+<h:outputText value="#{Product.dateexpiration}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="price" /></f:facet>
+<h:outputText value="#{Product.price}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="pricepromotion" /></f:facet>
+<h:outputText value="#{Product.pricepromotion}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="barCode" /></f:facet>
+<h:outputText value="#{Product.barCode}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="createdAt" /></f:facet>
+<h:outputText value="#{Product.createdAt}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="mostViewed" /></f:facet>
+<h:outputText value="#{Product.mostViewed}" /></h:column>
+
+<h:column> <f:facet name="header"><h:outputText value="Action" /></f:facet>
+<h:commandButton action="#{ProductController.deleteProduct(Product.idProduct)}" value="Supprimer" /> </h:column>
+
+
+<h:column> <f:facet name="header"><h:outputText value="Action" /></f:facet>
+<h:commandButton action="#{ProductController.displayProduct(Product)}" value="Afficher" /></h:column>
+
+
+<h:column> <f:facet name="header"><h:outputText value="Action" /></f:facet>
+<h:commandButton  action="#{ProductController.addProduct()}"  value="modifier"/></h:column>
+</h:dataTable>
+</h:form>
+</h:panelGroup>
+</ui:define>
+</ui:composition>
+</html>

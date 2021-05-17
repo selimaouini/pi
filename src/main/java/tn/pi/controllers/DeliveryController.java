@@ -15,8 +15,8 @@ import tn.pi.entities.Command;
 import tn.pi.entities.Delivery;
 import tn.pi.entities.DeliveryMan;
 import tn.pi.entities.DeliveryState;
-import tn.pi.services.deliveryServices;
 import tn.pi.repositories.*;
+import tn.pi.services.deliveryServices;
 @Controller(value = "DeliveryController")
 @ELBeanName(value = "DeliveryController")
 public class DeliveryController {

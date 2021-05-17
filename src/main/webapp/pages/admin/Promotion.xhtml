@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/template.xhtml"> 
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+
+<p:panel>
+<h:form>
+<p:dialog header="Add A Promo" showEffect="fade" modal="true"
+                  widgetVar="managePromotionDialog" responsive="true">
+            <p:outputPanel id="manage-promotion-content" class="ui-fluid">
+                <p:outputPanel>
+                    
+                    <div class="p-field">
+                        <p:outputLabel for="libelle">Libelle</p:outputLabel>
+                        <p:inputText id="libelle" value="#{PromotionController.libelle}" required="true"/>
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="desc">Description</p:outputLabel>
+                        <p:inputTextarea id="desc" value="#{PromotionController.desc}"/>
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="startDate">Start Date</p:outputLabel>
+                        <p:datePicker id="startDate" value="#{PromotionController.startDate}"/>
+                    </div>
+                     <div class="p-field">
+                        <p:outputLabel for="endDate">End Date</p:outputLabel>
+                        <p:datePicker id="endDate" value="#{PromotionController.endDate}"/>
+                    </div>
+                    <div class="p-field">
+                    <p:outputLabel for="percentage">percentage</p:outputLabel>
+                    <p:inputTextarea id="percentage" value="#{PromotionController.percentage}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton value="add" icon="pi pi-check" actionListener="#{PromotionController.addPromos()}"
+                                 update="manage-promotion-content" process="manage-promotion-content @this"/>
+                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('managePromotionDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </p:dialog>
+
+<p:commandButton value="New" icon="pi pi-plus" actionListener="#{PromotionController.openNew}" oncomplete="PF('managePromotionDialog').show()" styleClass="ui-button-success" style="margin-right: .5rem">
+              
+</p:commandButton>
+<p:dataTable value="#{PromotionController.promotion}" var="Promotion" border="1">
+
+<p:column><f:facet name="header"><h:outputText value="libelle" /></f:facet>
+<h:outputText value="#{Promotion.libelle}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="startDate" /></f:facet>
+<h:outputText value="#{Promotion.startDate}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="endDate" /></f:facet>
+<h:outputText value="#{Promotion.endDate}" /></p:column>
+
+<p:column><f:facet name="header"><h:outputText value="desc" /></f:facet>
+<h:outputText value="#{Promotion.desc}" /></p:column>
+
+<p:column><f:facet name="header"><h:outputText value="percentage" /></f:facet>
+<h:outputText value="#{Promotion.percentage}" /></p:column>
+
+
+
+
+<p:column> 
+
+              
+                <p:commandButton action="#{PromotionController.deletePromotion(Promotion.idPromotion)}"  class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
+                                 oncomplete="PF('deleteProductDialog').show()">
+                  
+                </p:commandButton>
+</p:column>
+
+
+ 
+</p:dataTable>
+</h:form>
+</p:panel>
+
+</ui:define>
+
+</ui:composition>
+</html>

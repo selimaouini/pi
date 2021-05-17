@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/template.xhtml"> 
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+
+<p:panel>
+<h:form>
+
+     <div class="card">
+        <h5>Check our products</h5>
+        <p:carousel value="#{ProductController.productboissons}" var="Product" responsive="true">
+            <div class="product">
+                <div class="product-grid-item p-p-5">
+                    <div class="product-grid-item-top">
+                        <div>
+                            <i class="pi pi-tag product-category-icon"/>
+                            <span class="product-category">#{Product.pricepromotion}</span>
+                        </div>
+                      
+                    </div>
+                    <div class="product-grid-item-content">
+                    
+                   
+                       <p:graphicImage value="images/#{Product.picture}" width="50" height="50" />
+                    <div class="sub-box-content" >
+                    </div>
+                      
+                        <div class="product-name">#{Product.productName}</div>
+                        <div class="product-description">#{Product.description}</div>
+                        <p:rating readonly="true" value="#{product.rating}"/>
+                    </div>
+                    <div class="product-grid-item-bottom">
+                        <h:outputText value="#{Product.price}" styleClass="product-price">
+                            <f:convertNumber currencySymbol="TND $" type="currency"/>
+                        </h:outputText>
+                        
+                    </div>
+                    <div><p:commandButton value="Voir add" icon="pi pi-plus" actionListener="#{ProductController.Ajouterpub(Product.idProduct)}" oncomplete="PF('manageProductDialog').show()" styleClass="ui-button-success" style="margin-right: .5rem"></p:commandButton></div>
+             
+               
+                <p:commandButton   value="Voir promo"  disabled="#{Product.promotionEtat == 'ACTIF'}" oncomplete="PF('managePromotionDialog').show()" styleClass="ui-button-outlined" />
+                
+                
+                
+                </div>
+            </div>
+
+            
+        </p:carousel>
+    </div>
+     
+</h:form>
+</p:panel>
+
+</ui:define>
+
+</ui:composition>
+</html>

@@ -37,9 +37,9 @@ import tn.pi.entities.DeliveryCity;
 import tn.pi.entities.DeliveryMan;
 import tn.pi.entities.DeliveryState;
 import tn.pi.entities.RoleType;
-import tn.pi.repositories.deliveryRepository;
 import tn.pi.repositories.ICommandRepository;
 import tn.pi.repositories.deliveryManRepository;
+import tn.pi.repositories.deliveryRepository;
 
 
 @Service

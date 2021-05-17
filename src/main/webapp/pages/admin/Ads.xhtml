@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/template.xhtml"> 
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+
+<p:panel>
+<h:form>
+<p:dialog header="Add An advertissement" showEffect="fade" modal="true"
+                  widgetVar="manageAdsDialog" responsive="true">
+            <p:outputPanel id="manage-Ads-content" class="ui-fluid">
+                <p:outputPanel>
+                    
+                    <div class="p-field">
+                        <p:outputLabel for="madia">Media</p:outputLabel>
+                        <p:inputText id="madia" value="#{AdsController.madia}" required="true"/>
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="mediatype">Media Type</p:outputLabel>
+                        <p:inputTextarea id="mediatype" value="#{AdsController.mediaType}"/>
+                    </div>
+                    <div class="p-field">
+                        <p:outputLabel for="beginDate">Start Date</p:outputLabel>
+                        <p:datePicker id="beginDate" value="#{AdsController.beginDate}"/>
+                    </div>
+                     <div class="p-field">
+                        <p:outputLabel for="finishDate">finish Date</p:outputLabel>
+                        <p:datePicker id="finishDate" value="#{AdsController.finishDate}"/>
+                    </div>
+                    <div class="p-field">
+                    <p:outputLabel for="target">target</p:outputLabel>
+                    <p:inputTextarea id="target" value="#{AdsController.target}"/>
+                    </div>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton value="add" icon="pi pi-check" actionListener="#{AdsController.AddAd()}"
+                                 update="manage-Ads-content" process="manage-Ads-content @this"/>
+                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageAdsDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </p:dialog>
+        <p:commandButton value="New" icon="pi pi-plus" actionListener="#{AdsController.AddAd()}" oncomplete="PF('manageAdsDialog').show()" styleClass="ui-button-success" style="margin-right: .5rem">
+                    
+</p:commandButton>
+<p:dataTable value="#{AdsController.ads}" var="Ads" border="1">
+
+<p:column><f:facet name="header"><h:outputText value="Madia" /></f:facet>
+<h:outputText value="#{Ads.madia}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="MediaType" /></f:facet>
+<h:outputText value="#{Ads.mediaType}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="beginDate" /></f:facet>
+<h:outputText value="#{Ads.beginDate}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="finishDate" /></f:facet>
+<h:outputText value="#{Ads.finishDate}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="nbsignal" /></f:facet>
+<h:outputText value="#{Ads.nbsignal}" /></p:column>
+
+
+<p:column><f:facet name="header"><h:outputText value="Target" /></f:facet>
+<h:outputText value="#{Ads.target}" /></p:column>
+
+
+<p:column> 
+
+              
+                <p:commandButton action="#{AdsController.deleteAdd(Ads.idAds)}"  class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
+                                 oncomplete="PF('deleteProductDialog').show()">
+                
+                </p:commandButton>
+</p:column>
+
+
+ 
+</p:dataTable>
+
+<p:dataTable value="#{AdsController.ads}" var="Ads" border="1">
+
+<p:column><f:facet name="header"><h:outputText value="NbVuesMale" /></f:facet>
+<h:outputText value="#{Ads.nbVuesMale}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="NbVuesfemale" /></f:facet>
+<h:outputText value="#{Ads.nbVuesfemale}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="NbVues" /></f:facet>
+<h:outputText value="#{Ads.nbVues}" /></p:column>
+
+<p:column><f:facet name="header"><h:outputText value="NbSignal" /></f:facet>
+<h:outputText value="#{Ads.nbsignal}" /></p:column>
+
+
+
+
+
+
+
+ 
+</p:dataTable>
+
+
+
+</h:form>
+</p:panel>
+
+</ui:define>
+
+</ui:composition>
+</html>
+
+ 

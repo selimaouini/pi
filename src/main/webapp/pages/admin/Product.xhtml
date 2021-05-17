@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"  
+xmlns:c="http://java.sun.com/jstl/core" 
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/template.xhtml"> 
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+
+<h:form id="form">
+<p:splitButton value="Save" action="#{ProductController.save}" icon="pi pi-save">
+            <p:menuitem value="Boissons" outcome="/pages/admin/ProductCremerie"  icon="pi pi-refresh"/>
+         
+            <p:divider />
+            <p:menuitem value="Homepage" url="http://www.primefaces.org" icon="pi pi-home"/>
+        </p:splitButton>
+<p:dialog header="Add A Product" showEffect="fade" modal="true"
+                  widgetVar="manageProductDialog" responsive="true">
+            <p:outputPanel id="manage-product-content" class="ui-fluid">
+                <p:outputPanel>
+                    
+                    
+                </p:outputPanel>
+            </p:outputPanel>
+
+           
+        </p:dialog>
+        
+        
+<p:dialog header="CHECK the PROMO" widgetVar="managePromotionDialog" minHeight="40" width="350" showEffect="fade" minimizable="true" maximizable="true">
+     
+            <p:carousel value="#{PromotionController.promotion}" var="Promotion" responsive="true">
+           
+                <div class="promotion-grid-item p-p-100">
+                    <div class="promotion-grid-item-top">
+                        <div>
+                        <h5>Promotion Details</h5>
+                            <i class="pi pi-tag promotion-category-icon"/>
+                              
+                            <span class="promotion-category">#{Promotion.libelle}</span>
+                        </div>
+                           </div>
+                           
+                    <div class="promotion-grid-item-content">
+                    
+                   
+                       
+                    <div class="sub-box-content" >
+                    </div>
+                         <h5>Begins</h5>                     
+                        <div class="promotion-name">#{Promotion.startDate}</div>
+                        <h5>End's</h5>
+                        <div class="promotion-description">#{Promotion.endDate}</div>
+                        
+                    </div>
+                    <h5>Can you belive the discount??</h5>
+                    <div class="promotion-grid-item-bottom">
+                        <p:knob disabled="true" value="#{Promotion.percentage}"/>
+                        
+                    </div>
+            </div>
+           
+
+            
+        </p:carousel>
+            
+        </p:dialog>
+     </h:form>         
+<h:form>
+    <div class="card">
+        <h5>Check our products</h5>
+        <p:carousel value="#{ProductController.product}" var="Product" responsive="true">
+            <div class="product">
+                <div class="product-grid-item p-p-5">
+                    <div class="product-grid-item-top">
+                        <div>
+                            <i class="pi pi-tag product-category-icon"/>
+                            <span class="product-category">#{Product.pricepromotion}</span>
+                        </div>
+                       <span class="product-badge status">
+                        <c:if test="#{Product.promotionEtat eq true}">
+                         En Promotion
+                       </c:if> 
+                
+                       </span>
+                    </div>
+                    <div class="product-grid-item-content">
+                    
+                   
+                       <p:graphicImage name="/images/lait.jpg" width="50" length="50" />
+                    </div>
+                    <div>
+                      
+                        <div class="product-name">#{Product.productName}</div>
+                        <div class="product-description">#{Product.description}</div>
+                       
+   <p:growl id="messages" showDetail="true"/>
+  
+ <p:rating value="#{ProductController.nbretoile}">
+            <p:ajax event="rate" listener="#{ProductController.onrate}" update="messages"/>
+            
+        </p:rating>
+
+                    </div>
+                    <div class="product-grid-item-bottom">
+                        <h:outputText value="#{Product.price}" styleClass="product-price">
+                            <f:convertNumber currencySymbol="TND $" type="currency"/>
+                        </h:outputText>
+                        
+                    </div>
+     <div><p:commandButton value="Voir add" icon="pi pi-plus" actionListener="#{ProductController.Ajouterpub(Product.idProduct)}" oncomplete="PF('manageProductDialog').show()" styleClass="ui-button-success" style="margin-right: .5rem"></p:commandButton></div>
+             
+               
+                <p:commandButton   value="Voir promo"  disabled="#{Product.promotionEtat == 'ACTIF'}" oncomplete="PF('managePromotionDialog').show()" styleClass="ui-button-outlined" />
+                
+                
+                
+                </div>
+            </div>
+
+            
+        </p:carousel>
+    </div>
+
+    
+    </h:form>
+
+
+
+
+|
+</ui:define>
+</ui:composition>
+</html>

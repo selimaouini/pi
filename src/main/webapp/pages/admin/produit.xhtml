@@ -24,7 +24,7 @@ xmlns:p="http://primefaces.org/ui">
             
             
        
-<p:dataTable  id="dt-products" widgetVar="dtProducts" filterBy="#{Product.productName}" value="#{ProductController.product}" var="Product"  reflow="true" styleClass="products-table"
+<p:dataTable  id="dt-products" widgetVar="dtProducts" filterBy="#{Product.productName}" value="#{ProducttController.product}" var="Product"  reflow="true" styleClass="products-table"
                       rowKey="#{product.id}" paginator="true"  
                      rows="10" rowSelectMode="add" paginatorPosition="bottom"> >
 
@@ -64,7 +64,7 @@ xmlns:p="http://primefaces.org/ui">
 
 
 <p:column exportable="false" > <f:facet name="header"><h:outputText value="Action" /></f:facet>
-<p:commandButton action="#{ProductController.ajouterlc(Product.idProduct)}"  process="@this" icon="pi pi-shopping-cart" value="Commander" ></p:commandButton></p:column>
+<p:commandButton action="#{ProducttController.ajouterlc(Product.idProduct)}"  process="@this" icon="pi pi-shopping-cart" value="Commander" ></p:commandButton></p:column>
 
 
 </p:dataTable>
@@ -73,7 +73,7 @@ xmlns:p="http://primefaces.org/ui">
 <p:panel>
 <h:form>
 
-<p:dataTable value="#{ProductController.ligneComand}" var="LigneComand" border="1">
+<p:dataTable value="#{ProducttController.ligneComand}" var="LigneComand" border="1">
 
 <p:column><f:facet name="header"><h:outputText value="Quantité" /></f:facet>
 <h:outputText value="#{LigneComand.qte}" /></p:column>
@@ -83,16 +83,16 @@ xmlns:p="http://primefaces.org/ui">
 <p:column><f:facet name="header"><h:outputText value="Date" /></f:facet>
 <h:outputText value="#{LigneComand.date}" /></p:column>
 <p:column> <f:facet name="header"><h:outputText value="Quantité" /></f:facet>
-<h:commandButton action="#{ProductController.incrementer(LigneComand.idlc)}" value="+" />
+<h:commandButton action="#{ProducttController.incrementer(LigneComand.idlc)}" value="+" />
 
-<h:commandButton action="#{ProductController.decrementer(LigneComand.idlc)}" value="-" /></p:column>
+<h:commandButton action="#{ProducttController.decrementer(LigneComand.idlc)}" value="-" /></p:column>
 
 
 <p:column> <f:facet name="header"><h:outputText value="Annuler" /></f:facet>
 
   <p:growl id="message" showDetail="true"/>
        
-        <p:commandButton update="message" action="#{ProductController.delete(LigneComand.idlc)}"  icon="pi pi-times"    styleClass="rounded-button ui-button-danger ui-button-flat">
+        <p:commandButton update="message" action="#{ProducttController.delete(LigneComand.idlc)}"  icon="pi pi-times"    styleClass="rounded-button ui-button-danger ui-button-flat">
      <p:confirm type="popup" header="Confirmation" message="Do you want to delete this record?" icon="pi pi-info-circle"/>
         </p:commandButton>
          <p:confirmPopup global="true">
@@ -103,7 +103,7 @@ xmlns:p="http://primefaces.org/ui">
 </p:dataTable>
 
 
-   <p:commandButton action="#{ProductController.validerpanier()}" value="Valider" icon="pi pi-check" />
+   <p:commandButton action="#{ProducttController.validerpanier()}" value="Valider" icon="pi pi-check" />
 </h:form>
 </p:panel>
 </ui:define>

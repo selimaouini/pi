@@ -8,15 +8,16 @@ import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.pi.repositories.UserRepository;
-import tn.pi.repositories.claimRepository;
-import tn.pi.repositories.decisionRepository;
-import tn.pi.repositories.deliveryRepository;
+
 import tn.pi.entities.Claim;
 import tn.pi.entities.Decision;
 import tn.pi.entities.Delivery;
 import tn.pi.entities.DeliveryState;
 import tn.pi.entities.User;
+import tn.pi.repositories.UserRepository;
+import tn.pi.repositories.claimRepository;
+import tn.pi.repositories.decisionRepository;
+import tn.pi.repositories.deliveryRepository;
 
 
 @Service

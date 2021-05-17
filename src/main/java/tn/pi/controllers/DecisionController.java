@@ -11,10 +11,11 @@ import javax.persistence.Enumerated;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import tn.pi.repositories.*;
+
 import tn.pi.entities.Claim;
 import tn.pi.services.decisionServices;
 import tn.pi.entities.Decision;
+import tn.pi.repositories.*;
 
 
 @Controller(value = "DecisionController")
