@@ -12,38 +12,21 @@
         <title>Consommi Tounsi </title>
     </h:head>
     <h:body>
-        <div class="ui-g">
-            <div class="ui-g-12">
-                <p:toolbar>
-                    <f:facet name="left">
-                   
-            <p:button value="Produits" styleClass="ui-button-raised" icon="pi pi-th-large" />
-             <p:button value="Ventes" styleClass="ui-button-raised" outcome="/pages/admin/Commande" icon="pi pi-money-bill" />
-              <p:button value="Stock" styleClass="ui-button-raised" outcome="/pages/admin/stock" icon="pi pi-fw pi-inbox" />
-                 <p:button value="Livraisons" styleClass="ui-button-raised" icon="pi pi-list" />
-                 <p:button value="Forum" styleClass="ui-button-raised" icon="pi pi-comments" />
-                          <p:button value="Evénements" styleClass="ui-button-raised" icon="pi pi-calendar" /> 
-                           <p:button value="Réclamations" styleClass="ui-button-raised" icon=" pi pi-exclamation-triangle"/>
-                        <p:button value="Dashboard" styleClass="ui-button-raised" icon=" pi pi-chart-bar"/>
-                        
-                        
-                          <f:facet name="right">
-                   
-<p:button icon="pi pi-bell" styleClass="rounded-button ui-button-info" />
- <p:button icon="pi pi-heart" styleClass="rounded-button ui-button-info" />
-  <p:button icon="pi pi-user" styleClass="rounded-button ui-button-info" />
-   <p:button  styleClass="rounded-button ui-button-info" icon="pi pi-sign-out" />
- 
-    
-                    </f:facet>
-                         
-                    </f:facet>
-                </p:toolbar>
-            </div>
-            <div class="ui-g-12">
-                <ui:insert name="content" />
-            </div>
-        </div>
+      
+         <ui:include src="/template/header.xhtml" />
+	<ui:insert name="menu" />
+	<ui:insert name="content" />
+       
+            <br></br>
+					<br></br>
+					<br></br>
+					<br></br>
+					<br></br><br></br>
+					<br></br><br></br>
+					<br></br><br></br>
+					<br></br>
+	<ui:include src="/template/footer.xhtml" />
+       
     </h:body>
 </f:view>
 </html>

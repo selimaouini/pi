@@ -30,6 +30,9 @@
                     <p:inputText value="#{catalogcontroller.price}" placeholder="Price"/>
                     <span class="ui-inputgroup-addon">.00</span>
                     <span class="ui-inputgroup-addon">TND</span>
+                    <p:growl id="messages" showDetail="true"/>
+
+
                 </div>
             </div>  </td> </tr>
 
@@ -37,7 +40,14 @@
 <tr><td><h:outputText value="stock"></h:outputText></td>
 <td> <p:spinner id="stock" min="0" max="50" value="#{catalogcontroller.stock}"/></td></tr>
 
-                   
+           <tr><td>        <div class="card">
+   
+    <h:form enctype="multipart/form-data">
+        <p:fileUpload value="#{catalogcontroller.image}" mode="simple" skinSimple="true"/>
+
+      
+    </h:form>
+</div></td></tr>
 
 
 <tr><td colspan="2"> <p:commandButton action="#{catalogcontroller.proposer()}" value="Ajouter"  /></td></tr>

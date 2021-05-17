@@ -30,12 +30,12 @@ public class RestControlcatalog {
 	
 
  // http://localhost:8081/SpringMVC/servlet/addOrUpdateCart
-	   	@PostMapping("/addcatalog")
-	   	@ResponseBody
-	 		public catalog addProduct(@RequestBody catalog catalog) {
+	 //  	@PostMapping("/addcatalog")
+	   //	@ResponseBody
+	 	//	public catalog addProduct(@RequestBody catalog catalog) {
 	   		
 	   		
-	   			return cv.addProduct(catalog); 
-	   	}    
+	   		//	return cv.addProduct(catalog); 
+	   	//}    
 
 }

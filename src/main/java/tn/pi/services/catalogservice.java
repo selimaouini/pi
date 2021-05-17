@@ -1,5 +1,7 @@
 package tn.pi.services;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +9,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import tn.pi.entities.Cart;
 import tn.pi.entities.Demandestock;
@@ -22,12 +26,15 @@ public class catalogservice implements Icatalogservice{
 	catalogrepository categrep;
 	@Autowired
 	Idemandestockrepository demrep;
+
 	
 	@Transactional
 	@Override
 	public catalog addProduct(catalog catalog) {
+		
+		
 		categrep.save(catalog);
-				return categrep.save(catalog);
+		return categrep.save(catalog);
 			
 	}
 

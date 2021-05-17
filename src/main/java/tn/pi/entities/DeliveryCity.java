@@ -1,7 +1,7 @@
 package tn.pi.entities;
 
 public enum DeliveryCity {
-	n,
+	
 	nabeul,
 	tunis,
 	sfax,

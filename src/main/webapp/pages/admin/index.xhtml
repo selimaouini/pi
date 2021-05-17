@@ -6,10 +6,10 @@
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<ui:composition template="/template/template.xhtml"> 
+<ui:composition template="/template/templateadmin.xhtml"> 
+<ui:define name="content">
 
 <ui:param name="page_name" value="Accueil" />
-<ui:define name="content">
 
 
 <p:menubar>
@@ -21,7 +21,7 @@
 
 <h:body style="margin-left:50px">
 
-<h1>Download your bills </h1>
+
 <div class="card">
 	<h2>Statistiques de ventes </h2>
 	<p:chart type="line" model="#{lineChartBean.lineModel}" style="height:400px;width:600px"/>

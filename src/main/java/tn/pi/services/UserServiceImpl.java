@@ -51,7 +51,6 @@ public class UserServiceImpl implements IUserService{
 
 	@Override
 	public User authenticate(String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.getUserByEmailAndPassword(login, password);
 	}
 }

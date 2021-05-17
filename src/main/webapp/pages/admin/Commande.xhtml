@@ -15,6 +15,11 @@ xmlns:p="http://primefaces.org/ui">
 
 <p:menuitem value="Bills" icon="pi pi-fw pi-money-bill" outcome="/pages/admin/bill"></p:menuitem>
 </p:menubar>
+<p:menubar>
+
+
+<p:menuitem value="Commandes du jour" icon="pi pi-fw pi-percentage" outcome="/pages/admin/Commandejour"></p:menuitem>
+</p:menubar>
 <p:panel header="Commands">
 <h:form>
 
@@ -33,11 +38,7 @@ xmlns:p="http://primefaces.org/ui">
 
 
 </p:dataTable>
-<div class="card">
-	<div>
-		<h1>  <p:tag styleClass="p-mr-2" icon="pi pi-info-circle" severity="info" value="Info"/> Le profit d'aujourd'hui est égal <h:outputText value="#{CommandController.totaljour}" /> TND </h1>
-		
-	</div>
+
 	<div class="card">
 	<div>
 		<h1>  <p:tag styleClass="p-mr-2" icon="pi pi-heart" severity="info" value="Info"/> Le client du mois est  <h:outputText value="#{CommandController.bestclient}" /> <p:commandButton value="Offrir" action="#{CommandController.cadeau()}" icon="pi pi-check" iconPos="right" /> 	 </h1>
@@ -46,7 +47,7 @@ xmlns:p="http://primefaces.org/ui">
 		
 	
 		
-	</div></div>
+	</div>
 
 </div>
 

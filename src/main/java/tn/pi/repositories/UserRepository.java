@@ -16,6 +16,6 @@ import tn.pi.entities.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-	
+	public User getUserByEmailAndPassword(String login, String password);
 
 }

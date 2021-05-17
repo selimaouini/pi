@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.web.multipart.MultipartFile;
+
 
 
 @Entity
@@ -26,10 +28,12 @@ public class catalog implements Serializable{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private String pic;
+
 	private float price;
 	private String barCode;
 	private int  stock;
+
+	  private String image;
 	//@OneToOne
 	//private User user;
 	
@@ -42,22 +46,14 @@ public class catalog implements Serializable{
 
 	@Override
 	public String toString() {
-		return "catalog [id=" + id + ", name=" + name + ", pic=" + pic + ", price=" + price + ", barCode=" + barCode
+		return "catalog [id=" + id + ", name=" + name + ",  price=" + price + ", barCode=" + barCode
 				+ ", stock=" + stock + "]";
 	}
 
 
 
 
-	public catalog(int id, String name, String pic, float price, String barCode, int stock) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.pic = pic;
-		this.price = price;
-		this.barCode = barCode;
-		this.stock = stock;
-	}
+	
 
 
 
@@ -74,6 +70,19 @@ public class catalog implements Serializable{
 
 
 
+
+	
+
+
+	
+
+
+
+
+	
+
+
+	
 
 	public catalog(String name, float price, String barCode, int stock) {
 		super();
@@ -84,11 +93,11 @@ public class catalog implements Serializable{
 	}
 
 
-	public catalog(int id, String name, String pic, float price, String barCode) {
+	public catalog(int id, String name,  float price, String barCode) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.pic = pic;
+		
 		this.price = price;
 		this.barCode = barCode;
 	}
@@ -144,6 +153,18 @@ public class catalog implements Serializable{
 
 
 
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
 	public String getName() {
 		return name;
 	}
@@ -162,6 +183,17 @@ public class catalog implements Serializable{
 
 
 
+
+
+	public catalog(String name, float price, String barCode, int stock, String image) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.barCode = barCode;
+		this.stock = stock;
+		this.image = image;
+	
+	}
 
 
 	public void setName(String name) {
@@ -184,29 +216,11 @@ public class catalog implements Serializable{
 
 
 
-	public String getPic() {
-		return pic;
-	}
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-	public void setPic(String pic) {
-		this.pic = pic;
-	}
 
 
 
@@ -343,6 +357,9 @@ public class catalog implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
+	
 
 
 

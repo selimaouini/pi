@@ -1,5 +1,10 @@
 package tn.pi.controllers;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -10,19 +15,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.primefaces.PrimeFaces;
 import org.primefaces.component.export.ExcelOptions;
 import org.primefaces.component.export.PDFOptions;
 import org.primefaces.component.export.PDFOrientationType;
+import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.multipart.MultipartFile;
 
 import tn.pi.entities.Cart;
 import tn.pi.entities.Demandestock;
@@ -57,7 +66,7 @@ IProductRepository PR;
 @Autowired 
 catalogservice cs;
 
-
+private UploadedFile image;
 private int id;
 private String name;
 private String pic;
@@ -67,6 +76,138 @@ private int  stock;
 public int getId() {
 	return id;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public UploadedFile getImage() {
+	return image;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public void setImage(UploadedFile image) {
+	this.image = image;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 public void setId(int id) {
 	this.id = id;
 }
@@ -101,6 +242,7 @@ public void setStock(int stock) {
 	this.stock = stock;
 }
 
+
 private List<catalog> cat;
 
 public List<catalog> getCat() {
@@ -111,16 +253,29 @@ public void setCat(List<catalog> cat) {
 	this.cat = cat;
 }
 
-public catalog proposer(){
+
+
+public void SaveImage(InputStream inputStream, File ImageFile) throws IOException {
+    OutputStream outputStream=new FileOutputStream(ImageFile);
+    IOUtils.copy(inputStream, outputStream);
+}
+public catalog proposer() throws IOException{
+	
 	catalog dst = new catalog();
+	
+	
+	
     
 	dst.setName(name);
 	dst.setBarCode(barCode);
 	dst.setPrice(price);
 	dst.setStock(stock);
-	cs.addProduct(dst);
+	 dst.setImage(image.getFileName());
+
+	  cs.addProduct(dst);
 	return cs.addProduct(dst);
 	
+
 }
 	public String delete(int id)
 	{ 

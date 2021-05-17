@@ -41,7 +41,7 @@ public class User implements Serializable {
 	private String lastName;
 	private String firstName;
 	private String password;
-	private String Email;
+	private String email;
 	private boolean connected;
 	private boolean active;
 	private double pointconverti;
@@ -173,13 +173,18 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 
+
+
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
+
+
 
 	public boolean isConnected() {
 		return connected;
@@ -253,7 +258,7 @@ public class User implements Serializable {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.password = password;
-		Email = email;
+		this.email = email;
 		this.connected = connected;
 		this.active = active;
 		this.pointconverti = pointconverti;
@@ -282,7 +287,7 @@ public class User implements Serializable {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.password = password;
-		Email = email;
+		this.email = email;
 		this.connected = connected;
 		this.active = active;
 		this.dateCreation = dateCreation;
@@ -344,7 +349,7 @@ public class User implements Serializable {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.password = password;
-		Email = email;
+		this.email = email;
 		this.connected = connected;
 		this.active = active;
 		this.pointconverti = pointconverti;
@@ -392,7 +397,7 @@ public class User implements Serializable {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.password = password;
-		Email = email;
+		this.email = email;
 		this.connected = connected;
 		this.active = active;
 		this.pointconverti = pointconverti;
@@ -412,7 +417,7 @@ public class User implements Serializable {
 	public String toString() {
 		return "User [idUser=" + idUser + ", workZone=" + workZone + ", availability=" + availability + ", toHour="
 				+ toHour + ", country=" + country + ", nb=" + nb + ", tel=" + tel + ", lastName=" + lastName
-				+ ", firstName=" + firstName + ", password=" + password + ", Email=" + Email + ", connected="
+				+ ", firstName=" + firstName + ", password=" + password + ", email=" + email + ", connected="
 				+ connected + ", active=" + active + ", pointconverti=" + pointconverti + ", nbrpoint=" + nbrpoint
 				+ ", dateCreation=" + dateCreation + ", picture=" + picture + ", gender=" + gender + ", age=" + age
 				+ ", etat=" + etat + ", role=" + role + ", carts=" + carts + "]";
