@@ -71,7 +71,7 @@
 <p:column><f:facet name="header"><h:outputText value="quantité" /></f:facet>
 <h:outputText value="#{catalog.stock}" /></p:column>
  <p:column> <f:facet name="header"><h:outputText value="action" /></f:facet>
- <p:commandButton icon="pi pi-pencil"  styleClass="edit-button rounded-button ui-button-success" >
+ <p:commandButton icon="pi pi-pencil" action="#{catalogcontroller.select(catalog.id)}" styleClass="edit-button rounded-button ui-button-success" >
  </p:commandButton>
   <p:commandButton  action="#{catalogcontroller.delete(catalog.id)}" class="ui-button-warning rounded-button" icon="pi pi-trash" >
                    

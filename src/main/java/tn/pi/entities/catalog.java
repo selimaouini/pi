@@ -52,38 +52,6 @@ public class catalog implements Serializable{
 
 
 
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-	
-
-
-
-
-	
-
-
-	
-
 	public catalog(String name, float price, String barCode, int stock) {
 		super();
 		this.name = name;
@@ -103,7 +71,7 @@ public class catalog implements Serializable{
 	}
 
 
-	public catalog(int id, String name, float price, String barCode, int stock) {
+	public catalog(int id, String name,  String barCode,float price, int stock) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -183,6 +151,9 @@ public class catalog implements Serializable{
 
 
 
+
+
+	
 
 
 	public catalog(String name, float price, String barCode, int stock, String image) {

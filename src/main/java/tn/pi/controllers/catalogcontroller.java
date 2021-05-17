@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import tn.pi.entities.Cart;
+import tn.pi.entities.DeliveryMan;
 import tn.pi.entities.Demandestock;
 import tn.pi.entities.Etatdemande;
 import tn.pi.entities.LigneComand;
@@ -43,6 +44,7 @@ import tn.pi.entities.User;
 import tn.pi.entities.catalog;
 import tn.pi.repositories.ILigneCommandeRepository;
 import tn.pi.repositories.IProductRepository;
+import tn.pi.repositories.catalogrepository;
 import tn.pi.services.ILigneCommandeService;
 import tn.pi.services.ProductService;
 import tn.pi.services.catalogservice;
@@ -65,6 +67,8 @@ catalogcontroller cc;
 IProductRepository PR;
 @Autowired 
 catalogservice cs;
+@Autowired
+catalogrepository catarep;
 
 private UploadedFile image;
 private int id;
@@ -75,6 +79,13 @@ private String barCode;
 private int  stock;
 public int getId() {
 	return id;
+}
+
+
+private int IdToUpdate;
+
+public int getIdToUpdate() {
+	return IdToUpdate;
 }
 
 
@@ -96,8 +107,9 @@ public int getId() {
 
 
 
-
-
+public void setIdToUpdate(int idToUpdate) {
+	IdToUpdate = idToUpdate;
+}
 
 
 
@@ -141,70 +153,9 @@ public UploadedFile getImage() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 public void setImage(UploadedFile image) {
 	this.image = image;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -270,7 +221,7 @@ public catalog proposer() throws IOException{
 	dst.setBarCode(barCode);
 	dst.setPrice(price);
 	dst.setStock(stock);
-	 dst.setImage(image.getFileName());
+	// dst.setImage(image.getFileName());
 
 	  cs.addProduct(dst);
 	return cs.addProduct(dst);
@@ -287,5 +238,28 @@ public catalog proposer() throws IOException{
 		cs.DemanderStock(id);
 		return cs.DemanderStock(id);
 	}
+	
+	 public void display(catalog cat){
+			 
+			this.setName(name);
+			this.setBarCode(barCode);
+			this.setPrice(price);
+			this.setStock(stock);
+			this.setIdToUpdate(cat.getId());
+			
+			}
+		 
+		 public String select(int id){ 
+			catalog  cat = catarep.findById(id).get();
+			display(cat);
+		 	return "/pages/admin/updatecatalog.xhtml?faces-redirect=true";
+		 }	
+		 
+
+		 public void updatecatalog(){
+			 cs.addProduct(new catalog(IdToUpdate,name,barCode,price,stock));
+		   
+			 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message", "CATALOG UPDATED");
+				PrimeFaces.current().dialog().showMessageDynamic(message);} 
 
 }
