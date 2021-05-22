@@ -1,4 +1,5 @@
 package tn.pi.services;
+import java.io.InputStream;
 import java.util.List;
 import tn.pi.entities.Category;
 public interface CategoryService {
@@ -9,5 +10,6 @@ public interface CategoryService {
 	public Category findCategoryById(int id);
 	public Category findCategoryByName(String name);
 	public void affecterCategoryProduct(int idp,int idc);
+	
 }
 

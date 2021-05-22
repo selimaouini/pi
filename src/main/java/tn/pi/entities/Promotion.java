@@ -17,10 +17,7 @@ import javax.persistence.TemporalType;
 @Table(name="Promotion")
 public class Promotion implements Serializable {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPromotion;
@@ -29,7 +26,7 @@ public class Promotion implements Serializable {
 	private Date startDate;
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
-	private String desc;
+	private String description;
 	private float percentage;
 	@ManyToOne
 	private Product product;
@@ -61,11 +58,11 @@ public class Promotion implements Serializable {
 		this.endDate = endDate;
 	}
 	
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public float getPercentage() {
 		return percentage;
@@ -79,9 +76,7 @@ public class Promotion implements Serializable {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
 	public Promotion(int idPromotion, String libelle, Date startDate, Date endDate, String desc,
 			float percentage, Product product) {
 		super();
@@ -89,7 +84,7 @@ public class Promotion implements Serializable {
 		this.libelle = libelle;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.desc = desc;
+		this.description = description;
 		this.percentage = percentage;
 		this.product = product;
 	}
@@ -100,7 +95,7 @@ public class Promotion implements Serializable {
 		this.libelle = libelle;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.desc = desc;
+		this.description = description;
 		this.percentage = percentage;
 		this.product = product;
 	}
@@ -111,7 +106,7 @@ public class Promotion implements Serializable {
 	@Override
 	public String toString() {
 		return "Promotion [idPromotion=" + idPromotion + ", libelle=" + libelle + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", desc=" + desc + ", percentage=" + percentage + ", product="
+				+ ", endDate=" + endDate + ",description=" +description + ", percentage=" + percentage + ", product="
 				+ product + "]";
 	}
 	

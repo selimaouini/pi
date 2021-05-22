@@ -21,7 +21,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 
 @SpringBootApplication
-//@EnableScheduling
+@EnableScheduling
 @EnableAutoConfiguration
 public class piApplication {
 
@@ -44,13 +44,7 @@ public class piApplication {
 	return rwFilter;
 	}
 	
-	@Bean
-	public FilterRegistrationBean FileUploadFilter() {
-	    FilterRegistrationBean registration = new FilterRegistrationBean();
-	    registration.setFilter(new org.primefaces.webapp.filter.FileUploadFilter());
-	    registration.setName("PrimeFaces FileUpload Filter");
-	    return registration;
-	}
+	
 	
 
 		

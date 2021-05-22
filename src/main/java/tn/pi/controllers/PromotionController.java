@@ -98,7 +98,7 @@ public class PromotionController {
 		prom.setLibelle(libelle);
 		prom.setStartDate(startDate);
 		prom.setEndDate(endDate);
-		prom.setDesc(desc);
+		prom.setDescription(desc);
 		prom.setPercentage(percentage);
 		PromotionService.addPromos(prom , idProduct);
 		return prom;
@@ -112,7 +112,7 @@ public class PromotionController {
 	this.setLibelle(Promotion.getLibelle());
 	this.setStartDate(Promotion.getStartDate());
 	this.setEndDate(Promotion.getEndDate());
-	this.setDesc(Promotion.getDesc());
+	this.setDesc(Promotion.getDescription());
 	this.setPercentage(Promotion.getPercentage());
 	
 	
