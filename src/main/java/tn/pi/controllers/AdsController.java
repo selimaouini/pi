@@ -24,7 +24,7 @@ import tn.pi.services.AdsViewService;
 
 @Controller(value = "AdsController")
 @ELBeanName(value = "AdsController")
-@Join(path = "/", to = "/Ads.jsf")
+//@Join(path = "/", to = "/Ads.jsf")
 public class AdsController {
 	@Autowired
 	AdsService AdsService;

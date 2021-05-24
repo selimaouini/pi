@@ -16,7 +16,7 @@ public class ImagesViews {
     @PostConstruct
     public void init() {
         images = new ArrayList<String>();
-        for (int i = 1; i <= 12; i++) {
+        for (int i = 1; i <= 10; i++) {
             images.add("nature" + i + ".jpg");
         }
     }

@@ -35,6 +35,7 @@ import tn.pi.repositories.ILigneCommandeRepository;
 import tn.pi.repositories.IProductRepository;
 import tn.pi.repositories.IStockRepository;
 import tn.pi.repositories.Idemandestockrepository;
+import tn.pi.repositories.ProductRepository;
 import tn.pi.repositories.UserRepository;
 @Service
 public  class DemandestockService implements IdemandestockService{
@@ -43,6 +44,8 @@ public  class DemandestockService implements IdemandestockService{
 	@Autowired
 	IStockRepository stockrep;
 	@Autowired IStockService ss;
+	@Autowired
+	ProductRepository pr;
 	
 	
 	@Override
@@ -59,18 +62,37 @@ public  class DemandestockService implements IdemandestockService{
 		return demrep.findAll();
 	}
 	@Override
+	@Transactional
 	public String validerdemande(int demandeID ) {
 	
 	    
 		Demandestock ds = demrep.findById(demandeID).get();
-	if (ds.getEtatdemande()!=Etatdemande.Validé){
+    if (ds.getStock()!=null){
 		ds.setEtatdemande(Etatdemande.Validé);
 		ds.getStock().setQuantity(ds.getStock().getQuantity()+ds.getQuantity());
 		demrep.save(ds);
 		stockrep.save(ds.getStock());
 		return "validé"; }
+    else {
+    	
+    	ds.setEtatdemande(Etatdemande.Validé);
+    	Stock s = new Stock();
+    	Product p = new Product();
+    	s.setNomp(ds.getNomp());
+    	s.setQuantity(ds.getQuantity());
+    	s.setDateCreation(new Date());
+    	p.setBarCode(ds.getCatalog().getBarCode());
+    	p.setProductName(ds.getNomp());
+    	p.setPrice(ds.getCatalog().getPrice());  
+    	p.setCreatedAt(new Date());
+    	p.setStock(s);
+    	p.setDescription("nouveau produit");
+    	s.setProducts(p);
+    demrep.save(ds);
+    pr.save(p);
+	stockrep.save(s);
+    }
 	return null;
-		
 		
 	}
 	
