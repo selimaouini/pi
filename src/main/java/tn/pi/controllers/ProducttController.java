@@ -68,7 +68,15 @@ private Date date;
 private Cart cart;
 private Product produit;
 private User user;
+public int codepromo;
 
+
+public int getCodepromo() {
+	return codepromo;
+}
+public void setCodepromo(int codepromo) {
+	this.codepromo = codepromo;
+}
 public String getProductName() {
 	return productName;
 }
@@ -206,14 +214,13 @@ public String ajouterlc(int productId )
 	return navigateTo ;
 	}
 
-public String  validerpanier()
+public String  validerpanier(int codepromo)
 
 
 
 {  
 	int cartId= 1;
-	
-	ls.affecterpanier(cartId ) ;
+    ls.affecterpromo(cartId, codepromo) ;
 	String navigateTo = "/pages/admin/panier.jsf";
 	
 	return navigateTo = "/pages/admin/panier.jsf";}

@@ -44,6 +44,12 @@ public interface ILigneCommandeService  {
 
 
 
+	public String affecterpromo(int cartid, int codepromo);
+
+
+
+
+
 	//LigneComand supprimerLignecommande(Product p);
 
 

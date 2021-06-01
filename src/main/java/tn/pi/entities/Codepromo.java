@@ -30,6 +30,7 @@ public class Codepromo implements Serializable{
 	private int idcode;
 	private double Promotion;
 	private int codeprom;
+	@Enumerated(EnumType.STRING)
 	private State state;
 	public int getIdcode() {
 		return idcode;

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 import tn.pi.entities.Cart;
+import tn.pi.entities.Codepromo;
 import tn.pi.entities.Command;
 import tn.pi.entities.EtatCart;
 import tn.pi.entities.LigneComand;
@@ -22,6 +23,7 @@ import tn.pi.entities.User;
 import tn.pi.repositories.ICartRepository;
 import tn.pi.repositories.ICommandRepository;
 import tn.pi.repositories.UserRepository;
+import tn.pi.repositories.codepromorep;
 
 
 
@@ -29,6 +31,8 @@ import tn.pi.repositories.UserRepository;
 public class CartService implements ICartService {
 	@Autowired
 	ICartRepository cartrep;
+	@Autowired
+	codepromorep cpr;
 	
 	@Override
 	public Cart getCartById(int idcart) {
@@ -74,9 +78,12 @@ public class CartService implements ICartService {
 	}
 	
 
-	
+	@Override 
+	public Codepromo getcode(int codepromo){
+	return  cpr.getcode(codepromo);
 
 
 }
-
+	
+}
 

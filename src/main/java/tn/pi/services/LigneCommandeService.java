@@ -19,11 +19,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import tn.pi.entities.Cart;
+import tn.pi.entities.Codepromo;
 import tn.pi.entities.Command;
 import tn.pi.entities.Etat;
 import tn.pi.entities.EtatCart;
 import tn.pi.entities.LigneComand;
 import tn.pi.entities.Product;
+import tn.pi.entities.State;
 import tn.pi.entities.Stock;
 import tn.pi.entities.User;
 import tn.pi.repositories.ICartRepository;
@@ -31,6 +33,7 @@ import tn.pi.repositories.ILigneCommandeRepository;
 import tn.pi.repositories.IProductRepository;
 import tn.pi.repositories.IStockRepository;
 import tn.pi.repositories.UserRepository;
+import tn.pi.repositories.codepromorep;
 @Service
 public  class LigneCommandeService implements ILigneCommandeService {
 
@@ -47,6 +50,9 @@ public  class LigneCommandeService implements ILigneCommandeService {
 	UserRepository userep;
 	@Autowired
 	IStockRepository sr;
+	@Autowired
+	codepromorep crp;
+	@Autowired CartService cs;
 	private Map<Integer,LigneComand>lcs=new HashMap<Integer,LigneComand>();
 	
 	@Transactional
@@ -84,6 +90,7 @@ public  class LigneCommandeService implements ILigneCommandeService {
 	@Override
 	public String affecterpanier(int cartid ) {
 		
+		
 		Cart cart=cartrep.findById(cartid).get();
 		double tot1=lcrep.sum(cart);
 		cart.setSubtotal(tot1);
@@ -102,7 +109,32 @@ public  class LigneCommandeService implements ILigneCommandeService {
 		
 	
 }
+	@Transactional
+	@Override
+	public String affecterpromo(int cartid,int codepromo ) {
+		Codepromo cp = crp.getcode(codepromo);
+		if ( cp!=null)
+		{
+		
+		Cart cart=cartrep.findById(cartid).get();
+		double tot1=lcrep.sum(cart);
+		cart.setSubtotal(tot1-cp.getPromotion());
+	    cart.setEtatcart(EtatCart.abandonedbasket);
+	    cart.setNb(this.count(cartid));
+	   
+	    
+	    cp.setState(State.utilisé);
+	    
+
+		
+	    cartrep.save(cart);
+	    crp.save(cp);
+		}
+	 //   lcrep.deleteById();
+		return "Ligne de commande ajouté et affecté au panier";
+		
 	
+}
 	
 	@Transactional
 	@Override 

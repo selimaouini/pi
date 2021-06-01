@@ -35,6 +35,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 import tn.pi.entities.Cart;
+import tn.pi.entities.Codepromo;
 import tn.pi.entities.Command;
 import tn.pi.entities.Delivery;
 import tn.pi.entities.Etat;
@@ -47,12 +48,14 @@ import tn.pi.entities.ModePayement;
 import tn.pi.entities.Product;
 import tn.pi.entities.ProgrammeFidelité;
 import tn.pi.entities.RoleType;
+import tn.pi.entities.State;
 import tn.pi.entities.User;
 import tn.pi.repositories.ICartRepository;
 import tn.pi.repositories.ICommandRepository;
 import tn.pi.repositories.IDeliveryRepository;
 import tn.pi.repositories.IProgramfideliteRepository;
 import tn.pi.repositories.UserRepository;
+import tn.pi.repositories.codepromorep;
 @Service
 
 public class CommandeService implements ICommandeService{
@@ -66,6 +69,8 @@ public class CommandeService implements ICommandeService{
 	IDeliveryRepository delivrep;
     @Autowired
     IProgramfideliteRepository pfrep;
+    @Autowired
+    codepromorep promorep;
    
    	private JavaMailSender JavaMailSender;
    	
@@ -275,6 +280,13 @@ public class CommandeService implements ICommandeService{
 						
 				
 			 }
+		 Codepromo cp = new Codepromo();
+		 cp.setCodeprom(generatecodepromo());
+		 cp.setState(State.valide);
+		 cp.setPromotion(cmd.getPrice()*0.05);
+		 
+		 
+		
 		cmd.getUser().setNbrpoint(cmd.getUser().getNbrpoint()+ 5000);
 	     String s= "+216" + String.valueOf(cmd.getUser().getTel());
 		sendSms(s, "+12067853390" , "Your order has been confirmed");
@@ -285,12 +297,16 @@ public class CommandeService implements ICommandeService{
 				
 						
 				
-			
+		promorep.save(cp);	
 		comrep.save(cmd);
 		userep.save(cart.getUser());
 		
 	}
 
+
+	public int generatecodepromo() {
+		return UUID.randomUUID().hashCode();
+	}
 
 
 public void sendSms(String to,String from,String body) {
@@ -404,7 +420,7 @@ public User  cadeau(){
   u.setPointconverti(u.getPointconverti()+100);  
   userep.save(u);
   String s= "+216"+ u.getTel();
-	sendSms(s, "+12067853390" , "Félicications , vous étes le meilleur client de ce mois , vous avez un bon d'achat de 100 dinars ");
+	sendSms(s, "+12067853390" , "Félicications vous étes le meilleur client de ce mois vous avez un bon d'achat de 100 dinars ");
   
 return u;
   
