@@ -34,6 +34,19 @@
 </p:dataTable>
 
 </div>
+<p:panel> 
+                    
+                    <div class="card">
+   
+    <p:imageSwitch effect="shuffle">
+        <ui:repeat value="#{imagesViews.images}" var="image">
+            <p:graphicImage name="/images/sup/#{image}"/>
+        </ui:repeat>
+    </p:imageSwitch>
+
+                    
+</div></p:panel>
+
 </h:form>
 </p:panel>
 

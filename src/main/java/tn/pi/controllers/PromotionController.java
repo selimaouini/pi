@@ -18,7 +18,7 @@ import tn.pi.services.PromotionService;
 
 @Controller(value = "PromotionController")
 @ELBeanName(value = "PromotionController")
-@Join(path = "/", to = "/Product.jsf")
+//@Join(path = "/", to = "/Product.jsf")
 public class PromotionController {
 	@Autowired
 	PromotionService PromotionService;

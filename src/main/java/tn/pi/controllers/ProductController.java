@@ -53,7 +53,7 @@ import tn.pi.repositories.RatingRepository;
 
 @Controller(value = "ProductController")
 @ELBeanName(value = "ProductController")
-@Join(path = "/", to = "/Product.jsf")
+//@Join(path = "/", to = "/Product.jsf")
 
 public class ProductController {
 @Autowired

@@ -40,8 +40,8 @@ public interface ICommandRepository extends JpaRepository<Command,Integer>{
 	
 	@Query("select DISTINCT c from Command c "
 		    + "join User u "
-			+ "where u.idUser=:userid")
-public List<Command >getAllCommandByUser(@Param("userid")int userId);
+			+ "where c.user=:user")
+public List<Command >getAllCommandByUser(@Param("user")User user);
 	
 	@Query("select c FROM Command c ORDER BY c.dateCreation DESC")
 	public List<Command> findByOrderByOrderDatecreationDesc() ;

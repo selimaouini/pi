@@ -106,6 +106,8 @@ public void reductionsurcommande(@PathVariable("id") int idcart) {
 	comserv.reductionsurcommande(idcart);
 }
 
+
+
 //URL : http://localhost:8081/SpringMVC/servlet/count/{x}
 @GetMapping(value = "/count/{x}")
 public long count(@PathVariable("x") Etat etat) {

@@ -72,10 +72,11 @@ public class CommandController {
 	
 	
 	
-	int userid=1;
 	
+	int id=1;
 public List<Command> getCommanduser() {
-	commanduser = cs.findCommandByUser(userid);
+
+	commanduser = cs.findCommandByUser(id);
 		return commanduser;
 	}
 

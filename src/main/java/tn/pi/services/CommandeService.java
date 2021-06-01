@@ -435,10 +435,8 @@ return u;
 
 	@Override
 	public List<Command> findCommandByUser(int userid) {
-		
-	
-		
-		return comrep.getAllCommandByUser(userid);
+		User x=userep.findById(userid).get();
+	return comrep.getAllCommandByUser(x);
 	}
 
 

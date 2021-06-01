@@ -104,6 +104,31 @@ xmlns:p="http://primefaces.org/ui">
 
 
    <p:commandButton action="#{ProducttController.validerpanier()}" value="Valider" icon="pi pi-check" />
+    <p:commandButton value="Vous avez un code promotionnel?" var="Product" icon="pi pi-plus" 
+   oncomplete="PF('manageProductDialog').show()" styleClass="ui-button-success"
+    style="margin-right: .5rem">
+        <p:dialog header="Entrez le code" showEffect="fade" modal="true"
+                  widgetVar="manageProductDialog" responsive="true">
+                   
+            <p:outputPanel id="manage-product-content" class="ui-fluid">
+                <p:outputPanel>
+                    
+                    
+                   
+                    <p:outputLabel >Entrez votre code promotionnel</p:outputLabel>
+                    <p:inputText required="true" value="#{demandestockcontroller.quantity}"/>
+                   
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandButton action="#{demandestockcontroller.demander()}" value="Valider " icon="pi pi-check" 
+                                 />
+                <p:commandButton value="annuler" icon="pi pi-times" onclick="PF('manageProductDialog').hide()"
+                                 class="ui-button-secondary"/>
+            </f:facet>
+        </p:dialog>            
+</p:commandButton>
 </h:form>
 </p:panel>
 </ui:define>
