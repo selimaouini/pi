@@ -22,12 +22,15 @@ import antlr.StringUtils;
 import freemarker.template.TemplateException;
 import tn.pi.entities.Ads;
 import tn.pi.entities.Category;
+import tn.pi.entities.Demandechange;
+import tn.pi.entities.Etatdemande;
 import tn.pi.entities.Product;
 import tn.pi.entities.Promotion;
 import tn.pi.entities.Rating;
 import tn.pi.repositories.ProductRepository;
 import tn.pi.repositories.PromotionRepository;
 import tn.pi.repositories.RatingRepository;
+import tn.pi.repositories.demechangerep;
 import tn.pi.repositories.CategoryRepository;
 import tn.pi.repositories.AdsRepository;
 @Service
@@ -44,6 +47,8 @@ public class ProductServiceImpl implements ProductService{
 	EmailService  emailService;
 	@Autowired
 	RatingRepository var3;
+	@Autowired
+	demechangerep dcr;
 	/************************************VerifyProduct**************************************/
 	@Override
 	public boolean verifyProduct(String barCode) {
@@ -298,26 +303,26 @@ public class ProductServiceImpl implements ProductService{
 
 	@Transactional
 	@Override
-	@Scheduled(cron="* 30 * * * ?")
+	@Scheduled(cron="* 35 * * * ?")
 	public Product Expireddel() {
 		
 	Product prod =  ProductService.getepuisé();
 	 if (prod !=null) {
-		
-		 try {
-			emailService.sendMailMultipart("mohamedselim.aouini@esprit.tn","Expired products");
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TemplateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			
-		 ProductService.deleteProduct(ProductService.getepuisé().getIdProduct());
+		Demandechange dc = new Demandechange();
+			dc.setDateCreation(new Date());
+			dc.setQuantity(prod.getStock().getQuantity());
+			dc.setEtatdemande(Etatdemande.encours);
+			dc.setNomp(prod.getProductName());
+			dcr.save(dc);
+	
+					try {
+						emailService.sendMail("Mohamedselim.aouini@esprit.tn", "Produit expiré ", "Le produit  "+dc.getNomp() + " est expiré , une demande d'échange a été envoyée");
+					} catch (MessagingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
+	//	 ProductService.deleteProduct(ProductService.getepuisé().getIdProduct());
 			 }
 	return null ;
 			
