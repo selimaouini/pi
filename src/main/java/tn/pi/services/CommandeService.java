@@ -285,11 +285,12 @@ public class CommandeService implements ICommandeService{
 		 cp.setState(State.valide);
 		 cp.setPromotion(cmd.getPrice()*0.05);
 		 
-		 
-		
-		cmd.getUser().setNbrpoint(cmd.getUser().getNbrpoint()+ 5000);
+			cmd.getUser().setNbrpoint(cmd.getUser().getNbrpoint()+ 5000);
+		 promorep.save(cp);	
+		 comrep.save(cmd);
+			userep.save(cart.getUser());
 	     String s= "+216" + String.valueOf(cmd.getUser().getTel());
-		sendSms(s, "+12067853390" , "Your order has been confirmed");
+		sendSms(s, "+12067853390" , "Your order has been confirmed , Your Promo code is" + cp.getCodeprom() +" this code is available only one time" );
 	
 				
 				
@@ -297,9 +298,9 @@ public class CommandeService implements ICommandeService{
 				
 						
 				
-		promorep.save(cp);	
-		comrep.save(cmd);
-		userep.save(cart.getUser());
+		
+		
+
 		
 	}
 

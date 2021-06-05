@@ -103,8 +103,7 @@ public  class LigneCommandeService implements ILigneCommandeService {
 
 		
 	    cartrep.save(cart);
-		
-	 //   lcrep.deleteById();
+	
 		return "Ligne de commande ajouté et affecté au panier";
 		
 	
@@ -130,7 +129,7 @@ public  class LigneCommandeService implements ILigneCommandeService {
 	    cartrep.save(cart);
 	    crp.save(cp);
 		}
-	 //   lcrep.deleteById();
+
 		return "Ligne de commande ajouté et affecté au panier";
 		
 	

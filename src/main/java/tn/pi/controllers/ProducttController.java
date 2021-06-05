@@ -24,13 +24,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import tn.pi.entities.Cart;
+import tn.pi.entities.Codepromo;
 import tn.pi.entities.Etatdemande;
 import tn.pi.entities.LigneComand;
 //import tn.esprit.spring.entities.Employe;
 import tn.pi.entities.Product;
+import tn.pi.entities.State;
 import tn.pi.entities.User;
 import tn.pi.repositories.ILigneCommandeRepository;
 import tn.pi.repositories.IProductRepository;
+import tn.pi.services.CartService;
 import tn.pi.services.ILigneCommandeService;
 import tn.pi.services.ProductService;
 
@@ -42,6 +45,8 @@ import tn.pi.services.ProductService;
 public class ProducttController {
 @Autowired
 ProductService ProductService;
+@Autowired 
+CartService cs;
 @Autowired
 ILigneCommandeService ls;
 @Autowired
@@ -214,13 +219,33 @@ public String ajouterlc(int productId )
 	return navigateTo ;
 	}
 
-public String  validerpanier(int codepromo)
-
-
+public String  validerpromo(int codepromo)
 
 {  
+	Codepromo cpro = cs.getcode(codepromo);
+	if (cpro.getState()==State.utilisé){
+		FacesMessage message1 = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message", "Code deja utilisé");
+
+	PrimeFaces.current().dialog().showMessageDynamic(message1);
+	}
+	else if  (cs.getcode(codepromo)==null){
+		FacesMessage message2 = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message", "Code erroné");
+
+	PrimeFaces.current().dialog().showMessageDynamic(message2);
+	}
+	else  if  (cpro.getState()==State.valide){
+		
 	int cartId= 1;
-    ls.affecterpromo(cartId, codepromo) ;
+    ls.affecterpromo(cartId,codepromo) ;
+	String navigateTo = "/pages/admin/panier.jsf";
+	
+	return navigateTo = "/pages/admin/panier.jsf";}
+	return "ok";}
+
+public String  validerpanier()
+{  
+	int cartId= 1;
+    ls.affecterpanier(cartId) ;
 	String navigateTo = "/pages/admin/panier.jsf";
 	
 	return navigateTo = "/pages/admin/panier.jsf";}
