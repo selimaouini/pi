@@ -26,6 +26,7 @@ public interface IBillRepository extends JpaRepository<Bill, Integer>{
 	@Query("select b from Bill b  "
 			+ "join b.user u "
 			+ "where u.idUser=:userId" )
+	
 	public Bill getbillByuser(@Param("userId")int userId);
 	@Query("select b from Bill b "
 			+ "join b.command c "

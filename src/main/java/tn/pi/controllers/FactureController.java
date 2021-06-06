@@ -40,7 +40,10 @@ public class FactureController {
 	
 	@Autowired
 	IBillService bs;
+	@Autowired 
+	UserController uc;
 	private List<Bill> bill;
+	private List<Bill> bill2;
 	private int idBill;
 	private int numBill;
 	
@@ -55,7 +58,15 @@ public class FactureController {
 	private TypeFacture typeofbill;
     private Command command;
     private User user;
+    
 	
+	public List<Bill> getBill2() {
+		bill2 = bs.getBillByIduser(uc.getIdUserC());
+		return bill2;
+	}
+	public void setBill2(List<Bill> bill2) {
+		this.bill2 = bill2;
+	}
 	public int getIdBill() {
 		return idBill;
 	}

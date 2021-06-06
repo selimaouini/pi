@@ -50,6 +50,8 @@ public class CommandController {
 	ILigneCommandeService lignserv;
 	@Autowired
 	IUserService userserv;
+	@Autowired 
+	UserController uc;
 	
 	@Autowired 
 	UserRepository userep;
@@ -73,10 +75,10 @@ public class CommandController {
 	
 	
 	
-	int id=1;
+	
 public List<Command> getCommanduser() {
 
-	commanduser = cs.findCommandByUser(id);
+	commanduser = cs.findCommandByUser(uc.getIdUserC());
 		return commanduser;
 	}
 

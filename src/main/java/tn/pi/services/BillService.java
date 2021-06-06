@@ -137,6 +137,13 @@ public  class BillService implements IBillService{
 			
 			return facrep.getbillByIdorder(idorder);
 		}
+  
+
+		@Override
+		public List<Bill> getBillByuser(int iduser) {
+			
+			return facrep.getbillByidUser(iduser);
+		}
 
 		@Override
 		public long count() {

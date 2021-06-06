@@ -39,7 +39,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
+import tn.pi.entities.Bill;
 import tn.pi.entities.Cart;
 import tn.pi.entities.Codepromo;
 import tn.pi.entities.Command;
@@ -55,7 +55,9 @@ import tn.pi.entities.Product;
 import tn.pi.entities.ProgrammeFidelité;
 import tn.pi.entities.RoleType;
 import tn.pi.entities.State;
+import tn.pi.entities.TypeFacture;
 import tn.pi.entities.User;
+import tn.pi.repositories.IBillRepository;
 import tn.pi.repositories.ICartRepository;
 import tn.pi.repositories.ICommandRepository;
 import tn.pi.repositories.IDeliveryRepository;
@@ -75,6 +77,8 @@ public class CommandeService implements ICommandeService{
 	IDeliveryRepository delivrep;
     @Autowired
     IProgramfideliteRepository pfrep;
+    @Autowired
+    IBillRepository fr;
     @Autowired
     codepromorep promorep;
     @Autowired
@@ -293,8 +297,18 @@ public class CommandeService implements ICommandeService{
 		 cp.setPromotion(cmd.getPrice()*0.05);
 		 
 			cmd.getUser().setNbrpoint(cmd.getUser().getNbrpoint()+ 5000);
+			Bill f = new Bill();
+			f.setCommand(cmd);
+			f.setDatebill(new Date());
+			f.setDatereglement(new Date());
+			f.setTotalfinal(cmd.getPrice());
+			f.setTypeofbill(TypeFacture.AUTOMATIC);
+			f.setNumBill(generatecodebill());
+			f.setUser(cmd.getUser());
+			
 		 promorep.save(cp);	
 		 comrep.save(cmd);
+		 fr.save(f);
 			userep.save(cart.getUser());
 			// You may want to store charge id along with order information
 			 try {
@@ -328,6 +342,9 @@ public class CommandeService implements ICommandeService{
 		
 	}
 
+	public int generatecodebill() {
+		return UUID.randomUUID().hashCode();
+	}
 
 	public int generatecodepromo() {
 		return UUID.randomUUID().hashCode();
@@ -337,7 +354,7 @@ public class CommandeService implements ICommandeService{
 public void sendSms(String to,String from,String body) {
 	
 	try {
-	 Twilio.init("AC97e41d3e8b79b440d26a39ce19f53f30", "dbc0d30b1911a2235813732b6cf03ef8");
+	 Twilio.init("AC97e41d3e8b79b440d26a39ce19f53f30", "f358a99e66f267d5b4ce2c3a1b900caa");
         Message message = Message.creator( new PhoneNumber(to), new PhoneNumber(from),body) // to:to which no  you want to send sms           
             //.setMediaUrl(Arrays.asList(URI.create("https://demo.twilio.com/owl.png")))     // from: twillio given phone no
             .setStatusCallback(URI.create("http://postb.in/1234abcd"))                      // body : text message

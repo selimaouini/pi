@@ -52,6 +52,8 @@ public interface IBillService {
 
 	public Bill getBillByuser(int iduser, int idb);
 
+	public List<Bill> getBillByuser(int iduser);
+
 	
 	
 }
