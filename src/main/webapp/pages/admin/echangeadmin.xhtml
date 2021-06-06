@@ -4,12 +4,12 @@
 <html xmlns:f="http://java.sun.com/jsf/core"
 xmlns:h="http://java.sun.com/jsf/html"
 xmlns:ui="http://java.sun.com/jsf/facelets"
-
 xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/template/templateadmin.xhtml"> 
-
 <ui:param name="page_name" value="Accueil" />
 <ui:define name="content">
+<!-- BEGIN : TP1 JSF Introduction Login -->
+
 <p:menubar>
 <p:menuitem value="Stock" icon="pi pi-fw pi-inbox" outcome="/pages/admin/stock"></p:menuitem>
 <p:menuitem value="Demandes de stocks" icon="pi pi-fw pi-plus" outcome="/pages/admin/demandesdestock_admin"></p:menuitem>
@@ -18,15 +18,25 @@ xmlns:p="http://primefaces.org/ui">
 <p:menuitem value="Stock epuisé" icon="pi pi-fw pi-exclamation-circle" outcome="/pages/admin/epuisé"></p:menuitem>
 </p:menubar>
 
-<p:panel>
+
+
+<p:panel columns="2">
 <h:form>
-<p:dataTable value="#{StockController.stock}" var="Stock" border="1">
+<p:dataTable value="#{demandechangecontroller.demande}" var="Demandechange" paginator="true" rows="3" border="1">
 <p:column><f:facet name="header"><h:outputText value="Produit" /></f:facet>
-<h:outputText value="#{Stock.nomp}" /></p:column>
+<h:outputText value="#{Demandechange.nomp}" /></p:column>
 <p:column><f:facet name="header"><h:outputText value="Date de création" /></f:facet>
-<h:outputText value="#{Stock.dateCreation}" /></p:column>
+<h:outputText value="#{Demandechange.dateCreation}" /></p:column>
 <p:column><f:facet name="header"><h:outputText value="quantité" /></f:facet>
-<h:outputText value="#{Stock.quantity}" /></p:column>
+<h:outputText value="#{Demandechange.quantity}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Etat" /></f:facet>
+<h:outputText value="#{Demandechange.etatdemande}" /></p:column>
+
+
+
+<p:column > <f:facet name="header"><h:outputText value="Action" /></f:facet>
+<p:commandButton action="#{demandestockcontroller.removedemande(Demandechange.idds)}" icon="pi pi-times" styleClass="rounded-button ui-button-danger ui-button-flat" ></p:commandButton> </p:column>
+
 </p:dataTable>
 
 </h:form>
@@ -34,5 +44,3 @@ xmlns:p="http://primefaces.org/ui">
 </ui:define>
 </ui:composition>
 </html>
-
-

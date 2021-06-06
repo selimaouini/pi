@@ -118,15 +118,7 @@ public class PaymentController {
 			return new Response(false, "An error accurred while trying to charge.");
 		}
 		
-		// You may want to store charge id along with order information
-		 try {
-			emailService.sendMailMultipart(email, " félicitations");
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-		}
-		 
+		
 		return new Response(true, "Success your charge id is " + chargeId);
 		
 	}

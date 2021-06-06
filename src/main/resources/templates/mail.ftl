@@ -19,7 +19,7 @@
 							</div>
 							
 							<div style="font-size: 24px; color: #555100;">
-								<br> Félicitations, vous allez recevoir un SMS bientot pour avoir votre livraison !!! <br>
+								<br> Félicitations, vous allez recevoir un SMS  qui contient le code Promotionnel utilisable  une seule fois  !!! <br>
 						
 						
 						

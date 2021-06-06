@@ -1,5 +1,6 @@
 package tn.pi.services;
 
+import java.io.IOException;
 import java.net.URI;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -16,12 +17,17 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSender;
+
+import javax.mail.MessagingException;
 import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.transaction.Transactional;
 import javax.xml.bind.ParseConversionEvent;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+
+import freemarker.template.TemplateException;
+
 import org.hibernate.Session;
 import org.slf4j.helpers.BasicMDCAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +77,8 @@ public class CommandeService implements ICommandeService{
     IProgramfideliteRepository pfrep;
     @Autowired
     codepromorep promorep;
-   
+    @Autowired
+    private EmailService emailService;
    	private JavaMailSender JavaMailSender;
    	
 	
@@ -289,6 +296,23 @@ public class CommandeService implements ICommandeService{
 		 promorep.save(cp);	
 		 comrep.save(cmd);
 			userep.save(cart.getUser());
+			// You may want to store charge id along with order information
+			 try {
+				try {
+					emailService.sendMailMultipart(cmd.getUser().getEmail(), " félicitations");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (TemplateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			}
+			 
 	     String s= "+216" + String.valueOf(cmd.getUser().getTel());
 		sendSms(s, "+12067853390" , "Your order has been confirmed , Your Promo code is" + cp.getCodeprom() +" this code is available only one time" );
 	
@@ -313,7 +337,7 @@ public class CommandeService implements ICommandeService{
 public void sendSms(String to,String from,String body) {
 	
 	try {
-	 Twilio.init("AC97e41d3e8b79b440d26a39ce19f53f30", "99a22f092cfcd5bcac078b311a8fb00c");
+	 Twilio.init("AC97e41d3e8b79b440d26a39ce19f53f30", "dbc0d30b1911a2235813732b6cf03ef8");
         Message message = Message.creator( new PhoneNumber(to), new PhoneNumber(from),body) // to:to which no  you want to send sms           
             //.setMediaUrl(Arrays.asList(URI.create("https://demo.twilio.com/owl.png")))     // from: twillio given phone no
             .setStatusCallback(URI.create("http://postb.in/1234abcd"))                      // body : text message
@@ -327,16 +351,7 @@ public void sendSms(String to,String from,String body) {
 	}
 	
 }
-public void sendSimpleMessage(String to, String subject, String text) {
 
-    SimpleMailMessage message = new SimpleMailMessage(); 
-    message.setFrom("ahmedissiou1@gmail.com");
-    message.setTo(to); 
-    message.setSubject(subject); 
-    message.setText(text);
-    JavaMailSender.send(message);
-
-}
 
 
 	@Override
