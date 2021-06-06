@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import tn.pi.controllers.UserController;
 import tn.pi.entities.Ads;
 import tn.pi.entities.AdsView;
 import tn.pi.entities.Category;
@@ -38,12 +39,13 @@ public class AdsViewServiceImpl implements AdsViewService {
 	
 	@Autowired
 	AdsRepository adsrepository;
-
+	@Autowired 
+	UserController uc;
 	@Override
 	public int AddAdsView(int idadd) {
 		AdsView adsview = new AdsView();
-		int iduser=1;
-		User u = userrepository.findById(iduser).get();
+		
+		User u = userrepository.findById(uc.getIdUserC()).get();
 		Ads a = adsrepository.findById(idadd).get();
 		adsview.setAds(a);
 		adsview.setUser(u);

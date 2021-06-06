@@ -22,7 +22,7 @@ import tn.pi.entities.RoleType;
 import tn.pi.entities.User;
 import tn.pi.services.IUserService;
 
-@Scope(value = "session")
+//@Scope(value = "session")
 @Controller(value = "UserController") // Name of the bean in Spring IoC
 @ELBeanName(value = "UserController") // Name of the bean used by JSF
 //@Join(path = "/", to = "/loginnnn.jsf")
@@ -73,7 +73,8 @@ public class UserController {
 	public String doLogin() {
 		String navigateTo = "null";
 		User u=userService.authenticate(login, password);
-		//idUserC=u.getIdUser();
+		idUserC=u.getIdUser();
+		
 		if (u != null && u.getRole() == RoleType.ADMIN) {
 		navigateTo = "/pages/admin/homeadmin.xhtml?faces-redirect=true";
 		loggedIn = true; }

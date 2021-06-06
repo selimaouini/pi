@@ -18,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import tn.pi.controllers.UserController;
 import tn.pi.entities.Cart;
 import tn.pi.entities.Codepromo;
 import tn.pi.entities.Command;
@@ -54,13 +55,15 @@ public  class LigneCommandeService implements ILigneCommandeService {
 	codepromorep crp;
 	@Autowired CartService cs;
 	private Map<Integer,LigneComand>lcs=new HashMap<Integer,LigneComand>();
+	@Autowired 
+	UserController uc;
 	
 	@Transactional
 	@Override
 	public String affecterProductAlc(int productId,int cartId,int quantity ) {
 		
 		LigneComand lc = new LigneComand();
-		User user = userep.findById(1).get();
+		User user = userep.findById(uc.getIdUserC()).get();
 		Product pro = produitrep.findById(productId).get();
 		Cart cart =cartrep.findById(cartId).get();
 		Stock s =storep.findByproducts(pro);
@@ -92,10 +95,13 @@ public  class LigneCommandeService implements ILigneCommandeService {
 		
 		
 		Cart cart=cartrep.findById(cartid).get();
+		User user = userep.findById(uc.getIdUserC()).get();
 		double tot1=lcrep.sum(cart);
 		cart.setSubtotal(tot1);
 	    cart.setEtatcart(EtatCart.abandonedbasket);
 	    cart.setNb(this.count(cartid));
+	    cart.setUser(user);
+	    
 	   
 	
 	    
@@ -114,12 +120,13 @@ public  class LigneCommandeService implements ILigneCommandeService {
 		Codepromo cp = crp.getcode(codepromo);
 		if ( cp!=null)
 		{
-		
+		User user = userep.findById(uc.getIdUserC()).get();
 		Cart cart=cartrep.findById(cartid).get();
 		double tot1=lcrep.sum(cart);
 		cart.setSubtotal(tot1-cp.getPromotion());
 	    cart.setEtatcart(EtatCart.abandonedbasket);
 	    cart.setNb(this.count(cartid));
+	    cart.setUser(user);
 	   
 	    
 	    cp.setState(State.utilisé);

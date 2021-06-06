@@ -49,6 +49,8 @@ ProductService ProductService;
 CartService cs;
 @Autowired
 ILigneCommandeService ls;
+@Autowired 
+UserController uc;
 @Autowired
 ILigneCommandeRepository lcrep;
 @Autowired
@@ -178,7 +180,7 @@ public void setUser(User user) {
 public List<LigneComand> getLigneComand() {
 	
 	
-	ligneComand=ls.findLigneCommandByUser(1);
+	ligneComand=ls.findLigneCommandByUser(uc.getIdUserC());
 	return ligneComand;
 }
 public void setLigneComand(List<LigneComand> ligneComand) {

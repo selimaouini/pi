@@ -171,7 +171,7 @@ public class AdsController {
 		this.product = product;
 	}
 	
-	int idProduct=134;
+	int idProduct=1;
 	public Ads AddAd(){
 		    
 		Ads add = new Ads();

@@ -86,6 +86,8 @@ ILigneCommandeService lignserv;
 IUserService userserv;
 @Autowired
 CartController cc;
+@Autowired 
+UserController uc;
 private int nb;
 
 
@@ -111,9 +113,9 @@ private User user;
 private Command command;
 List<Stock>stocks;
 
-int iduser=1;
+
 public List<Cart> getCart() {
-	cart = cs.getpanierByUser(iduser);
+	cart = cs.getpanierByUser(uc.getIdUserC());
 	return cart;
 }
 public void setCart(List<Cart> cart) {
@@ -165,6 +167,7 @@ public void setStocks(List<Stock> stocks) {
 
 public String save(int cartId)
 {
+	
 	coms.saveCommande(cartId);
 
 
@@ -182,7 +185,7 @@ public Cart annuler() {
 public void paymentbyfidelite(int cartId)
 
 {
-	User u = usrep.findById(iduser).get();
+	User u = usrep.findById(uc.getIdUserC()).get();
 	Cart c = cr.findById(cartId).get();
 	if (u.getPointconverti()<c.getSubtotal()){
 	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message", "Solde isuffisant");

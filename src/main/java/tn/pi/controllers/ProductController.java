@@ -68,6 +68,8 @@ ProductRepository ProductRepository;
 RatingRepository RatingRepository;
 @Autowired
 IRatingService RatingService;
+@Autowired 
+UserController uc;
 private String productName;
 @Size(max = 250)
 @Column(name = "picture")
@@ -264,22 +266,23 @@ public String Redirection() {
 String navigateTo = "/pages/admin/ProductCremerie.jsf";
 	return navigateTo ;
 }
-int idUser=1;
+
+
 public String Ratting(int idProduct ) {
 	Rating rat = new Rating();
 	rat.setNbretoile(nbretoile);
-	RatingService.addRatingPub(idUser, idProduct, rat);
+	RatingService.addRatingPub(uc.getIdUserC(), idProduct, rat);
 	
-	return RatingService.addRatingPub(idUser, idProduct, rat);
+	return RatingService.addRatingPub(uc.getIdUserC(), idProduct, rat);
 	
 	
 	
 }
-int idProduct=134;
+int idProduct=1;
 public void onrate(RateEvent<Integer> rateEvent) {
 	Rating rat = new Rating();
 	rat.setNbretoile(rateEvent.getRating());
-	RatingService.addRatingPub(idUser, idProduct, rat);
+	RatingService.addRatingPub(uc.getIdUserC(), idProduct, rat);
 	
     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Rate Event", "You rated:" + rateEvent.getRating());
     FacesContext.getCurrentInstance().addMessage(null, message);

@@ -23,6 +23,7 @@ import tn.pi.entities.Bill;
 import tn.pi.entities.Command;
 import tn.pi.entities.Etatfidelite;
 import tn.pi.entities.User;
+import tn.pi.repositories.UserRepository;
 import tn.pi.services.ICommandeService;
 import tn.pi.services.IUserService;
 
@@ -31,6 +32,7 @@ import tn.pi.services.IUserService;
 
 @Controller(value = "FidelitéController")
 @ELBeanName(value = "FidelitéController")
+
 //@Join(path = "/fidelité/1", to = "/Fidelité.jsf")
 public class FidelitéController {
 	
@@ -38,6 +40,10 @@ public class FidelitéController {
 	ICommandeService cs;
 	@Autowired
 	IUserService us;
+	@Autowired 
+	UserRepository usrep;
+	@Autowired 
+	UserController uc;
 	private List<User> user;
 	public User oneuser; 
 	private String lastName;
@@ -73,8 +79,9 @@ public class FidelitéController {
 	
 
 	public User getOneuser() {
-		int id =1;
-		User oneuser = us.retrieveUser(id);
+	
+		
+		User oneuser = us.retrieveUser(uc.getIdUserC());
 		
 		return oneuser;
 	}
