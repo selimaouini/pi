@@ -25,7 +25,7 @@
 
 
 				<!-- BEGIN  -->
-				<h:panelGroup columns="2">
+	<h:panelGroup columns="2">
 					<h:form>
 						<fieldset
 							class="border-blue-400 border-2 p-4 m-4 min-w-min max-w-screen-sm">
@@ -37,14 +37,15 @@
 
 									<h:panelGrid columns="3" cellpadding="7" styleClass="p-mb-3">
 										<p:outputLabel for="title" value="Titre:" />
-										<p:inputText id="title" value="#{postController.title}"
+										<p:inputText id="title" value="#{posttController.post.title}"
 											required="true" label="title">
 											<f:validateLength minimum="2" />
 										</p:inputText>
 										<p:message for="title" display="icon" />
 
 										<p:outputLabel for="content" value="Description:" />
-										<p:inputText id="content" value="#{postController.content}"
+										<p:inputText id="content" value="#{posttController.post.content}"
+
 											required="true" label="content">
 											<f:validateLength minimum="2" />
 										</p:inputText>
@@ -52,7 +53,7 @@
 											
 
 											<h:outputLabel for="theme" value=" Sujet: *" />
-											<p:selectOneMenu id="theme" value="#{postController.themes}"
+											<p:selectOneMenu id="theme" value="#{postController.post.themes}"
 												validatorMessage="Cette valeur est obligatoire"
 												required="true" label="Text 2" style="width: 12rem">
 												<f:selectItem itemLabel="Choisir votre Sujet" itemValue=""
@@ -76,11 +77,10 @@
 
 
 						</fieldset>
-						<p:commandButton value="Envoyer" update="@form"
-							action="#{postController.addPost()}" icon="pi pi-check" />
-					
+			                    <h:commandButton value="Save" action="#{posttController.save}" update="@form" icon="pi pi-check"  />
 					</h:form>
 				</h:panelGroup>
+
 			</ui:define>
 		</ui:composition>
 	</h:body>

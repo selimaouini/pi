@@ -12,7 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,6 +24,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -74,13 +75,15 @@ public class User implements Serializable {
 	Role role;
 	/**************Associations**************/
 	
-     @OneToMany(cascade = CascadeType.ALL,mappedBy = "User")
-	private Set<Post> post;
+     @OneToMany(cascade = CascadeType.ALL,mappedBy = "User", fetch = FetchType.EAGER)
+     @JsonIgnore
+     private Set<Post> posts;
 
     /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "User")
 	private Set<Chat> chat;*/
 	
 	@OneToMany(mappedBy = "User")
+	@JsonIgnore
 	private List<Comment> comments;
 
 	@OneToMany(mappedBy = "User")
@@ -174,12 +177,12 @@ public class User implements Serializable {
 		this.role = role;
 	}
 
-	public Set<Post> getPost() {
-		return post;
+	public Set<Post> getPosts() {
+		return posts;
 	}
 
-	public void setPost(Set<Post> post) {
-		this.post = post;
+	public void setPost(Set<Post> posts) {
+		this.posts = posts;
 	}
 
 	public List<Comment> getComments() {
@@ -199,7 +202,7 @@ public class User implements Serializable {
 	}
 
 	public User(Long id, String firstName, String lastName, String username, String password, String passwordConfirm,
-			String email, String address, Date dateN, String tel, Role role, Set<Post> post, List<Comment> comments,
+			String email, String address, Date dateN, String tel, Role role, Set<Post> posts, List<Comment> comments,
 			List<Rating> ratings) {
 		super();
 		this.id = id;
@@ -213,7 +216,7 @@ public class User implements Serializable {
 		this.dateN = dateN;
 		this.tel = tel;
 		this.role = role;
-		this.post = post;
+		this.posts = posts;
 		this.comments = comments;
 		this.ratings = ratings;
 	}

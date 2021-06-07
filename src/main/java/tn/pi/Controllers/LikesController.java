@@ -31,6 +31,8 @@ private long idc;
 	private String etat;
 	
 	private List<Likes> likess;
+	private int like;
+	private int dislike;
 
 	
 	public List<Likes> getlikess() {	
@@ -43,10 +45,6 @@ private long idc;
 	public void removelikes(long idL) {
 		likesService.deleteLikesById(idL);
 	}
-	
-	
-	
-	
 	
 	public boolean isLiked() {
 		return liked;
@@ -79,7 +77,23 @@ private long idc;
 	public void setLikess(List<Likes> likess) {
 		this.likess = likess;
 	}
-	
-	
+
+	public int getLike() {
+		like= likesService.getAllNbrLikesByCom(idc);
+		return like;
+	}
+
+	public void setLike(int like) {
+		this.like = like;
+	}
+
+	public int getDislike() {
+		dislike = likesService.getAllNbrDislikeByCom(idc);
+		return dislike;
+	}
+
+	public void setDislike(int dislike) {
+		this.dislike = dislike;
+	}
 
 }

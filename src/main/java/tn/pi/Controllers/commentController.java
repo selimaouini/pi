@@ -50,11 +50,11 @@ public class commentController {
 	boolean liked;
 
 	/*** 1er méthode ***/
-	public void saveComment() {
+	/*public void saveComment() {
 		commentService.addOrUpdateComment(new Comment(description));
-	}
+	}*/
 
-	/*** 2éme méthode ***/
+	/*** 3éme méthode ***/
 	public void addComment(long idP) {
 		Comment com = new Comment();
 		User u = userRepository.findById(id).get();
@@ -72,12 +72,12 @@ public class commentController {
 	}
 
 	public void removeComment(long idP) {
-		commentService.deleteCommentById(idP);
+		commentService.delete(idc);
 		addMessage(FacesMessage.SEVERITY_INFO, "Success", "Comment deleted");
 	}
 
 	public void updateComment() {
-		commentService.addOrUpdateComment(new Comment(description));
+		commentService.updateComment(new Comment(description));
 	}
 
 	List<Comment> retrieveAllCommentsByPost(long idP) {

@@ -129,6 +129,23 @@ public class PostRestController {
 			return new ResponseEntity<String>("post without interaction deleted !", HttpStatus.OK);
 		}
 	 
+
+		/******** Partie Admin ********/
+		// tekhdem
+	// http://localhost:8081/SpringMVC/servlet/admin/Post/waitingPost
+		@GetMapping("/admin/Post/waitingPost")
+		@ResponseBody
+		public List<Post> waitingPost() {
+			return postService.getAllPostEtatWaiting();
+		}
+		
+		// tekhdem
+		// http://localhost:8081/SpringMVC/servlet/admin/Post/acceptedPost
+				@GetMapping("/admin/Post/acceptedPost")
+				@ResponseBody
+				public List<Post> acceptedPost() {
+					return postService.getAllPostEtatAccepted();
+				}
 	/******** Rating Section ********/
 
 	// tekhdem

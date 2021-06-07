@@ -45,6 +45,7 @@ public class postController {
 	RatingService ratingService;
 
 	private List<Post> posts;
+	private List<Post> ancien;
 	private long idP;
 	private String title;
 	private String content;
@@ -58,6 +59,7 @@ public class postController {
 	private Post post;
 	private float avg;
 	private String username;
+	String word;
 		
 	public String addPost(){		
 		User u =userRepository.findById(id).get();
@@ -67,12 +69,13 @@ public class postController {
 		post.setContent(content);
 		post.setPhoto(photo);
 		post.setTheme(theme);
+		post.setEtat("Waiting");
 		post.setUsername(username);
 		return postService.addPost(post,id);
 				}
 	
-	public void deletePost(long idP){
-		postService.deleteP(idP);
+	public void deletePost(String idP){
+		postService.deletePost(idP);
 		addMessage(FacesMessage.SEVERITY_INFO, "Success", "Post deleted");
 	}
 	
@@ -86,18 +89,29 @@ public class postController {
 	  addMessage(FacesMessage.SEVERITY_INFO, "Success", "Post updated");
 	
 	}
+	public void updatePost(){
+		postService.addOrUpdatePost(new Post(title, content, theme,postdToBeUpdated )); 
+	} 
 	
 	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
 	     FacesContext.getCurrentInstance().
 	             addMessage(null, new FacesMessage(severity, summary, detail));
 	}
 	
-	//public float getValueRatingByPostAndUser(long idP, long id) 
-	
 	 public List<Post> getPosts() {
-	    	posts=postService.retrieveAllPosts();
+	    	posts=postService.getAllPostsOrderedByDate();
 	        return posts;
 	    }
+	 public List<Post> getAncien() {
+	    	ancien=postService.retrieveAllPosts();
+	        return ancien;
+	    }
+	 
+	 
+	 public List<Post> search(String word) {
+	 posts = postService.search(word);
+	 return posts;
+}
 	public void setPosts(List<Post> posts) {
 		this.posts = posts;
 	}
@@ -182,6 +196,18 @@ public class postController {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getWord() {
+		return word;
+	}
+
+	public void setWord(String word) {
+		this.word = word;
+	}
+
+	public void setAncien(List<Post> ancien) {
+		this.ancien = ancien;
 	}
 
 	

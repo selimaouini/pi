@@ -4,12 +4,18 @@ import java.util.List;
 
 import tn.pi.entities.Comment;
 import tn.pi.entities.Post;
+import tn.pi.entities.Theme;
 
 public interface CommentService {
 	/******** JSF ********/
-	public Comment addOrUpdateComment(Comment comment);
-
-	void deleteCommentById(long idc);
+	 public String save();
+	 public Comment getComment();
+	 public String delete(long idc);
+	 public String modifier(Comment com, String description);
+	 public void loadData();
+	 public List<Comment> getComments();
+	 public String saveModif();
+	
 
 	/******** Crud ********/
 	List<Comment> retrieveAllComments();

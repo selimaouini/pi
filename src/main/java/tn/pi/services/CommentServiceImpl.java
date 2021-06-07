@@ -16,6 +16,7 @@ import tn.pi.Repository.UserRepository;
 import tn.pi.entities.Comment;
 import tn.pi.entities.Likes;
 import tn.pi.entities.Post;
+import tn.pi.entities.Theme;
 import tn.pi.entities.User;
 
 @Service
@@ -31,10 +32,14 @@ public class CommentServiceImpl implements CommentService {
 	@Autowired
 	LikesRepository likesRepository; 
 
+	
+	private Comment comment = new Comment();
+	private List<Comment> comments;
+	
 	private static final Logger log = LogManager.getLogger(CommentServiceImpl.class);
 
 	/******** JSF ********/
-	@Override
+	/*@Override
 	public Comment addOrUpdateComment(Comment comment) {
 		commentRepository.save(comment);
 		return comment;
@@ -44,6 +49,55 @@ public class CommentServiceImpl implements CommentService {
 	public void deleteCommentById(long idc) {
 		commentRepository.deleteById(idc);
 
+	}*/
+	
+	@Override
+	public String save() {
+		commentRepository.save(comment);
+		comment = new Comment();
+		return "/pages/post/detail.xhtml?faces-redirect=true";
+		
+	}
+	
+	@Override
+	public Comment getComment() {
+		return comment;
+	}
+
+	@Override
+	public String delete(long idc) {
+		Comment com = commentRepository.findById(idc).get();
+		commentRepository.delete(com);
+		return "/pages/post/detail.xhtml?faces-redirect=true";
+	}
+
+
+	@Override
+	public String modifier(Comment com, String description) {
+	comment= com;
+			return "/pages/post/update-com.xhtml?faces-redirect=true";
+	}
+	
+	
+	@Override
+	public void loadData() {
+		comments = (List<Comment>) commentRepository.findAll();
+		
+	}
+
+	@Override
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	@Override
+	public String saveModif() {
+		Comment com =commentRepository.findById(comment.getIdc()).get();
+		com.setDescription(comment.getDescription());
+		commentRepository.save(com);
+		comment = new Comment();
+		return "/pages/post/detail.xhtml?faces-redirect=true";
+		
 	}
 
 	/******** Crud ********/
@@ -176,6 +230,7 @@ public class CommentServiceImpl implements CommentService {
 	                l.setComment(comment);
 	                l.setUser(user);
 	                l.setLiked(liked);
+	                l.setEtat("like");
 	                likesRepository.save(l);
 	            }
 	        }
@@ -198,11 +253,14 @@ public void dislikeComment(long idc, long id, boolean disliked) {
                l=new Likes();
                l.setComment(comment);
                l.setUser(user);
+               l.setEtat("dislike");
                l.setDisliked(disliked);
                likesRepository.save(l);
            }
        }
    }
+
+
 }
 
 /* 

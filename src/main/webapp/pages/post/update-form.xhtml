@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+			rel="stylesheet" />
+	</h:head>
+	<h:body>
+		<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+			template="/template/template.xhtml">
+			<ui:param name="page_name" value="Forum" />
+			<ui:define name="menu">
+
+				<h:form id="postForm">
+					<p:panel header="Modifier Article ">
+
+						<h:panelGroup columns="2">
+							<h:form>
+								<fieldset
+									class="border-blue-400 border-2 p-4 m-4 min-w-min max-w-screen-sm">
+									<legend class="text-blue-400">Article détails</legend>
+
+									<div class="card">
+										<h:form>
+											<p:messages id="msgs" />
+
+											<h:panelGrid columns="3" cellpadding="7" styleClass="p-mb-3">
+												<p:outputLabel for="title" value="Titre:" />
+												<p:inputText id="title"
+													value="#{posttController.post.title}" required="true"
+													label="title">
+													<f:validateLength minimum="2" />
+												</p:inputText>
+												<p:message for="title" display="icon" />
+
+												<p:outputLabel for="content" value="Description:" />
+												<p:inputTextarea rows="5" cols="93" id="content"
+													value="#{posttController.post.content}" />
+												<p:message for="content" display="icon" />
+
+												<p:outputLabel for="theme" value="Sujet:" />
+												<p:inputText id="theme"
+													value="#{posttController.post.theme}" required="true"
+													label="theme">
+													<f:validateLength minimum="2" />
+												</p:inputText>
+												<p:message for="title" display="icon" />
+
+												<h:commandButton value="Save" action="#{posttController.saveModif}" />
+											</h:panelGrid>
+										</h:form>
+									</div>
+
+								</fieldset>
+
+
+
+							</h:form>
+						</h:panelGroup>
+					</p:panel>
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+</html>

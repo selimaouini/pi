@@ -38,7 +38,7 @@
 
  <p:toolbarGroup align="right">
                
-                <p:linkButton outcome="/pages/post/ancienlist" value="Plus ancien" icon="pi pi-sort-alt" styleClass="ui-button-help" ajax="false" action="#{postController.getAncien()}" >
+                <p:linkButton outcome="/pages/post/list" value="Plus récent" icon="pi pi-sort-alt" styleClass="ui-button-help" ajax="false" action="#{postController.getAncien()}" >
                   
              </p:linkButton>
             </p:toolbarGroup>
@@ -50,7 +50,7 @@
 <h:form>
 <div class="post">
 
-<p:dataTable value="#{postController.posts}" var="post" border="1" reflow="true" styleClass="posts-table"
+<p:dataTable value="#{postController.ancien}" var="post" border="1" reflow="true" styleClass="posts-table"
                       rowKey="#{post.idP}" paginator="true"  
                      rows="10" rowSelectMode="add" paginatorPosition="bottom">
 

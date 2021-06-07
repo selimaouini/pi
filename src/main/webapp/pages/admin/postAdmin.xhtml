@@ -1,56 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/TemplateAdmin/template.xhtml">
-	<ui:define name="adminposts">
-
-		<h:head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+	<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		</h:head>
 		<h:body>
+		<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+			template="/template/templateadmin.xhtml">
+			<ui:param name="page_name" value="Dashboard" />
+			<ui:define name="menu">
+
+    
+				
+<!-- BEGIN  -->
 			<h:form>
 				<center>
-					<div class="feature-img">
-						<h:outputText value="#{ControllerValidatePost.findSujetrec1().id}"
-							style="display: none" />
-						<ui:param name="ImageSujet"
-							value="#{ControllerImagesSujet.getImageSujet(ControllerValidatePost.sujetrec.id)}" />
-						<img class="img-fluid" src="#{ImageSujet.image}" alt="" />
-					</div>
-
-					<h2>
-						<h:outputText value="#{ControllerValidatePost.sujetrec.nomSujet}" />
-					</h2>
-					<p>
-						<h:outputText
-							value="#{ControllerValidatePost.sujetrec.description}" />
-					</p>
+					<div>
+						<h:outputText value="#{ControllerValidatePost.findPostrec1().idP}"
+							style="display: none" />				
+					</div>					
+					<h2><h:outputText value="#{ControllerValidatePost.postrec.title}" /></h2>
+					<p><h:outputText value="#{ControllerValidatePost.postrec.content}" /></p>
+					
+					
 					<div style="padding-left: 20%">
 					<table>
-						<tr>
-						
-							<td><h:commandLink value="accpted " action="#{ControllerValidatePost.accptedSujet(ControllerValidatePost.sujetrec.id)}" class="btn btn-lg btn-success">
-												<i class="ace-icon fa fa-check"></i>
-												
-											</h:commandLink></td>
-							<td><h:commandLink value="Refused 	" action="#{ControllerValidatePost.refuseSujet(ControllerValidatePost.sujetrec.id)}" class="btn btn-lg btn-danger">
-							
-								<i class="ace-icon fa  fa-times "></i>
-									
-							</h:commandLink>
-							</td>
+						<tr>						
+							<td><h:commandLink value="Accepte" action="#{ControllerValidatePost.accptedPost(ControllerValidatePost.postrec.idP)}" class="btn btn-lg btn-success">
+												<i class="ace-icon fa fa-check"></i> </h:commandLink></td>
+							<td><h:commandLink value="Refuse" action="#{ControllerValidatePost.refusePost(ControllerValidatePost.postrec.idP)}" class="btn btn-lg btn-danger">					
+								<i class="ace-icon fa  fa-times "></i> </h:commandLink> </td>
 						</tr>
 					</table>
 					</div>
 				</center>
 			</h:form>
-		</h:body>
-	</ui:define>
-
-
-
-
-</ui:composition>
+			</ui:define>
+			</ui:composition>
+</h:body>
+</f:view></html>

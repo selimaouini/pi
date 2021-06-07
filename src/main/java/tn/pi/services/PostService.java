@@ -13,51 +13,51 @@ import tn.pi.entities.User;
 public interface PostService {
 	
 	/******** jsf ********/
-	 public String save(Post p);
+	 public long addOrUpdatePost(Post post) ;
+	 public Post addPostt(Post p);
+	 public String delete1(long idP);
+
+	 //2éme méthode
+	 public String save();
 	 public Post getPost();
 	 public String delete(long idP);
-	 public String modifier(Post p, String title, String content,String photo, Theme theme);
+	 public String modifier(Post p, String title, String content, Theme theme);
 	 public void loadData();
 	 public List<Post> getPosts();
 	 public String saveModif();
 
-	 public void deleteP(long idP);
-	public Post addPostt(Post p);
 	/******** Crud ********/
-	List<Post> retrieveAllPosts();// done
-
-	String addPost(Post p, long id); // done
-
-	void updatePost(Post p); // done
+	public List<Post> retrieveAllPosts();// done
+	public String addPost(Post p, long id); // done
+	public void updatePost(Post p); // done
 	// Post getPostById(String idP); //done
-
-	void deletePost(String idP); // done
+	public	void deletePost(String idP); // done
 
 	/******** Get By ********/
-	Post getPostById(long idP); //done
-
+	public Post getPostById(long idP); //done
 	public List<Post> getPostByUserId(Long id);
-
+ 	public List<Post> findPostbyUser(Long id);
+ 
 	/******** Search ********/
-
 	public List<Post> search(String word);//done
 
 	/******** Filtre ********/
-
-	List<Post> retrievePostsByDateAsc(); // filtre by date asc done
-
-	List<Post> getAllPostsOrderedByDate(); // filtre by date desc done
+	public List<Post> retrievePostsByDateAsc(); // filtre by date asc done
+	public List<Post> getAllPostsOrderedByDate(); // filtre by date desc done
 
 	/******** Suppression automatique ********/
-	void deleteSansInteraction(); // not commented
+	public void deleteSansInteraction(); // not commented
 
 	// void affectPostToUser(int id, int idP);
 
 	/******** Post a la une ********/
-	List<String> PostMostCommented();
+	public List<String> PostMostCommented();
 
-	public void accpeterPost (Long idP);
+	/******** Partie Admin ********/
+	public void accepterPost (Long idP);
 	public void RefuserPost (Long idP);
 	public List<Post> getAllPostEtatWaiting();
+	public List<Post> getAllPostEtatAccepted();
+
 	// public void uploadImage(final MultipartFile file);
 }

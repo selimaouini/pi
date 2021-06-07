@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Consommi Tounsi </title>
+    </h:head>
+    <h:body>
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <p:toolbar>
+                    <f:facet name="left">
+                     <a class="navbar-brand page-scroll" href="#page-top"><span>CONSOMMI TOUNSI</span></a>
+             <img class="img-responsive" src="logo.png/"></img>
+          
+ <p:button value="Produits" styleClass="ui-button-secondary ui-button-flat"  icon="pi pi-th-large" style="margin-left:30px ;icon-size:20px;font-size:20px;;width:130px;"/>
+     <p:button value="Commandes" styleClass="ui-button-secondary ui-button-flat"  icon="pi pi-shopping-cart" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;" />
+ <p:button value="Evénements" styleClass="ui-button-secondary ui-button-flat" icon="pi pi-calendar" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;" />                
+ <p:button value="Livraisons" styleClass="ui-button-secondary ui-button-flat" icon="pi pi-list" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;"/>
+  <p:button value="Forum" outcome="/pages/post/list" styleClass="ui-button-secondary ui-button-flat" icon="pi pi-comments" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;"/>
+  <p:button value="Catalogue" styleClass="ui-button-secondary ui-button-flat" icon=" pi pi-book" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;"/>
+     <p:button value="Stock" styleClass="ui-button-secondary ui-button-flat"  icon="pi pi-fw pi-inbox" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;"/>
+                    </f:facet>
+                    
+                      <f:facet name="right">                  
+<p:button icon="pi pi-bell" styleClass="rounded-button ui-button-info" style="margin-left:10px;" />
+ <p:button icon="pi pi-heart" styleClass="rounded-button ui-button-info"  style="margin-left:10px;"/>
+  <p:button icon="pi pi-user" styleClass="rounded-button ui-button-info" style="margin-left:10px;" />
+   <p:button  styleClass="rounded-button ui-button-info" icon="pi pi-sign-out" style="margin-left:10px;" />
+                    </f:facet>
+                </p:toolbar>
+            </div>
+            </div>
+            </h:body>
+            </f:view>
+     
+</html>

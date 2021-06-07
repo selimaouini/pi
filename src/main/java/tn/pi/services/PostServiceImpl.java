@@ -50,13 +50,73 @@ public class PostServiceImpl implements PostService {
 
 	private static final Logger log = LogManager.getLogger(PostServiceImpl.class);
 
-	
-	
+	/******** jsf ********/
+	// méthode cours
 	@Override
-	public void deleteP(long idP) {
-		postRepository.deleteById(idP);
-		
+	public long addOrUpdatePost(Post post) {
+		postRepository.save(post);
+		return post.getIdP();
 	}
+
+	// 2éme méthode jsf crud
+	@Override
+	public String save() {
+		postRepository.save(post);
+		post = new Post();
+		return "/pages/post/list.xhtml?faces-redirect=true";
+
+	}
+
+	@Override
+	public String delete1(long idP) {
+		Post p = postRepository.findById(idP).get();
+		postRepository.delete(p);
+		return "/pages/post/list.xhtml?faces-redirect=true";
+
+	}
+
+	@Override
+	public String delete(long idP) {
+		Post p = postRepository.findById(post.getIdP()).get();
+		postRepository.deleteById(idP);
+		return "/pages/post/list.xhtml?faces-redirect=true";
+	}
+
+	@Override
+	public String modifier(Post p, String title, String content, Theme theme) {
+		post = p;
+		return "/pages/post/post_form_modif.xhtml?faces-redirect=true";
+	}
+
+	@Override
+	public Post getPost() {
+		return post;
+	}
+
+	@Override
+	public void loadData() {
+		posts = (List<Post>) postRepository.findAll();
+
+	}
+
+	@Override
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	@Override
+	public String saveModif() {
+		Post p1 = postRepository.findById(post.getIdP()).get();
+		p1.setTitle(post.getTitle());
+		p1.setContent(post.getContent());
+		// p.setPhoto(post.getPhoto());
+		p1.setTheme(post.getTheme());
+		postRepository.save(p1);
+		post = new Post();
+		return "/pages/post/list.xhtml?faces-redirect=true";
+
+	}
+
 	/******** CRUD ********/
 
 	@Override
@@ -73,7 +133,7 @@ public class PostServiceImpl implements PostService {
 		postRepository.save(post);
 		return post;
 	}
-	
+
 	@Override
 	public String addPost(Post p, long id) {
 		// Post p = postRepository.findById(idP).get();
@@ -94,8 +154,8 @@ public class PostServiceImpl implements PostService {
 				return "** Attention il y a un autre post avec ce titre **";
 			// p.setTitle();
 			p.setContent("***");
-			p.setEtat("Waiting");
-			p.setUsername(user.getFirstName()+" "+user.getLastName());
+			p.setEtat("waiting");
+			p.setUsername(user.getFirstName() + " " + user.getLastName());
 			// Date currentSqlDate= new Date (System.currentTimeMillis());
 			// p.setDateCreation(currentSqlDate);
 			postRepository.save(p);
@@ -112,8 +172,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 	/*
-	 * User user = userRepository.findById(id).orElse(null); if (user != null)
-	 * { // Test titres redondants if
+	 * User user = userRepository.findById(id).orElse(null); if (user != null) {
+	 * // Test titres redondants if
 	 * (postRepository.findByTitle(p.getTitle()).size() > 0) return
 	 * "** Il y a 2 publications avec ce titre **"; // String[] title =
 	 * p.getTitle().replaceAll(" +", " ").split(" "); // forbidden words
@@ -138,20 +198,21 @@ public class PostServiceImpl implements PostService {
 			p.setTitle(post.getTitle());
 			p.setContent(post.getContent());
 			p.setPhoto(post.getPhoto());
-		//	p.setRating(post.getRating());
-		    p.setTheme(post.getTheme());
-		//	p.setDateCreation(post.getDateCreation());
+			// p.setRating(post.getRating());
+			p.setTheme(post.getTheme());
+			// p.setDateCreation(post.getDateCreation());
 			p.setPostdToBeUpdated(post.getPostdToBeUpdated());
 			p.setUser(post.getUser());
 			postRepository.save(p);
 		}
 	}
 
-	
 	public Post getPostById(long idP) {
 		return postRepository.findById(idP).orElse(null);
+
 	}
 
+	
 	@Override
 	public void deletePost(String idP) {
 		postRepository.deleteById(Long.parseLong(idP));
@@ -163,7 +224,16 @@ public class PostServiceImpl implements PostService {
 	public List<Post> getPostByUserId(Long id) {
 		return (List<Post>) postRepository.getPostByUserId(id);
 	}
-
+	
+	@Override
+	public List<Post> findPostbyUser(Long id) {
+		User user = userRepository.findById(id).get();
+		List<Post> posts = new ArrayList<>();
+		for(Post p :user.getPosts())
+			posts.add(p);
+			return posts;
+			
+	}
 	@Override
 	public List<Post> retrievePostsByDateAsc() {
 		List<Post> posts = (List<Post>) postRepository.getAllPostsOrderByDateByDateAsc();
@@ -196,77 +266,34 @@ public class PostServiceImpl implements PostService {
 
 	}
 
+	/******** Partie Admin ********/
 	@Override
-	public String save(Post p) {
+	public void accepterPost (Long idP){
+		Post post = postRepository.findById(idP).get();
+		post.setEtat("Accepted");
 		postRepository.save(post);
-		post = new Post();
-		return "/list.xhtml?faces-redirect=true";
 
 	}
 
-	@Override
-	public Post getPost() {
-		return  post;
-	}
-
-	@Override
-	public String delete(long idP) {
-		Post p =postRepository.findById(idP).get();
-		postRepository.delete(p);
-		return "/list.xhtml?faces-redirect=true";
-
-	}
-
-	@Override
-	public String modifier(Post p, String title, String content, String photo, Theme theme) {
-		post=p;
-		return "/update.xhtml?faces-redirect=true";
-
-	}
-
-	@Override
-	public void loadData() {
-		posts = (List<Post>) postRepository.findAll();
-		
-	}
-
-	@Override
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-	
-	
-	@Override
-	public String saveModif() {
-		Post p=postRepository.findById(post.getIdP()).get();
-		p.setTitle(post.getTitle());
-		p.setContent(post.getContent());
-		p.setPhoto(post.getPhoto());
-		p.setTheme(post.getTheme());
-		postRepository.save(p);
-		post = new Post();
-		return "/list.xhtml?faces-redirect=true";
-
-	}
-	@Override
-	public void accpeterPost(Long idP) {
-		Post post=postRepository.findById(idP).get();
-		post.setEtat("Accpted");
-		postRepository.save(post);
-		
-	}
 	@Override
 	public void RefuserPost(Long idP) {
-		Post post=postRepository.findById(idP).get();
-		post.setEtat("Accpted");
+		Post post = postRepository.findById(idP).get();
+		post.setEtat("Refused");
 		postRepository.save(post);
-		
+
 	}
+
 	@Override
 	public List<Post> getAllPostEtatWaiting() {
 		return postRepository.findAllbyEtatWaiting();
 	}
+
+	@Override
+	public List<Post> getAllPostEtatAccepted() {
+		return postRepository.findAllbyEtataccepted();
+	}
+
+
 
 	/*
 	 * public void uploadImage(final MultipartFile file) { // UUID

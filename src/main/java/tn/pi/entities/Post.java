@@ -71,6 +71,7 @@ private String username;
 	@ManyToOne(cascade = CascadeType.ALL)
 	User User ;
 	
+	@JsonIgnore
 	@JsonBackReference(value="Comment_post")
 	@OneToMany(mappedBy="Post" , fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
 		public List<Comment> comments;
@@ -230,27 +231,16 @@ public User getUser() {
 	}
 
 	public Post(@NotEmpty @Size(min = 3, max = 25, message = " you should insert at least 1 character ") String title,
-			@NotEmpty String content, String photo, Theme theme, Long postdToBeUpdated) {
+			@NotEmpty String content,  Theme theme, Long postdToBeUpdated) {
 		super();
 		this.title = title;
 		this.content = content;
-		this.photo = photo;
+
 		this.theme = theme;
 		this.postdToBeUpdated = postdToBeUpdated;
 	}
 
-	public Post(long idP,
-			@NotEmpty @Size(min = 3, max = 25, message = " you should insert at least 1 character ") String title,
-			@NotEmpty String content, String photo , Theme theme, Long postdToBeUpdated) {
-		super();
-		this.idP = idP;
-		this.title = title;
-		this.content = content;
-		this.photo = photo;
-		this.theme = theme;
-		this.postdToBeUpdated = postdToBeUpdated;
-	}
-
+	
 	
 
 }

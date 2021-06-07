@@ -30,9 +30,16 @@ public interface LikesRepository extends CrudRepository<Likes, Long> {
 	
 	@Query("select l from Likes l where  l.comment.idc=:idc and l.user.id=:id ")
 	public Likes getDislikesByComAndUser (@Param("idc") long idc, @Param("id") long id);
-    
+  
 	
-	//
+	/*
+	
+	@Query(value = "select count(*) from Likes where nb_like=1 and id_sujet= ?1", nativeQuery = true)
+	 public int countlike(Long sujetId);
+	
+	@Query(value = "select count(*) from Likes where nb_dislike=1 and id_sujet= ?1", nativeQuery = true)
+	 public int countdislike(Long sujetId);
+*/
 	
 	/*
 		
