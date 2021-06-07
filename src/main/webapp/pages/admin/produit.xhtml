@@ -12,6 +12,8 @@ xmlns:p="http://primefaces.org/ui">
 <p:panel>
   
 <h:form>
+
+
 <p:toolbarGroup align="right">
              
                 <p:commandButton value="Export" icon="pi pi-upload" styleClass="ui-button-help" ajax="false">
@@ -20,7 +22,7 @@ xmlns:p="http://primefaces.org/ui">
                
                 
             </p:toolbarGroup>
-           
+        
             
             
        
@@ -80,8 +82,8 @@ xmlns:p="http://primefaces.org/ui">
 <p:column><f:facet name="header"><h:outputText value="Prix" /></f:facet>
 <h:outputText value="#{LigneComand.price}" /></p:column>
 
-<p:column><f:facet name="header"><h:outputText value="Date" /></f:facet>
-<h:outputText value="#{LigneComand.date}" /></p:column>
+<p:column><f:facet name="header"><h:outputText value="Produit" /></f:facet>
+<h:outputText value="#{LigneComand.nomp}" /></p:column>
 <p:column> <f:facet name="header"><h:outputText value="incrémenter" /></f:facet>
 <h:commandButton action="#{ProducttController.incrementer(LigneComand.idlc)}" value= "+" /></p:column>
 <p:column> <f:facet name="header"><h:outputText value="Décrementer" /></f:facet>

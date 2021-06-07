@@ -26,6 +26,7 @@ public class LigneComand implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idlc;
+	private String nomp;
     //@PositiveOrZero
 	private int qte;
 	//@PositiveOrZero
@@ -61,6 +62,12 @@ public class LigneComand implements Serializable{
 		this.produit = produit;
 	}
 	
+	public String getNomp() {
+		return nomp;
+	}
+	public void setNomp(String nomp) {
+		this.nomp = nomp;
+	}
 	public Cart getCart() {
 		return cart;
 	}
@@ -141,13 +148,24 @@ public class LigneComand implements Serializable{
 		this.produit = produit;
 		this.user = user;
 	}
+	public LigneComand(int idlc, String nomp, int qte, double price, Date date, Cart cart, Product produit, User user) {
+		super();
+		this.idlc = idlc;
+		this.nomp = nomp;
+		this.qte = qte;
+		this.price = price;
+		this.date = date;
+		this.cart = cart;
+		this.produit = produit;
+		this.user = user;
+	}
 	@Override
 	public String toString() {
-		return "LigneComand [idlc=" + idlc + ", qte=" + qte + ", price=" + price + ", date=" + date + ", cart=" + cart
-				+ ", produit=" + produit + ", user=" + user + "]";
+		return "LigneComand [idlc=" + idlc + ", nomp=" + nomp + ", qte=" + qte + ", price=" + price + ", date=" + date
+				+ ", cart=" + cart + ", produit=" + produit + ", user=" + user + "]";
 	}
-
-
+	
+	
 	
 	
 	

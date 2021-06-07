@@ -26,6 +26,8 @@ public interface IdemandestockService {
 
 	public String refuserdemande(int demandeID);
 
+	public int nbdemande();
+
 
 
 	

@@ -71,6 +71,7 @@ public  class LigneCommandeService implements ILigneCommandeService {
 			//double tot1=lcrep.sum(cart);
 		if (!ObjectUtils.isEmpty(lc) && !ObjectUtils.isEmpty(pro)) {
 		lc.setUser(user);
+		lc.setNomp(pro.getProductName());
 		lc.setProduit(pro);
 		lc.setPrice(pro.getSellPrice());
 		lc.setQte(quantity);

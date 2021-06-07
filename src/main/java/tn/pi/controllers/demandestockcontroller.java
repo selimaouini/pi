@@ -64,7 +64,16 @@ public class demandestockcontroller {
 	private  Etatdemande etatdemande;
 	private Stock Stock;
 	private String nomp;
+	private int notif;
 	
+	
+	public int getNotif() {
+		notif = ds.nbdemande();
+		return notif;
+	}
+	public void setNotif(int notif) {
+		this.notif = notif;
+	}
 	public List<Demandestock> getDemandestock() {
 		demandestock = ds.getdemande();
 		return demandestock;

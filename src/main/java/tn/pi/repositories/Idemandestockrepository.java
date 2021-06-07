@@ -12,9 +12,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import tn.pi.entities.Ads;
 import tn.pi.entities.Bill;
 import tn.pi.entities.Cart;
 import tn.pi.entities.Demandestock;
+import tn.pi.entities.Etatdemande;
 import tn.pi.entities.ModePayement;
 import tn.pi.entities.Product;
 import tn.pi.entities.TypeFacture;
@@ -23,5 +25,6 @@ import tn.pi.entities.User;
 
 @Repository
 public interface Idemandestockrepository extends JpaRepository<Demandestock, Integer>{
-	
+	@Query("select count(c) from Demandestock c where c.etatdemande=:y ")
+	public int countt(@Param("y")Etatdemande etatdemande);
 }

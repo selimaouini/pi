@@ -55,7 +55,13 @@ public  class DemandestockService implements IdemandestockService{
 		return "the stock is deleted successfully";
 		
 	}
-
+    
+	
+	 @Override 
+	 public int nbdemande()
+	 {return demrep.countt(Etatdemande.encours);}
+		 
+	 
 	@Override
 	public List<Demandestock> getdemande() {
 	
