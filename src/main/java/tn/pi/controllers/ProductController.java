@@ -90,7 +90,17 @@ private Category category;
 private boolean promotionEtat;
 private int idrating;
 private int nbretoile;
+private String categ;
 
+
+
+public String getCateg() {
+	return categ;
+}
+
+public void setCateg(String categ) {
+	this.categ = categ;
+}
 
 public List<Product> getProductboissons() {
 	productboissons =ProductService.filterProductByCategory("Boissons");
@@ -200,13 +210,12 @@ public List<Product> getProduct() {
 public void setProduct(List<Product> product) {
 	product = product;
 }
-int idCategory=3;
+
 
 public Product addProduct(){
 	    
 	Product prod = new Product();
-	//Category category = CategoryRepository.findById(3).get();
-   // prod.setCategory(category);
+	
 	prod.setProductName(productName);
 	prod.setPicture(picture);
 	prod.setDescription(description);
@@ -215,8 +224,9 @@ public Product addProduct(){
 	prod.setPricepromotion(pricepromotion);
 	prod.setBarCode(barCode);
 	prod.setMostViewed(mostViewed);
+	prod.setCateg(categ);
 	//prod.setPromotionEtat(promotionEtat);
-	ProductService.addProduct( prod, idCategory);
+	ProductService.addProduct(prod);
 	return prod;
 }
 public int Ajouterpub(int idproduit){

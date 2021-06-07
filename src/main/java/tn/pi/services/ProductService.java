@@ -25,7 +25,7 @@ public interface ProductService {
     public boolean verifyProduct(String barCode);
     public Product findProductByBarCode(String barCode);
 //	Product findProductByBarCode(int idCategory, Product prod);
-	Product addProduct(Product prod,int idCategory);
+	//Product addProduct(Product prod,int idCategory);
 	List<Product> filterProductByCategory(String categoryName);
 	public Product findProductByCategoryId(int id);
 	Product findProductByIdCategory(int id);
@@ -39,6 +39,7 @@ public interface ProductService {
 	public Product getepuisé();
 	public Product Expireddel();
 	public Product sendmail();
+	Product addProduct(Product prod);
 	
 	
 	

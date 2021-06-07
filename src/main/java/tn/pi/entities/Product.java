@@ -44,6 +44,7 @@ public class Product implements Serializable{
 	private Date dateexpiration;
 	private int weigth;
 	private float pricepromotion;
+	private String categ;
 
 	private boolean promotionEtat;
 	@JsonIgnore
@@ -97,6 +98,14 @@ public class Product implements Serializable{
 
 	public void setRating(List<Rating> rating) {
 		this.rating = rating;
+	}
+    
+	public String getCateg() {
+		return categ;
+	}
+
+	public void setCateg(String categ) {
+		this.categ = categ;
 	}
 
 	public String getProductName() {
@@ -386,17 +395,44 @@ public class Product implements Serializable{
 		this.promotions = promotions;
 		this.category = category;
 	}
+
+	public Product(int idProduct, String productName, String picture, String description, float price,
+			boolean newProduct, String barCode, Date createdAt, int mostViewed, boolean expired, Date dateexpiration,
+			int weigth, float pricepromotion, String categ, boolean promotionEtat, List<Promotion> promotions,
+			tn.pi.entities.Ads ads, Category category, List<Rating> rating, Stock stock) {
+		super();
+		this.idProduct = idProduct;
+		this.productName = productName;
+		this.picture = picture;
+		this.description = description;
+		this.price = price;
+		this.newProduct = newProduct;
+		this.barCode = barCode;
+		this.createdAt = createdAt;
+		this.mostViewed = mostViewed;
+		this.expired = expired;
+		this.dateexpiration = dateexpiration;
+		this.weigth = weigth;
+		this.pricepromotion = pricepromotion;
+		this.categ = categ;
+		this.promotionEtat = promotionEtat;
+		this.promotions = promotions;
+		Ads = ads;
+		this.category = category;
+		this.rating = rating;
+		this.stock = stock;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [idProduct=" + idProduct + ", productName=" + productName + ", picture=" + picture
 				+ ", description=" + description + ", price=" + price + ", newProduct=" + newProduct + ", barCode="
-				+ barCode + ", createdAt=" + createdAt + ", mostViewed=" + mostViewed + ", weigth=" + weigth
-				+ ", promotions=" + promotions + ", Ads=" + Ads + ", category=" + category + ", rating=" + rating
-				+ ", stock=" + stock + "]";
+				+ barCode + ", createdAt=" + createdAt + ", mostViewed=" + mostViewed + ", expired=" + expired
+				+ ", dateexpiration=" + dateexpiration + ", weigth=" + weigth + ", pricepromotion=" + pricepromotion
+				+ ", categ=" + categ + ", promotionEtat=" + promotionEtat + ", promotions=" + promotions + ", Ads="
+				+ Ads + ", category=" + category + ", rating=" + rating + ", stock=" + stock + "]";
 	}
-
-	
-	
+ 
 	
 	
 	

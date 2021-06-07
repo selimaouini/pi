@@ -78,11 +78,15 @@ public class UserController {
 		if (u != null && u.getRole() == RoleType.ADMIN) {
 		navigateTo = "/pages/admin/homeadmin.xhtml?faces-redirect=true";
 		loggedIn = true; }
+		
+		
 		else if (u != null && u.getRole() == RoleType.CLIENT){
 		navigateTo = "/pages/admin/home.xhtml?faces-redirect=true";	
 		}
+		
 		else if (u != null && u.getRole() == RoleType.supp){
 			navigateTo = "/pages/admin/homesup.xhtml?faces-redirect=true";	}
+		
 		else {
 		FacesMessage facesMessage =
 		new FacesMessage("Login Failed: please check your username/password and try again.");

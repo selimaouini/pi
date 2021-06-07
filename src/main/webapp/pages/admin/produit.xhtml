@@ -82,9 +82,9 @@ xmlns:p="http://primefaces.org/ui">
 
 <p:column><f:facet name="header"><h:outputText value="Date" /></f:facet>
 <h:outputText value="#{LigneComand.date}" /></p:column>
-<p:column> <f:facet name="header"><h:outputText value="Quantité" /></f:facet>
-<h:commandButton action="#{ProducttController.incrementer(LigneComand.idlc)}" value="+" />
-
+<p:column> <f:facet name="header"><h:outputText value="incrémenter" /></f:facet>
+<h:commandButton action="#{ProducttController.incrementer(LigneComand.idlc)}" value= "+" /></p:column>
+<p:column> <f:facet name="header"><h:outputText value="Décrementer" /></f:facet>
 <h:commandButton action="#{ProducttController.decrementer(LigneComand.idlc)}" value="-" /></p:column>
 
 

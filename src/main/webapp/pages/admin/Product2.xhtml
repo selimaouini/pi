@@ -23,11 +23,16 @@ xmlns:p="http://primefaces.org/ui">
                         <p:inputText id="productName" value="#{ProductController.productName}" required="true" label="productName">
                         
                         </p:inputText>
-                        
-                        <p:message for="productName" display="text"/>
+                          <p:message for="productName" display="text"/>
                         <p:tooltip for="productName" value="Enter the product name" my="right center" at="left center"/>
                          
                     </div>
+                     <div class="p-field">
+                         <p:outputLabel for="categ">Category</p:outputLabel>
+                        <p:inputText id="categ" value="#{ProductController.categ}" required="true" label="Category"/>
+                          <p:message for="categ" display="text"/>
+                        <p:tooltip for="productName" value="Enter the product Category" my="right center" at="left center"/>
+                       </div>
                     <div class="p-field">
                         <p:outputLabel for="description">Description</p:outputLabel>
                         <p:inputTextarea id="description" value="#{ProductController.description}" required="true" label="description"/>

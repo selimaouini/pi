@@ -27,11 +27,13 @@ import tn.pi.entities.Etatdemande;
 import tn.pi.entities.Product;
 import tn.pi.entities.Promotion;
 import tn.pi.entities.Rating;
+import tn.pi.entities.Stock;
 import tn.pi.repositories.ProductRepository;
 import tn.pi.repositories.PromotionRepository;
 import tn.pi.repositories.RatingRepository;
 import tn.pi.repositories.demechangerep;
 import tn.pi.repositories.CategoryRepository;
+import tn.pi.repositories.IStockRepository;
 import tn.pi.repositories.AdsRepository;
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -39,6 +41,8 @@ public class ProductServiceImpl implements ProductService{
 	ProductRepository ProductRepository;
 	@Autowired
 	CategoryRepository CategoryRepository;
+	@Autowired
+	IStockRepository sr;
 	@Autowired
 	AdsRepository AdsRepository;
 	@Autowired
@@ -240,18 +244,30 @@ public class ProductServiceImpl implements ProductService{
 	@Transactional
 	@Override
 	
-	public Product addProduct(Product prod, int idCategory) {
+	public Product addProduct(Product prod) {
 		
 		/// prod.setCategoryname(category.getname);
 		
-		Category category = CategoryRepository.findById(idCategory).get();
+
 		
-		prod.setCategory(category);
+	
 	    
 			   
 		        prod.setCreatedAt(new Date());
-				ProductRepository.save(prod);
-				return prod;
+		        Stock s = new Stock();
+		        s.setDateCreation(new Date());
+		        s.setProducts(prod);
+		        s.setNomp(prod.getProductName());
+		        s.setQuantity(30);
+		        Category cat = new Category();
+		        cat.setName(prod.getCateg());
+		    	prod.setCategory(cat);
+		        ProductRepository.save(prod);
+		        sr.save(s);
+		        CategoryRepository.save(cat);
+		        
+		        
+		        return prod;
 			
 	}
 
