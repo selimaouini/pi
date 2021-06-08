@@ -1,5 +1,6 @@
 package tn.pi.controllers;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import freemarker.template.TemplateException;
 import tn.pi.entities.Claim;
 import tn.pi.entities.Command;
 import tn.pi.entities.Decision;
@@ -169,13 +171,21 @@ public class ClaimController {
 		dc.getClaim().setState(true);
 		addMessage(FacesMessage.SEVERITY_INFO, "Success", "Decision added");
 
-		try {
+		
 			
-			EmailService.sendMail(dc.getClaim().getUser().getEmail() , " Reclamation Recu", dc.getDecision_result());
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			try {
+				EmailService.sendMail(dc.getClaim().getUser().getEmail() , " Reclamation Recu", dc.getDecision_result());
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (TemplateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 
 		
 		

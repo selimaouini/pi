@@ -1,5 +1,6 @@
 package tn.pi.services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,6 +9,8 @@ import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import freemarker.template.TemplateException;
 import tn.pi.repositories.UserRepository;
 import tn.pi.repositories.claimRepository;
 import tn.pi.repositories.decisionRepository;
@@ -88,19 +91,28 @@ public class claimServicesImpl implements claimServices  {
 
 		int idaa = c.getUser().getIdUser();
 		User aa = UserRepository.findById(idaa).get();
-		try {
-			EmailService.sendMail(c.getUser().getEmail(), " Reclamation Recu", "votre réclamation a été bien prise en compte, vous devez accepter notre suggestion avant 24h de ce mail.Merci pour votre confiance ");
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
+		
+			try {
+				EmailService.sendMail(c.getUser().getEmail(), " Reclamation Recu", "votre réclamation a été bien prise en compte, vous devez accepter notre suggestion avant 24h de ce mail.Merci pour votre confiance ");
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (TemplateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			UserRepository.save(aa);
+			claimRepository.save(c);
+			 String ref=aa.getFirstName();
 			
 		}
-		UserRepository.save(aa);
-		claimRepository.save(c);
-		 String ref=aa.getFirstName();
 		
-	}
+	
+		
 
 
 	
@@ -115,12 +127,20 @@ public class claimServicesImpl implements claimServices  {
 		d.setDate_decision(new Date());
 		d.setClaim(c);
 		decisionRepository.save(d);
-		try {   
-			EmailService.sendMail(c.getUser().getEmail(), " Reclamation Recu", "votre réclamation a été bien prise en compte, vous devez accepter notre suggestion avant 24h de ce mail.Merci pour votre confiance ");
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-	}
+		   
+			try {
+				EmailService.sendMail(c.getUser().getEmail(), " Reclamation Recu", "votre réclamation a été bien prise en compte, vous devez accepter notre suggestion avant 24h de ce mail.Merci pour votre confiance ");
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (TemplateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 
 }
 	
