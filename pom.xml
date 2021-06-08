@@ -13,7 +13,6 @@
 	</parent>
 	 
 	
-	<groupId>tn.pi</groupId>
 	<artifactId>pi</artifactId>
 	<version>1.0</version>
 	<name>pi</name>
@@ -321,17 +320,21 @@ hibernate.validator/hibernate-validator -->
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
 	
+	</dependencies>
+
 	<build>
 	
 	<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+	
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+		<finalName>pi</finalName>
 	</build>
 
 </project>

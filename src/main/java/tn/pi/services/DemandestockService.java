@@ -121,7 +121,7 @@ public  class DemandestockService implements IdemandestockService{
 	
 	@Transactional
 	@Override
-	@Scheduled(cron="* 30 * * * ?")
+	@Scheduled(cron="* 47 * * * ?")
 	public Demandestock Demand() {
 		
 	Stock stock =  ss.getepuisé();
@@ -132,7 +132,9 @@ public  class DemandestockService implements IdemandestockService{
 			ds.setStock(stock);
 			ds.setNomp(ds.getStock().getProducts().getProductName());
 			ds.setEtatdemande(Etatdemande.encours);
+			
 			demrep.save(ds); 
+			stock.setQuantity(1);
 		 
 			return ds; }
 	return null ;

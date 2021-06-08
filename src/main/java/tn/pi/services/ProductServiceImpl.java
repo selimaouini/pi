@@ -3,6 +3,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -319,7 +321,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Transactional
 	@Override
-	@Scheduled(cron="* 35 * * * ?")
+	@Scheduled(cron="* 30 * * * ?")
 	public Product Expireddel() {
 		
 	Product prod =  ProductService.getepuisé();
@@ -329,7 +331,15 @@ public class ProductServiceImpl implements ProductService{
 			dc.setQuantity(prod.getStock().getQuantity());
 			dc.setEtatdemande(Etatdemande.encours);
 			dc.setNomp(prod.getProductName());
+			Date dd = prod.getDateexpiration();
 			dcr.save(dc);
+			LocalDateTime dateaffect = dd.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+			LocalDateTime tomorrow = dateaffect.plusDays(1);
+			Date d= java.util.Date.from(tomorrow.atZone(ZoneId.systemDefault()).toInstant());
+			prod.setDateexpiration(d);
+		    
+			
+			ProductRepository.save(prod);
 	
 					try {
 						emailService.sendMail("Mohamedselim.aouini@esprit.tn", "Produit expiré ", "Le produit  "+dc.getNomp() + " est expiré , une demande d'échange a été envoyée");
