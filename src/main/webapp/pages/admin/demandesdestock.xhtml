@@ -11,19 +11,6 @@ xmlns:p="http://primefaces.org/ui">
 <ui:param name="page_name" value="Accueil" />
 <ui:define name="content">
 
-<div class="card">
-
-    <p:notificationBar position="top" effect="slide" styleClass="top" widgetVar="bar">
-        <h:outputText value= "Vous avez #{demandestockcontroller.notif} Demandes  non confirmés " />  
-         <p:commandButton  onclick="PF('bar').hide()" styleClass="rounded-button ui-button-warning" icon="pi pi-arrow-up"/>
-    </p:notificationBar>
-    <p:toolbarGroup align="left">
-<div>
-    <p:commandButton onclick="PF('bar').show()"  value="#{demandestockcontroller.notif}" styleClass="rounded-button ui-button-warning" icon="pi pi-bell"/>
-   
-    </div>
-    </p:toolbarGroup>
-</div>
 
 <p:panel columns="2">
 <h:form>

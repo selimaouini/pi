@@ -22,4 +22,8 @@ public interface claimRepository extends JpaRepository<Claim,Integer> {
 	@Modifying
     @Query("UPDATE Claim c SET c.description=:description1 where c.id_claim=:claimId")
     public void updateDescriptionClaimJPQL(@Param("description1")String description, @Param("claimId")int id);
+	
+	//public List<Decision> findByDecision_stateFalse();
+		@Query("select count(c) from Claim c where c.state=false")
+		public int countt();
 }

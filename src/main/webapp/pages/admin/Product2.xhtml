@@ -10,6 +10,9 @@ xmlns:p="http://primefaces.org/ui">
 
 <p:panel>
 <h:form>
+ <p:growl>
+            <p:autoUpdate/>
+        </p:growl>
 <p:messages id="msgs"/>
 
 <p:dialog header="Add A Product" showEffect="fade" modal="true"
@@ -27,11 +30,19 @@ xmlns:p="http://primefaces.org/ui">
                         <p:tooltip for="productName" value="Enter the product name" my="right center" at="left center"/>
                          
                     </div>
-                     <div class="p-field">
-                         <p:outputLabel for="categ">Category</p:outputLabel>
-                        <p:inputText id="categ" value="#{ProductController.categ}" required="true" label="Category"/>
-                          <p:message for="categ" display="text"/>
-                        <p:tooltip for="productName" value="Enter the product Category" my="right center" at="left center"/>
+                     
+                       <div>
+                        <p:selectOneMenu id="option" value="#{ProductController.categ}">
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItem itemLabel="hello" itemValue="cremerie"/>
+                    <f:selectItem itemLabel="hello" itemValue="boissons"/>
+                   
+                    <f:facet name="footer">
+                        <p:divider styleClass="p-mt-0" />
+                        <h:outputText value="2 Catégories" style="font-weight:bold;"/>
+                    </f:facet>
+                </p:selectOneMenu>
+       
                        </div>
                     <div class="p-field">
                         <p:outputLabel for="description">Description</p:outputLabel>

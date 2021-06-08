@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+
+xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/templateadmin.xhtml"> 
+
+<ui:define name="content">
+<f:view>
+	<h:head>
+	
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Event</title>
+	</h:head>
+	<h:body>
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<h:form id="eventForm">
+					<p:panel header="Event Details">
+						<h:panelGrid columns="1">
+							<p:outputLabel for="title" value="title: " />
+							<p:inputText id="title" value="#{eventController.event.title}"
+								required="true" />
+							<p:message for="title" display="text" />
+							<p:tooltip for="title" value="Enter the title" my="right center"
+								at="left center" />
+
+							<p:outputLabel for="adress" value="Adress: " />
+							<p:inputText id="adress" value="#{eventController.event.adress}"
+								required="true" />
+							<p:message for="adress" display="text" />
+							<p:tooltip for="adress" value="Enter the adress"
+								my="right center" at="left center" />
+
+
+							<p:outputLabel for="date" value="Date: " />
+							<p:datePicker id="date" value="#{eventController.event.date}"
+								required="true" />
+							<p:message for="date" display="text" />
+							<p:tooltip for="date" value="Enter the date" my="right center"
+								at="left center" />
+
+
+
+							<h:commandButton value="Save" action="#{eventController.save}" />
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+			</div>
+		</div>
+	</h:body>
+</f:view>
+</ui:define></ui:composition>
+</html>
+
+
+

@@ -65,7 +65,14 @@ public class claimServicesImpl implements claimServices  {
 	}
 
 
-	
+	@Override
+	public int  nbnotifs(){
+	return	claimRepository.countt();
+		
+		
+		
+		
+	}
 
 
 	@Override

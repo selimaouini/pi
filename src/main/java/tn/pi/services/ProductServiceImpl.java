@@ -53,6 +53,7 @@ public class ProductServiceImpl implements ProductService{
 	EmailService  emailService;
 	@Autowired
 	RatingRepository var3;
+	@Autowired demandeechangeservice ds;
 	@Autowired
 	demechangerep dcr;
 	/************************************VerifyProduct**************************************/
@@ -321,11 +322,12 @@ public class ProductServiceImpl implements ProductService{
 
 	@Transactional
 	@Override
-	@Scheduled(cron="* 30 * * * ?")
+	@Scheduled(cron="* 05 * * * ?")
 	public Product Expireddel() {
 		
 	Product prod =  ProductService.getepuisé();
 	 if (prod !=null) {
+		 if (ds.Catalog(prod.getProductName())!=null){
 		Demandechange dc = new Demandechange();
 			dc.setDateCreation(new Date());
 			dc.setQuantity(prod.getStock().getQuantity());
@@ -337,20 +339,30 @@ public class ProductServiceImpl implements ProductService{
 			LocalDateTime tomorrow = dateaffect.plusDays(1);
 			Date d= java.util.Date.from(tomorrow.atZone(ZoneId.systemDefault()).toInstant());
 			prod.setDateexpiration(d);
+			try {
+				emailService.sendMail("Mohamedselim.aouini@esprit.tn", "Produit expiré ", "Le produit  "+prod.getProductName() + " est expiré , une demande d'échange a été envoyée");
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		    
 			
-			ProductRepository.save(prod);
-	
-					try {
-						emailService.sendMail("Mohamedselim.aouini@esprit.tn", "Produit expiré ", "Le produit  "+dc.getNomp() + " est expiré , une demande d'échange a été envoyée");
-					} catch (MessagingException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+			ProductRepository.save(prod); } 
+		 else  if (prod !=null) {
+			 ProductRepository.deleteById(prod.getIdProduct());
+			     
+		
+			 try {
+				emailService.sendMail("Mohamedselim.aouini@esprit.tn", "Produit expiré ", "Le produit  "+prod.getProductName() + "est indisponible et suprimé automatiquement");
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 				
 	//	 ProductService.deleteProduct(ProductService.getepuisé().getIdProduct());
-			 }
-	return null ;
+			 }}
+	return prod;
+	
 			
 		}
 

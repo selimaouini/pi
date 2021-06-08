@@ -11,7 +11,7 @@
 	
 	
 </h:head>
-<div class="card">
+
 
     <h:form>
         <p:growl id="messages"/>
@@ -26,19 +26,13 @@
                                   
                  </p:menuitem>
                
-              
-               
-            
-            
-            
-
-            
+           
                     
             
         </p:menubar>
      
     </h:form>
-</div>
+
    
             
                     
@@ -46,34 +40,32 @@
 	 
 <h:body>	
 <p:panel columns="2"><h:form><table>
+<h:form>
 
-<h5>Ville</h5>
-        <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col-12 p-md-4">
+ 
+  
+  <h:outputText value="Ville"></h:outputText>
+        
+        
                 
                 
                 
-                <p:selectOneMenu id="option" value="#{CascadeSelectView.selectedOption},{DeliveryController.city}" >
-                    <f:selectItem itemLabel="Choisir votre ville" itemValue=""/>
-                    <f:selectItem itemLabel="bizerte" itemValue="Option1 "/>
-                    <f:selectItem itemLabel="tunis" itemValue="Option2"/>
-                    <f:selectItem itemLabel="nabeul" itemValue="Option3"/>
-                    <f:selectItem itemLabel="sousse" itemValue="Option4"/>
-                    <f:selectItem itemLabel="sfax" itemValue="Option5"/>
-                    <f:selectItem itemLabel="gabes" itemValue="Option6"/>
-                    
+         
+                        <p:selectOneMenu id="option" value="#{DeliveryController.city}">
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItem itemLabel="Bizerte" itemValue="Bizerte"/>
+		    <f:selectItem itemLabel="Gabes" itemValue="Gabes"/>
+                    <f:selectItem itemLabel="Sousse" itemValue="Sousse"/>
+                   
                     <f:facet name="footer">
                         <p:divider styleClass="p-mt-0" />
-                        
+                        <h:outputText value="2 Catégories" style="font-weight:bold;"/>
                     </f:facet>
                 </p:selectOneMenu>
-                
-                 
-            </div>
-          </div>
-          
-    <div class="p-field">
-    <tr><td><h:outputText value="Adresse"></h:outputText></td><td><p:inputText
+     
+ 
+    <tr><td><h:outputText value="Adresse"></h:outputText>
+    </td><td><p:inputText
     value="#{DeliveryController.address}"></p:inputText></td></tr>
      
    
@@ -81,11 +73,10 @@
 
   <tr><td colspan="2"> <p:commandButton value="ajouter livraison" action="#{DeliveryController.addNewDeliveryByCommand()}" /></td></tr>
 
+</h:form>
 
 
-</div>
-
-<p:panel>>    <div class="card">
+<p:panel>  <div class="card">
     <p:imageCompare leftImage="/resources/images/sonic.png"
                     rightImage="/resources/images/sonicnn.jpg"
                     width="450" height="435"/>
@@ -124,6 +115,7 @@
      </div>
 	 
 	 </p:panel>
+	
 </table></h:form></p:panel>
 </h:body>
 </html>

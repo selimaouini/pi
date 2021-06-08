@@ -29,6 +29,7 @@ import tn.pi.entities.Product;
 import tn.pi.entities.Stock;
 import tn.pi.entities.TypeFacture;
 import tn.pi.entities.User;
+import tn.pi.entities.catalog;
 import tn.pi.repositories.IBillRepository;
 import tn.pi.repositories.ICartRepository;
 import tn.pi.repositories.ICommandRepository;
@@ -94,7 +95,11 @@ public  class demandeechangeservice implements Idemservice{
 		
 		
 	
-
+@Override 
+public catalog Catalog(String name){
+	return demrep.getcatalogbyname(name);
+	
+} 
 	
 	}
 

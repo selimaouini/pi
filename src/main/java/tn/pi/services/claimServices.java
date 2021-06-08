@@ -19,4 +19,5 @@ public interface claimServices {
 	public void acceptClaimAddDecision(int id, Decision d);
 	public String addClaimByUserAndDelivery(int idUser, int idDelivery, Claim d);
     public String verifierClaim();
+	public int nbnotifs();
 }

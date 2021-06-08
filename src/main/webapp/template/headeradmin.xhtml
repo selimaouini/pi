@@ -21,17 +21,32 @@
           
  <p:button value="Produits" styleClass="ui-button-secondary ui-button-flat" outcome="/pages/admin/Product2" icon="pi pi-th-large" style="margin-left:30px ;icon-size:20px;font-size:20px;;width:130px;"/>
      <p:button value="Commandes" styleClass="ui-button-secondary ui-button-flat" outcome="/pages/admin/Commande" icon="pi pi-shopping-cart" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;" />
- <p:button value="Evénements" styleClass="ui-button-secondary ui-button-flat" icon="pi pi-calendar" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;" />                
- <p:button value="Livraisons" styleClass="ui-button-secondary ui-button-flat" icon="pi pi-list" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;"/>
+ <p:button value="Evénements" styleClass="ui-button-secondary ui-button-flat"  outcome="/pages/admin/event-list" icon="pi pi-calendar" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;" />                
+ <p:button value="Livraisons" styleClass="ui-button-secondary ui-button-flat" outcome="/pages/admin/deliveries" icon="pi pi-list" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;"/>
   <p:button value="Forum" styleClass="ui-button-secondary ui-button-flat" icon="pi pi-comments" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;"/>
-  <p:button value="Catalogue" styleClass="ui-button-secondary ui-button-flat" icon=" pi pi-book" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;"/>
+  <p:button value="Catalogue" styleClass="ui-button-secondary ui-button-flat" outcome="/pages/admin/catalog_admin" icon=" pi pi-book" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;"/>
      <p:button value="Stock" styleClass="ui-button-secondary ui-button-flat" outcome="/pages/admin/stock" icon="pi pi-fw pi-inbox" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;"/>
+      
                     </f:facet>
                     
                       <f:facet name="right">
                    
-<p:button icon="pi pi-bell" styleClass="rounded-button ui-button-info" style="margin-left:10px;" />
- <p:button icon="pi pi-heart" styleClass="rounded-button ui-button-info" outcome="/pages/admin/Fidelité" style="margin-left:10px;"/>
+
+<div class="card">
+
+    <p:notificationBar position="top" effect="slide" styleClass="top" widgetVar="bar">
+        <h:outputText value= "Vous avez #{ClaimController.nbnotif} Réclamations a traiter " />  
+   <p:commandButton  onclick="PF('bar').hide()" styleClass="rounded-button ui-button-warning" icon="pi pi-arrow-up"/>
+    <p:button value="Voir" styleClass="ui-button-secondary ui-button-flat"   outcome="/pages/admin/claims" style="margin-left:30px ;icon-size:20px;font-size:20px;width:130px;"/> 
+    </p:notificationBar>
+    <p:toolbarGroup align="left">
+<div>
+    <p:commandButton onclick="PF('bar').show()"  value="#{ClaimController.nbnotif}" styleClass="rounded-button ui-button-warning" icon="pi pi-bell"/>
+   
+    </div>
+    </p:toolbarGroup>
+</div>
+ <p:button icon="pi pi-heart" styleClass="rounded-button ui-button-info" outcome="/pages/admin/Fidelité-admin" style="margin-left:10px;"/>
   <p:button icon="pi pi-user" styleClass="rounded-button ui-button-info" style="margin-left:10px;" />
    <p:button  styleClass="rounded-button ui-button-info" icon="pi pi-sign-out" style="margin-left:10px;" />
  

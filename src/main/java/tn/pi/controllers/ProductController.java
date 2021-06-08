@@ -13,12 +13,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
+import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -54,7 +58,8 @@ import tn.pi.repositories.RatingRepository;
 @Controller(value = "ProductController")
 @ELBeanName(value = "ProductController")
 //@Join(path = "/", to = "/Product.jsf")
-
+@Named
+@RequestScoped
 public class ProductController {
 @Autowired
 ProductService ProductService;
@@ -91,8 +96,21 @@ private boolean promotionEtat;
 private int idrating;
 private int nbretoile;
 private String categ;
+private List<String> cities;
+@PostConstruct
+public void init() {
+    cities = new ArrayList<>();
+    cities.add("Miami");
+    cities.add("London");
+    cities.add("Paris");
+    cities.add("Istanbul");
+    cities.add("Berlin");
+    cities.add("Barcelona");
+    cities.add("Rome");
+    cities.add("Brasilia");
+    cities.add("Amsterdam");
 
-
+}
 
 public String getCateg() {
 	return categ;
@@ -126,6 +144,14 @@ public int getNbretoile() {
 
 public void setNbretoile(int nbretoile) {
 	this.nbretoile = nbretoile;
+}
+
+public List<String> getCities() {
+	return cities;
+}
+
+public void setCities(List<String> cities) {
+	this.cities = cities;
 }
 
 public String getPicture() {

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+
+xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/templateadmin.xhtml"> 
+
+<ui:define name="content">
+<f:view>
+	<h:head>
+		
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Donation</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<p:commandButton action="event-list" value="Events" />
+			<p:commandButton action="donation-list" value="Donations" />
+		</h:form>
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton action="donation-list" value="List of Donations" />
+						<p:commandButton action="donation-form" value="New Donation" />
+					</f:facet>
+				</p:toolbar>
+			</div>
+			<div class="ui-g-12">
+				<h:form id="form">
+					<p:panel header="Donations List">
+						<p:dataTable id="table" var="donation"
+							value="#{donationList.donations}">
+
+							<p:column>
+								<f:facet name="header">Amount</f:facet>
+								<h:outputText value="#{donation.amount}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">Date</f:facet>
+								<h:outputText value="#{donation.date}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">Name Event</f:facet>
+								<h:outputText value="#{donation.name_event}" />
+							</p:column>
+
+							<p:column>
+								<p:commandButton value="Update"
+									action="#{donationController.modifier(donation,donation.amount, donation.date, donation.name_event)}" />
+
+
+								<p:commandButton value="Delete"
+									action="#{donationController.delete(donation.id)}" />
+							</p:column>
+						</p:dataTable>
+					</p:panel>
+				</h:form>
+			</div>
+		</div>
+	</h:body>
+</f:view>
+</ui:define></ui:composition>
+</html>

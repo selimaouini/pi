@@ -27,7 +27,21 @@
                     
                       <f:facet name="right">
                    
-<p:button icon="pi pi-bell" styleClass="rounded-button ui-button-info" style="margin-left:10px;" />
+
+<div class="card">
+
+    <p:notificationBar position="top" effect="slide" styleClass="top" widgetVar="bar">
+        <h:outputText value= "Vous avez #{demandestockcontroller.notif} Demandes  non confirmés " />  
+         <p:commandButton  onclick="PF('bar').hide()" styleClass="rounded-button ui-button-warning" icon="pi pi-arrow-up"/>
+    </p:notificationBar>
+    <p:toolbarGroup align="left">
+<div>
+    <p:commandButton onclick="PF('bar').show()"  value="#{demandestockcontroller.notif}" styleClass="rounded-button ui-button-warning" icon="pi pi-bell"/>
+   
+    </div>
+    </p:toolbarGroup>
+</div>
+
   <p:button icon="pi pi-user" styleClass="rounded-button ui-button-info" style="margin-left:10px;" />
    <p:button  styleClass="rounded-button ui-button-info" icon="pi pi-sign-out" style="margin-left:10px;" />
  

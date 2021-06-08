@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+
+xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/templateadmin.xhtml"> 
+
+<ui:define name="content">
+<f:view>
+	<h:head>
+	
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Donation</title>
+	</h:head>
+	<h:body>
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<h:form id="donationForm">
+					<p:panel header="Donation Details">
+						<h:panelGrid columns="1">
+							<p:outputLabel for="amount" value="amount: " />
+							<p:inputText id="amount"
+								value="#{donationController.donation.amount}" required="true" />
+							<p:message for="amount" display="text" />
+							<p:tooltip for="amount" value="Enter the amount"
+								my="right center" at="left center" />
+
+							<p:outputLabel for="date" value="date: " />
+
+							<p:datePicker id="date"
+								value="#{donationController.donation.date}" required="true" />
+							<p:message for="date" display="text" />
+							<p:tooltip for="date" value="Enter the date" my="right center"
+								at="left center" />
+
+							<p:outputLabel for="name_event" value="Name Event: " />
+							<p:inputText id="name_event"
+								value="#{donationController.donation.name_event}"
+								required="true" />
+							<p:message for="name_event" display="text" />
+							<p:tooltip for="name_event" value="Enter the name of the event"
+								my="right center" at="left center" />
+
+							<h:commandButton value="Save" action="#{donationController.save}" />
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+			</div>
+		</div>
+	</h:body>
+</f:view>
+</ui:define></ui:composition>
+</html>
+
+
+

@@ -50,6 +50,17 @@ public class ClaimController {
 	private Decision Decision;
 	private Delivery Delivery;
 	private User User;
+	public  int nbnotif;
+	
+	
+	
+	public int getNbnotif() {
+		nbnotif = claimRepository.countt();
+		return nbnotif;
+	}
+	public void setNbnotif(int nbnotif) {
+		this.nbnotif = nbnotif;
+	}
 	public claimServices getClaimService() {
 		return claimService;
 	}
